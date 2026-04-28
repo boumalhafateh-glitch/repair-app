@@ -26,10 +26,9 @@
             align-items: center; 
             justify-content: center; 
             cursor: pointer; 
-            min-height: 80px; 
+            min-height: 85px; 
             transition: 0.2s; 
         }
-        /* Écriture plus grande ici */
         .card h3 { margin: 0; font-size: 13px; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
         .card p { margin: 6px 0 0; font-size: 10.5px; color: var(--text-sec); font-weight: 500; }
         .card.locked { opacity: 0.5; border-style: dashed; }
@@ -107,13 +106,18 @@
     </div>
 
     <div id="niv3" class="page">
-        <div class="header"><h1>📟 NIV 3 : MULTIMETER</h1><p>How to Measure / كيف نستخدم الأفوميتر</p></div>
+        <div class="header"><h1>📟 NIV 3 : MULTIMETER</h1><p>Full Measurement Modes / أوضاع القياس كاملة</p></div>
         <button class="btn-back" onclick="nav('home')">⬅ BACK / العودة</button>
         <div class="grid">
-            <div class="card" onclick="openInfo('DC VOLTAGE (V⎓)', 'Mesure de la tension continue (Batterie).', 'Direct Current Voltage.', 'قياس الجهد المستمر (البطارية).')"><h3>DC VOLTAGE</h3><p>الجهد المستمر</p></div>
-            <div class="card" onclick="openInfo('DIODE MODE (⯈|)', 'Mesure des chutes de tension (Chute).', 'Diode value / Drop voltage.', 'وضع الديود / قياس الممانعة.')"><h3>DIODE MODE</h3><p>وضع الديود</p></div>
-            <div class="card" onclick="openInfo('CONTINUITY (🔊)', 'Vérifier si le courant passe (Bip).', 'Buzz/Bip test.', 'وضع الجرس / فحص المسار.')"><h3>CONTINUITY</h3><p>وضع الجرس</p></div>
-            <div class="card" onclick="openInfo('RESISTANCE (Ω)', 'Mesure de la valeur résistive.', 'Ohms measurement.', 'قياس المقاومة.')"><h3>RESISTANCE</h3><p>المقاومة</p></div>
+            <div class="card" onclick="openInfo('DC VOLTAGE (V⎓)', 'Tension continue (Batterie, circuits).', 'Direct Current Voltage.', 'الجهد المستمر (البطارية).')"><h3>V⎓ DC VOLT</h3><p>الجهد المستمر</p></div>
+            <div class="card" onclick="openInfo('AC VOLTAGE (V~)', 'Tension alternative (Secteur/Prise).', 'Alternating Current Voltage.', 'الجهد المتردد (الكهرباء).')"><h3>V~ AC VOLT</h3><p>الجهد المتردد</p></div>
+            <div class="card" onclick="openInfo('DIODE MODE (⯈|)', 'Mesure des chutes de tension.', 'Diode value / Drop voltage.', 'وضع الديود / الممانعة.')"><h3>⯈| DIODE</h3><p>وضع الديود</p></div>
+            <div class="card" onclick="openInfo('CONTINUITY (🔊)', 'Test de connexion / Bip.', 'Continuity buzzer test.', 'وضع الجرس / التوصيل.')"><h3>🔊 BUZZER</h3><p>وضع الجرس</p></div>
+            <div class="card" onclick="openInfo('RESISTANCE (Ω)', 'Mesure de la valeur des résistances.', 'Resistance (Ohms).', 'قياس المقاومة.')"><h3>Ω RESIST</h3><p>المقاومة</p></div>
+            <div class="card" onclick="openInfo('CAPACITANCE (⊣⊢)', 'Mesure de la capacité (Farads).', 'Capacitor test.', 'قياس المكثفات.')"><h3>⊣⊢ CAPA</h3><p>قياس السعة</p></div>
+            <div class="card" onclick="openInfo('FREQUENCY (Hz)', 'Mesure de la fréquence.', 'Frequency test.', 'قياس التردد.')"><h3>Hz FREQ</h3><p>التردد</p></div>
+            <div class="card" onclick="openInfo('AMPERAGE (A)', 'Mesure de l\'intensité du courant.', 'Current intensity.', 'قياس التيار.')"><h3>A AMPÈRE</h3><p>شدة التيار</p></div>
+            <div class="card" onclick="openInfo('TEMPERATURE (°C)', 'Mesure de la chaleur des IC.', 'Heat measurement.', 'قياس الحرارة.')"><h3>°C TEMP</h3><p>الحرارة</p></div>
         </div>
     </div>
 
@@ -162,7 +166,6 @@
         }
 
         function startTest() {
-            // Mélanger et prendre 5 questions
             quizQuestions = allQuestions.sort(() => 0.5 - Math.random()).slice(0, 5);
             currentQ = 0; 
             score = 0; 
@@ -176,7 +179,6 @@
             document.getElementById('q-en').innerText = q.en;
             document.getElementById('q-ar').innerText = q.ar;
             document.getElementById('quiz-progress').innerText = `Question ${currentQ + 1}/5`;
-            
             let html = "";
             q.opts.forEach((o, i) => {
                 html += `<button class="opt-btn" onclick="check(${i})"><span>${o.fr}</span><span style="color:var(--primary)">${o.ar}</span></button>`;
