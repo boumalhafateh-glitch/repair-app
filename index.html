@@ -13,37 +13,44 @@
         .header p { color: var(--text-sec); margin: 5px 0 0; font-size: 14px; }
 
         .section-title { text-align: left; padding: 5px 5%; color: var(--primary); font-size: 13px; text-transform: uppercase; margin-top: 10px; font-weight: bold; }
+        
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 5%; }
         
         .card { 
             background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; 
-            padding: 15px 5px; display: flex; flex-direction: column; align-items: center; 
-            justify-content: center; cursor: pointer; min-height: 85px; transition: 0.2s; 
+            padding: 20px 5px; display: flex; flex-direction: column; align-items: center; 
+            justify-content: center; cursor: pointer; min-height: 90px; transition: 0.2s; 
         }
         .card h3 { margin: 0; font-size: 13px; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
-        .card p { margin: 6px 0 0; font-size: 10.5px; color: var(--text-sec); font-weight: 500; }
+        .card p { margin: 6px 0 0; font-size: 11px; color: var(--text-sec); font-weight: 500; }
         .card.locked { opacity: 0.5; border-style: dashed; }
 
-        .btn-back { background: #30363d; color: white; padding: 14px; margin: 15px 5%; border-radius: 8px; border: none; width: 90%; font-weight: bold; cursor: pointer; font-size: 14px; }
+        .btn-sos { background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; padding: 18px; margin: 20px 5%; border-radius: 10px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; font-size: 16px; border: none; }
+        
+        .full-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin: 15px 5%; cursor: pointer; }
+        
+        .btn-back { background: #30363d; color: white; padding: 15px; margin: 15px 5%; border-radius: 8px; border: none; width: 90%; font-weight: bold; cursor: pointer; font-size: 14px; }
 
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); overflow-y: auto; }
-        .modal-content { background: var(--card-bg); margin: 5% auto; border: 1px solid var(--primary); width: 85%; border-radius: 15px; text-align: left; overflow: hidden; }
-        .modal-img { width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid var(--primary); background: #222; }
+        .modal-content { background: var(--card-bg); margin: 5% auto; border: 1px solid var(--primary); width: 88%; border-radius: 15px; text-align: left; overflow: hidden; }
+        .modal-img { width: 100%; height: 220px; object-fit: cover; border-bottom: 1px solid var(--primary); }
         .modal-body { padding: 20px; }
 
-        .lang-label { font-size: 10px; color: var(--primary); text-transform: uppercase; font-weight: bold; margin-bottom: 2px; display: block;}
-        .lang-desc { font-size: 14px; margin: 0 0 15px 0; font-weight: 500; line-height: 1.4; display: block;}
+        .lang-label { font-size: 11px; color: var(--primary); text-transform: uppercase; font-weight: bold; margin-bottom: 4px; display: block;}
+        .lang-desc { font-size: 15px; margin: 0 0 18px 0; font-weight: 500; line-height: 1.5; display: block;}
 
         .page { display: none; }
         .active { display: block; }
 
-        .opt-btn { background: #21262d; border: 1px solid var(--border); color: #fff; width: 90%; padding: 15px; margin: 7px 5%; border-radius: 8px; font-size: 14px; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .q-header { background: var(--card-bg); border-left: 4px solid var(--primary); padding: 20px; border-radius: 8px; margin: 20px 5%; text-align: left; }
+        .opt-btn { background: #21262d; border: 1px solid var(--border); color: #fff; width: 90%; padding: 18px; margin: 10px 5%; border-radius: 10px; font-size: 15px; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
     </style>
 </head>
 <body>
 
     <div id="home" class="page active">
         <div class="header"><h1>MASTER REPAIR ACADEMY</h1><p>أكاديمية صيانة المحترفين</p></div>
+        
         <div class="section-title">Catalogue Technique</div>
         <div class="grid">
             <div class="card" onclick="nav('niv1')"><h3>🛠 NIV 1</h3><p>TOOLS / الأدوات</p></div>
@@ -51,85 +58,89 @@
             <div class="card locked" id="card-niv3" onclick="startTest()"><h3>📟 NIV 3</h3><p>🔒 MULTIMETER / القياس</p></div>
             <div class="card locked" id="card-niv4"><h3>📋 NIV 4</h3><p>🔒 SCHEMATIC / المخططات</p></div>
         </div>
+
         <div class="section-title">Évaluation</div>
-        <div class="card" style="width:90%; margin:10px 5%;" onclick="startTest()">
-            <p style="color:var(--primary); font-weight:bold;">📝 TEST MY LEVEL (5/5 to Unlock NIV 3)</p>
+        <div class="full-card" onclick="startTest()">
+            <p style="margin:0; color:var(--primary); font-weight:bold; font-size: 17px;">📝 TEST MY LEVEL (5/5)</p>
+            <p style="margin:5px 0 0; font-size:12px; color:var(--text-sec);">Débloquer le niveau supérieur / فتح المستوى التالي</p>
         </div>
+
+        <a href="https://t.me/votre_lien" class="btn-sos"><span>🆘</span> GROUPE SOS / الدعم الفني</a>
     </div>
 
     <div id="niv1" class="page">
         <div class="header"><h1>🛠 NIV 1 TOOLS</h1></div>
-        <button class="btn-back" onclick="nav('home')">⬅ BACK</button>
+        <button class="btn-back" onclick="nav('home')">⬅ RETOUR / BACK</button>
         <div class="grid">
-            <div class="card" onclick="openInfo('SOLDERING STATION', 'https://m.media-amazon.com/images/I/71YIovS3u7L._AC_SL1500_.jpg', 'Station thermique réglable pour souder et dessouder les composants avec précision.', 'Adjustable thermal station for soldering and desoldering components.', 'محطة حرارية قابلة للتعديل للحام وفك المكونات بدقة.')"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
-            <div class="card" onclick="openInfo('HOT AIR STATION', 'https://m.media-amazon.com/images/I/719fH2-7S7L._AC_SL1500_.jpg', 'Générateur d\'air chaud pour le retrait des circuits intégrés (IC).', 'Hot air generator for IC removal.', 'مولد هواء ساخن لإزالة الآيسيهات.')"><h3>HOT AIR STATION</h3><p>هواء ساخن</p></div>
-            <div class="card" onclick="openInfo('MICROSCOPE', 'https://m.media-amazon.com/images/I/71m6N4ZzD5L._AC_SL1500_.jpg', 'Outil optique pour inspecter les micro-fissures.', 'Optical tool to inspect micro-cracks.', 'مجهر لفحص المسارات الدقيقة.')"><h3>MICROSCOPE</h3><p>مجهر</p></div>
-            <div class="card" onclick="openInfo('MULTIMETER', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Appareil de mesure pour tester tension et continuité.', 'Device to test voltage and continuity.', 'جهاز قياس الممانعة والجهد.')"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
-            <div class="card" onclick="openInfo('FLUX', 'https://m.media-amazon.com/images/I/61Sj2HPrB3L._AC_SL1000_.jpg', 'Substance facilitant la fusion de l\'étain.', 'Substance facilitating solder melting.', 'مساعد لحام لتسهيل انصهار القصدير.')"><h3>FLUX</h3><p>فلاكس</p></div>
-            <div class="card" onclick="openInfo('SOLDER TIN', 'https://m.media-amazon.com/images/I/618mE9vjDML._AC_SL1200_.jpg', 'Alliage métallique pour connexions électriques.', 'Metal alloy for electrical connections.', 'سبيكة القصدير للتوصيل.')"><h3>SOLDER TIN</h3><p>قصدير</p></div>
-            <div class="card" onclick="openInfo('DESOLDERING WICK', 'https://m.media-amazon.com/images/I/81qEa0Zl1yL._AC_SL1500_.jpg', 'Tresse en cuivre pour aspirer l\'étain.', 'Copper braid for solder removal.', 'سلك سحب القصدير الزائد.')"><h3>DESOLDERING WICK</h3><p>فتيل إزالة</p></div>
-            <div class="card" onclick="openInfo('PCB HOLDER', 'https://m.media-amazon.com/images/I/61k8vG6L8JL._AC_SL1001_.jpg', 'Support pour fixer la carte mère.', 'Board holder for repair.', 'حامل لتثبيت البوردة.')"><h3>PCB HOLDER</h3><p>حامل البوردة</p></div>
-            <div class="card" onclick="openInfo('LCD GLUE', 'https://m.media-amazon.com/images/I/61tA62IuNKL._AC_SL1000_.jpg', 'Adhésif spécial pour écrans.', 'Special adhesive for screens.', 'غراء خاص لتركيب الشاشات.')"><h3>LCD GLUE</h3><p>غراء شاشات</p></div>
-            <div class="card" onclick="openInfo('CLEANING LIQUID', 'https://m.media-amazon.com/images/I/51p6WqX2mKL._AC_.jpg', 'Alcool isopropylique pour nettoyage.', 'Isopropyl alcohol for cleaning.', 'سائل لتنظيف البوردة.')"><h3>CLEANING LIQUID</h3><p>سائل تنظيف</p></div>
-            <div class="card" onclick="openInfo('JUMP WIRES', 'https://m.media-amazon.com/images/I/71Yx6Y6Y-kL._AC_SL1500_.jpg', 'Fils fins pour pontages.', 'Thin wires for jumpers.', 'أسلاك دقيقة لعمل كباري.')"><h3>JUMP WIRES</h3><p>أسلاك توصيل</p></div>
-            <div class="card" onclick="openInfo('OPENING TOOLS', 'https://m.media-amazon.com/images/I/71hW8S1mNIL._AC_SL1500_.jpg', 'Leviers pour ouvrir sans rayer.', 'Tools to open devices safely.', 'أدوات لفتح الهواتف.')"><h3>OPENING TOOLS</h3><p>أدوات الفتح</p></div>
-            <div class="card" onclick="openInfo('SCREWDRIVERS', 'https://m.media-amazon.com/images/I/71m5N4ZzD5L._AC_SL1500_.jpg', 'Tournevis de précision.', 'Precision screwdrivers.', 'مفكات دقيقة.')"><h3>SCREWDRIVERS</h3><p>مفكات</p></div>
-            <div class="card" onclick="openInfo('TWEEZERS', 'https://m.media-amazon.com/images/I/61A8t8Z2mAL._AC_SL1500_.jpg', 'Brucelles anti-statiques.', 'Precision tweezers.', 'ملقط دقيق.')"><h3>TWEEZERS</h3><p>ملقط</p></div>
+            <div class="card" onclick="openInfo('SOLDERING STATION', 'https://m.media-amazon.com/images/I/71YIovS3u7L._AC_SL1500_.jpg', 'Station thermique réglable pour souder et dessouder les composants traversants ou CMS avec précision.', 'Adjustable thermal station for soldering and desoldering components with precision.', 'محطة حرارية قابلة للتعديل للحام وفك المكونات بدقة عالية.')"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
+            <div class="card" onclick="openInfo('HOT AIR STATION', 'https://m.media-amazon.com/images/I/719fH2-7S7L._AC_SL1500_.jpg', 'Générateur d\'air chaud pour le retrait des circuits intégrés (IC) et des connecteurs plastiques.', 'Hot air generator used for removing ICs and plastic connectors.', 'مولد هواء ساخن لإزالة الدوائر المتكاملة والكونيكتورات.')"><h3>HOT AIR STATION</h3><p>هواء ساخن</p></div>
+            <div class="card" onclick="openInfo('MICROSCOPE', 'https://m.media-amazon.com/images/I/71m6N4ZzD5L._AC_SL1500_.jpg', 'Outil optique indispensable pour inspecter les micro-fissures et les pistes coupées.', 'Optical tool essential for inspecting micro-cracks and broken traces.', 'مجهر لا غنى عنه لفحص الشقوق الدقيقة والمسارات.')"><h3>MICROSCOPE</h3><p>مجهر</p></div>
+            <div class="card" onclick="openInfo('MULTIMETER', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Appareil de mesure polyvalent pour tester la tension, la continuité et la résistance.', 'Versatile measuring device to test voltage, continuity, and resistance.', 'جهاز قياس متعدد الاستخدامات لفحص الجهد والمسارات.')"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
+            <div class="card" onclick="openInfo('FLUX', 'https://m.media-amazon.com/images/I/61Sj2HPrB3L._AC_SL1000_.jpg', 'Substance chimique facilitant la fusion de l\'étain et empêchant l\'oxydation.', 'Chemical substance that facilitates solder melting and prevents oxidation.', 'مادة كيميائية تسهل انصهار القصدير وتمنع الأكسدة.')"><h3>FLUX</h3><p>فلاكس</p></div>
+            <div class="card" onclick="openInfo('SOLDER TIN', 'https://m.media-amazon.com/images/I/618mE9vjDML._AC_SL1200_.jpg', 'Alliage métallique utilisé pour créer les connexions électriques entre les composants et le PCB.', 'Metal alloy used to create electrical connections between components and PCB.', 'سبيكة معدنية تستخدم لإنشاء توصيلات كهربائية.')"><h3>SOLDER TIN</h3><p>قصدير</p></div>
+            <div class="card" onclick="openInfo('DESOLDERING WICK', 'https://m.media-amazon.com/images/I/81qEa0Zl1yL._AC_SL1500_.jpg', 'Tresse en cuivre qui aspire le surplus d\'étain par capillarité.', 'Copper braid that sucks up excess solder.', 'فتيل نحاسي يمتص القصدير الزائد.')"><h3>DESOLDERING WICK</h3><p>فتيل إزالة</p></div>
+            <div class="card" onclick="openInfo('PCB HOLDER', 'https://m.media-amazon.com/images/I/61k8vG6L8JL._AC_SL1001_.jpg', 'Support pour maintenir la carte mère immobile pendant le travail.', 'Support to keep the motherboard stationary while working.', 'حامل لتثبيت اللوحة الأم أثناء العمل.')"><h3>PCB HOLDER</h3><p>حامل البوردة</p></div>
+            <div class="card" onclick="openInfo('LCD GLUE', 'https://m.media-amazon.com/images/I/61tA62IuNKL._AC_SL1000_.jpg', 'Adhésif spécial conçu pour coller les écrans sans endommager le châssis.', 'Special adhesive designed for bonding screens without damage.', 'لاصق خاص لتركيب الشاشات.')"><h3>LCD GLUE</h3><p>غراء شاشات</p></div>
+            <div class="card" onclick="openInfo('CLEANING LIQUID', 'https://m.media-amazon.com/images/I/51p6WqX2mKL._AC_.jpg', 'Alcool isopropylique pour éliminer les résidus de flux et l\'oxydation.', 'Isopropyl alcohol to remove flux residue and oxidation.', 'سائل لتنظيف بقايا اللحام والأكسدة.')"><h3>CLEANING LIQUID</h3><p>سائل تنظيف</p></div>
+            <div class="card" onclick="openInfo('JUMP WIRES', 'https://m.media-amazon.com/images/I/71Yx6Y6Y-kL._AC_SL1500_.jpg', 'Fils de cuivre fins pour reconstruire des pistes coupées.', 'Thin copper wires to rebuild broken traces.', 'أسلاك نحاسية لإعادة بناء المسارات المقطوعة.')"><h3>JUMP WIRES</h3><p>أسلاك توصيل</p></div>
+            <div class="card" onclick="openInfo('OPENING TOOLS', 'https://m.media-amazon.com/images/I/71hW8S1mNIL._AC_SL1500_.jpg', 'Leviers pour ouvrir les smartphones sans rayer le châssis.', 'Levers to open smartphones without scratching.', 'أدوات لفتح الهواتف دون خدش.')"><h3>OPENING TOOLS</h3><p>أدوات الفتح</p></div>
+            <div class="card" onclick="openInfo('SCREWDRIVERS', 'https://m.media-amazon.com/images/I/71m5N4ZzD5L._AC_SL1500_.jpg', 'Ensemble de tournevis de précision adaptés aux vis spécifiques.', 'Set of precision screwdrivers for specific screws.', 'طقم مفكات دقيقة للبراغي الخاصة.')"><h3>SCREWDRIVERS</h3><p>مفكات</p></div>
+            <div class="card" onclick="openInfo('TWEEZERS', 'https://m.media-amazon.com/images/I/61A8t8Z2mAL._AC_SL1500_.jpg', 'Brucelles anti-statiques pour manipuler les composants minuscules.', 'Anti-static tweezers for handling tiny components.', 'ملقط دقيق للمكونات الصغيرة.')"><h3>TWEEZERS</h3><p>ملقط</p></div>
         </div>
     </div>
 
     <div id="niv2" class="page">
         <div class="header"><h1>⚡ NIV 2 COMPONENTS</h1></div>
-        <button class="btn-back" onclick="nav('home')">⬅ BACK</button>
+        <button class="btn-back" onclick="nav('home')">⬅ RETOUR / BACK</button>
         <div class="grid">
-            <div class="card" onclick="openInfo('DIODE', 'https://m.media-amazon.com/images/I/51A8fK9Yj8L._AC_.jpg', 'Laisse passer le courant dans un seul sens.', 'Allows current in one direction only.', 'تسمح بمرور التيار في اتجاه واحد.')"><h3>DIODE</h3><p>ديود</p></div>
-            <div class="card" onclick="openInfo('COIL', 'https://m.media-amazon.com/images/I/41Dq9K9Yj8L._AC_.jpg', 'Stocke l\'énergie magnétique et filtre.', 'Stores magnetic energy.', 'وشيعة للتخزين والفلترة.')"><h3>COIL</h3><p>وشيعة</p></div>
-            <div class="card" onclick="openInfo('RESISTANCE', 'https://m.media-amazon.com/images/I/51I-YfV9R6L._AC_SL1000_.jpg', 'Oppose une résistance au courant.', 'Resists current flow.', 'مقاومة لتقليل شدة التيار.')"><h3>RESISTANCE</h3><p>مقاومة</p></div>
-            <div class="card" onclick="openInfo('CAPACITOR', 'https://m.media-amazon.com/images/I/61Gf0Z6R8-L._AC_SL1000_.jpg', 'Stocke les charges électriques.', 'Stores electrical charges.', 'مكثف لتخزين الجهد.')"><h3>CAPACITOR</h3><p>مكثف</p></div>
-            <div class="card" onclick="openInfo('TRANSISTOR', 'https://m.media-amazon.com/images/I/41Dq9K9Yj8L._AC_.jpg', 'Interrupteur ou amplificateur.', 'Switch or amplifier.', 'ترانزستور كمفتاح.')"><h3>TRANSISTOR</h3><p>ترانزستور</p></div>
-            <div class="card" onclick="openInfo('IC (CHIP)', 'https://m.media-amazon.com/images/I/61A8fK9Yj8L._AC_.jpg', 'Circuit intégré (Le cerveau).', 'Integrated circuit chip.', 'دائرة متكاملة آيسي.')"><h3>IC (CHIP)</h3><p>آيسي</p></div>
-            <div class="card" onclick="openInfo('CONNECTOR', 'https://m.media-amazon.com/images/I/51A8fK9Yj8L._AC_.jpg', 'Port FPC pour écran/nappes.', 'FPC connector for screens.', 'كونيكتور الشاشة والبطارية.')"><h3>CONNECTOR</h3><p>كونيكتور</p></div>
-            <div class="card" onclick="openInfo('CRYSTAL', 'https://m.media-amazon.com/images/I/41Dq9K9Yj8L._AC_.jpg', 'Horloge pour la fréquence.', 'Generates frequency clock.', 'كريستالة التوقيت.')"><h3>CRYSTAL</h3><p>كريستال</p></div>
-            <div class="card" onclick="openInfo('FUSE', 'https://m.media-amazon.com/images/I/51A8fK9Yj8L._AC_.jpg', 'Protection contre surcharges.', 'Overload protection.', 'فيوز حماية.')"><h3>FUSE</h3><p>فيوز</p></div>
-            <div class="card" onclick="openInfo('THERMISTOR', 'https://m.media-amazon.com/images/I/41A8fK9Yj8L._AC_.jpg', 'Sonde de température.', 'Temperature sensor.', 'مقاومة حرارية.')"><h3>THERMISTOR</h3><p>ثرمستور</p></div>
+            <div class="card" onclick="openInfo('DIODE', 'https://m.media-amazon.com/images/I/51A8fK9Yj8L._AC_.jpg', 'Composant qui autorise le passage du courant dans un seul sens.', 'Component that allows current in one direction only.', 'مكون يسمح بمرور التيار في اتجاه واحد.')"><h3>DIODE</h3><p>ديود</p></div>
+            <div class="card" onclick="openInfo('COIL', 'https://sc04.alicdn.com/kf/H45c99454173840748722956f4d547d04F.jpg', 'Composant qui stocke l\'énergie sous forme de champ magnétique.', 'Component that stores energy in a magnetic field.', 'وشيعة لتخزين الطاقة المغناطيسية.')"><h3>COIL</h3><p>وشيعة</p></div>
+            <div class="card" onclick="openInfo('RESISTANCE', 'https://m.media-amazon.com/images/I/51I-YfV9R6L._AC_SL1000_.jpg', 'Composant qui s\'oppose au passage du courant pour limiter l\'intensité.', 'Component that opposes current to limit intensity.', 'مكون يقاوم التيار لتحديد شدته.')"><h3>RESISTANCE</h3><p>مقاومة</p></div>
+            <div class="card" onclick="openInfo('CAPACITOR', 'https://m.media-amazon.com/images/I/61Gf0Z6R8-L._AC_SL1000_.jpg', 'Composant capable de stocker des charges électriques et de filtrer.', 'Component that stores electrical charge and filters.', 'مكثف لتخزين الشحنة والفلترة.')"><h3>CAPACITOR</h3><p>مكثف</p></div>
+            <div class="card" onclick="openInfo('TRANSISTOR', 'https://m.media-amazon.com/images/I/41Dq9K9Yj8L._AC_.jpg', 'Composant actif utilisé comme interrupteur ou amplificateur.', 'Active component used as switch or amplifier.', 'ترانزستور يعمل كمفتاح أو مكبر.')"><h3>TRANSISTOR</h3><p>ترانزستور</p></div>
+            <div class="card" onclick="openInfo('IC (CHIP)', 'https://m.media-amazon.com/images/I/61A8fK9Yj8L._AC_.jpg', 'Le cerveau du circuit regroupant des milliers de transistors.', 'The brain of the circuit with thousands of transistors.', 'عقل الدائرة المتكاملة.')"><h3>IC (CHIP)</h3><p>آيسي</p></div>
+            <div class="card" onclick="openInfo('CONNECTOR', 'https://m.media-amazon.com/images/I/51A8fK9Yj8L._AC_.jpg', 'Interface permettant de connecter l\'écran ou la batterie.', 'Interface to connect the screen or battery.', 'كونيكتور لتوصيل القطع الخارجية.')"><h3>CONNECTOR</h3><p>كونيكتور</p></div>
+            <div class="card" onclick="openInfo('CRYSTAL', 'https://5.imimg.com/data5/SELLER/Default/2023/1/RP/XH/XW/12534575/smd-crystal-oscillator-500x500.jpg', 'Composant générant une fréquence précise pour l\'horloge.', 'Component generating precise clock frequency.', 'كريستال لتوليد تردد الساعة.')"><h3>CRYSTAL</h3><p>كريستال</p></div>
+            <div class="card" onclick="openInfo('FUSE', 'https://m.media-amazon.com/images/I/51A8fK9Yj8L._AC_.jpg', 'Dispositif de sécurité qui coupe le circuit en cas de surcharge.', 'Safety device that cuts circuit on overload.', 'فيوز لحماية الدائرة من التلف.')"><h3>FUSE</h3><p>فيوز</p></div>
+            <div class="card" onclick="openInfo('THERMISTOR', 'https://m.media-amazon.com/images/I/41A8fK9Yj8L._AC_.jpg', 'Résistance changeant avec la température pour la sécurité.', 'Resistor changing with temperature for safety.', 'مقاومة تتأثر بالحرارة للأمان.')"><h3>THERMISTOR</h3><p>ثرمستور</p></div>
         </div>
     </div>
 
     <div id="niv3" class="page">
         <div class="header"><h1>📟 NIV 3 : MULTIMETER</h1></div>
-        <button class="btn-back" onclick="nav('home')">⬅ BACK</button>
+        <button class="btn-back" onclick="nav('home')">⬅ RETOUR / BACK</button>
         <div class="grid">
-            <div class="card" onclick="openInfo('V⎓ DC VOLT', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Mesure tension batterie/lignes.', 'Measuring DC Voltage.', 'قياس الجهد المستمر.')"><h3>V⎓ DC VOLT</h3><p>الجهد المستمر</p></div>
-            <div class="card" onclick="openInfo('⯈| DIODE', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Mesure mamanat (Chute tension).', 'Diode drop test.', 'قياس الممانعة.')"><h3>⯈| DIODE</h3><p>الممانعة</p></div>
-            <div class="card" onclick="openInfo('🔊 BUZZER', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Test continuité des pistes.', 'Trace continuity test.', 'وضع الجرس.')"><h3>🔊 BUZZER</h3><p>الجرس</p></div>
-            <div class="card" onclick="openInfo('Ω RESIST', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Mesure valeur Ohms.', 'Measuring Resistance.', 'قياس المقاومة.')"><h3>Ω RESIST</h3><p>المقاومة</p></div>
-            <div class="card" onclick="openInfo('⊣⊢ CAPA', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Mesure sifa (Farad).', 'Capacitor capacity test.', 'قياس سعة المكثف.')"><h3>⊣⊢ CAPA</h3><p>السعة</p></div>
-            <div class="card" onclick="openInfo('Hz FREQ', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Mesure fréquence signaux.', 'Frequency measurement.', 'قياس التردد.')"><h3>Hz FREQ</h3><p>التردد</p></div>
-            <div class="card" onclick="openInfo('A AMPERE', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Mesure intensité courant.', 'Current measurement.', 'قياس شدة التيار.')"><h3>A AMPÈRE</h3><p>الأمبير</p></div>
-            <div class="card" onclick="openInfo('°C TEMP', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Mesure chaleur composants.', 'Temperature test.', 'قياس الحرارة.')"><h3>°C TEMP</h3><p>الحرارة</p></div>
-            <div class="card" onclick="openInfo('V~ AC VOLT', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Mesure tension secteur.', 'AC Voltage test.', 'الجهد المتردد.')"><h3>V~ AC VOLT</h3><p>الجهد المتردد</p></div>
+            <div class="card" onclick="openInfo('DC VOLTAGE', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Mesure de la tension continue (Batterie, lignes d\'alimentation).', 'Measuring DC voltage.', 'قياس الجهد المستمر.')"><h3>V⎓ DC VOLT</h3><p>الجهد المستمر</p></div>
+            <div class="card" onclick="openInfo('DIODE MODE', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Test de chute de tension pour trouver les pannes (Mamanat).', 'Diode drop test for troubleshooting.', 'وضع الديود للفحص.')"><h3>⯈| DIODE</h3><p>الممانعة</p></div>
+            <div class="card" onclick="openInfo('BUZZER', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Vérification de la continuité des pistes et fils.', 'Checking trace continuity.', 'وضع الجرس للمسارات.')"><h3>🔊 BUZZER</h3><p>الجرس</p></div>
+            <div class="card" onclick="openInfo('RESISTANCE', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Mesure de la valeur des résistances en Ohms.', 'Measuring resistance in Ohms.', 'قياس المقاومة.')"><h3>Ω RESIST</h3><p>المقاومة</p></div>
+            <div class="card" onclick="openInfo('CAPACITANCE', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Mesure de la capacité des condensateurs.', 'Measuring capacitor capacity.', 'قياس سعة المكثف.')"><h3>⊣⊢ CAPA</h3><p>السعة</p></div>
+            <div class="card" onclick="openInfo('HZ', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Mesure de la fréquence des signaux électriques.', 'Measuring signal frequency.', 'قياس التردد.')"><h3>Hz FREQ</h3><p>التردد</p></div>
+            <div class="card" onclick="openInfo('AMPERE', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Mesure de l\'intensité du courant circulant.', 'Measuring current intensity.', 'قياس شدة التيار.')"><h3>A AMPÈRE</h3><p>الأمبير</p></div>
+            <div class="card" onclick="openInfo('TEMP', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Mesure de la température des composants.', 'Measuring component temperature.', 'قياس الحرارة.')"><h3>°C TEMP</h3><p>الحرارة</p></div>
+            <div class="card" onclick="openInfo('AC VOLT', 'https://m.media-amazon.com/images/I/716mP06rCXL._AC_SL1500_.jpg', 'Mesure de la tension alternative (Secteur).', 'Measuring AC voltage.', 'الجهد المتردد.')"><h3>V~ AC VOLT</h3><p>الجهد المتردد</p></div>
         </div>
     </div>
 
     <div id="quiz-page" class="page">
         <div class="header"><h1>TEST DE NIVEAU</h1></div>
         <div class="q-header">
-            <span id="q-fr" style="font-weight:bold; display:block;"></span>
-            <span id="q-ar" style="color:var(--primary); display:block; text-align:right; margin-top:10px;"></span>
+            <span id="q-fr" style="font-weight:bold; display:block; font-size: 16px;"></span>
+            <span id="q-ar" style="color:var(--primary); display:block; text-align:right; margin-top:10px; font-size: 18px;"></span>
         </div>
         <div id="options"></div>
-        <button class="btn-back" onclick="nav('home')">QUITTER</button>
+        <button class="btn-back" onclick="nav('home')">QUITTER LE TEST</button>
     </div>
 
     <div id="infoModal" class="modal">
         <div class="modal-content">
             <img id="mImg" src="" class="modal-img">
             <div class="modal-body">
-                <h2 id="mTitle" style="color:var(--primary); margin:0 0 15px 0; font-size:18px;"></h2>
+                <h2 id="mTitle" style="color:var(--primary); margin:0 0 15px 0; font-size:20px;"></h2>
                 <span class="lang-label">Français</span><p id="mFr" class="lang-desc"></p>
                 <span class="lang-label">English</span><p id="mEn" class="lang-desc" style="color:var(--text-sec)"></p>
-                <span class="lang-label" style="text-align:right;">العربية</span><p id="mAr" class="lang-desc" style="text-align:right; direction:rtl; color:var(--primary); font-weight:bold;"></p>
-                <button class="btn-back" style="width:100%; margin:0;" onclick="closeInfo()">FERMER / أغلق</button>
+                <span class="lang-label" style="text-align:right;">العربية</span><p id="mAr" class="lang-desc" style="text-align:right; direction:rtl; color:var(--primary); font-weight:bold; font-size: 18px;"></p>
+                <button class="btn-back" style="width:100%; margin:10px 0 0;" onclick="closeInfo()">FERMER / أغلق</button>
             </div>
         </div>
     </div>
@@ -155,9 +166,9 @@
         const allQs = [
             { fr: "Quel composant laisse passer le courant dans un seul sens ?", ar: "ما الذي يمرر التيار في اتجاه واحد؟", opts: ["Diode", "Coil", "Fuse"], r: 0 },
             { fr: "Quelle unité mesure la résistance ?", ar: "وحدة قياس المقاومة؟", opts: ["Volt", "Ohm", "Farad"], r: 1 },
-            { fr: "Quel outil pour retirer les IC ?", ar: "أداة إزالة الآيسيهات؟", opts: ["Iron", "Hot Air", "Tweezer"], r: 1 },
+            { fr: "Quel outil pour retirer les IC ?", ar: "أداة إزالة الآيسيهات؟", opts: ["Fer à souder", "Station air chaud", "Pince"], r: 1 },
             { fr: "Rôle du condensateur ?", ar: "دور المكثف؟", opts: ["Stocker/Filtrer", "Chauffer", "Couper"], r: 0 },
-            { fr: "Mode multimètre pour continuité ?", ar: "وضع فحص المسارات؟", opts: ["Buzzer", "Hz", "Temp"], r: 0 }
+            { fr: "Mode multimètre pour continuité ?", ar: "وضع فحص المسارات؟", opts: ["Buzzer/Bip", "Hz", "Temp"], r: 0 }
         ];
 
         let cur = 0; let score = 0;
@@ -167,7 +178,7 @@
             document.getElementById('q-fr').innerText = q.fr;
             document.getElementById('q-ar').innerText = q.ar;
             let h = "";
-            q.opts.forEach((o, i) => { h += `<button class="opt-btn" onclick="check(${i})"><span>${o}</span></button>`; });
+            q.opts.forEach((o, i) => { h += `<button class="opt-btn" onclick="check(${i})"><span>${o}</span> ➜</button>`; });
             document.getElementById('options').innerHTML = h;
         }
         function check(i) {
@@ -177,9 +188,10 @@
         }
         function finish() {
             if(score === 5) {
-                alert("BRAVO 5/5 ! NIV 3 DEBLOQUÉ");
-                document.getElementById('card-niv3').classList.remove('locked');
-                document.getElementById('card-niv3').onclick = function() { nav('niv3'); };
+                alert("EXCELLENT 5/5 ! NIV 3 DEBLOQUÉ");
+                const c3 = document.getElementById('card-niv3');
+                c3.classList.remove('locked');
+                c3.onclick = function() { nav('niv3'); };
                 nav('home');
             } else { alert("SCORE: "+score+"/5. REESSAYEZ !"); nav('home'); }
         }
