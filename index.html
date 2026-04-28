@@ -3,47 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Repair Academy</title>
+    <title>Master Repair Academy</title>
     <style>
-        body { background-color: #000; color: #fff; font-family: sans-serif; text-align: center; margin: 0; padding: 20px; }
-        .btn { 
-            display: block; width: 100%; padding: 15px; margin: 10px 0; 
-            background: #222; border: 1px solid #444; color: #fff; 
-            border-radius: 8px; font-size: 18px; cursor: pointer;
+        body { background-color: #0d1117; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; text-align: center; }
+        .header { padding: 30px 10px; border-bottom: 2px solid #007bff; }
+        .header h1 { color: #007bff; margin: 0; font-size: 24px; text-transform: uppercase; }
+        .header p { color: #8b949e; margin: 5px 0 0; font-size: 14px; }
+        
+        .section-title { text-align: left; padding: 20px 5%; color: #444; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 5%; }
+        
+        .card { 
+            background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 20px 10px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            cursor: pointer; transition: 0.3s;
         }
-        .btn:active { background: #333; }
-        #content { margin-top: 20px; padding: 15px; border: 1px dashed #555; display: none; }
+        .card:active { background: #21262d; transform: scale(0.98); }
+        .card h3 { margin: 10px 0 5px; font-size: 14px; color: #58a6ff; text-transform: uppercase; }
+        .card p { margin: 0; font-size: 11px; color: #8b949e; }
+
+        .full-card { 
+            grid-column: span 2; background: #161b22; border: 1px solid #30363d; border-radius: 10px; 
+            padding: 15px; margin: 15px 5%; cursor: pointer;
+        }
+        
+        .btn-sos { 
+            background: #e74c3c; color: white; padding: 15px; margin: 20px 5%; 
+            border-radius: 10px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px;
+            cursor: pointer; text-decoration: none;
+        }
     </style>
 </head>
 <body>
-    <h2>🛠 REPAIR ACADEMY</h2>
-    <button class="btn" onclick="show('CPU')">💻 CPU</button>
-    <button class="btn" onclick="show('NAND')">💾 NAND</button>
-    <button class="btn" onclick="show('AUDIO')">🔊 AUDIO</button>
-    <button class="btn" onclick="show('WIFI')">📶 WIFI</button>
-    <button class="btn" onclick="alert('Besoin d\'aide ? Contactez @votre_pseudo')">❓ HELP</button>
 
-    <div id="content">
-        <h3 id="title"></h3>
-        <p id="desc"></p>
-        <button class="btn" onclick="hide()">⬅ BACK</button>
+    <div class="header">
+        <h1>MASTER REPAIR ACADEMY</h1>
+        <p>أكاديمية صيانة المحترفين</p>
     </div>
 
-    <script>
-        function show(cat) {
-            document.getElementById('title').innerText = "Catégorie : " + cat;
-            document.getElementById('desc').innerText = "Informations techniques pour " + cat + " à venir...";
-            document.getElementById('content').style.display = 'block';
-            // On cache les boutons du haut pour faire de la place
-            const buttons = document.querySelectorAll('.btn');
-            buttons.forEach(b => { if(b.innerText !== '⬅ BACK') b.style.display = 'none'; });
-        }
+    <div class="section-title">Catalogue Technique</div>
 
-        function hide() {
-            document.getElementById('content').style.display = 'none';
-            const buttons = document.querySelectorAll('.btn');
-            buttons.forEach(b => b.style.display = 'block');
-        }
-    </script>
+    <div class="grid">
+        <div class="card" onclick="alert('NIV 1')">
+            <h3>🛠 NIV 1</h3>
+            <p>REPAIR TOOLS / أدوات الإصلاح</p>
+        </div>
+        
+        <div class="card" onclick="alert('NIV 2')">
+            <h3>⚡ NIV 2</h3>
+            <p>ELECTRONIC COMPONENTS / مكونات إلكترونية</p>
+        </div>
+        
+        <div class="card" onclick="alert('NIV 3')">
+            <h3>📟 NIV 3</h3>
+            <p>MULTIMETER-PSU / المالتيميتر ومزود الطاقة</p>
+        </div>
+        
+        <div class="card" onclick="alert('NIV 4')">
+            <h3>📋 NIV 4</h3>
+            <p>SCHEMATIC / المخططات</p>
+        </div>
+    </div>
+
+    <div class="section-title">Évaluation</div>
+    
+    <div class="full-card" onclick="alert('Test my level')">
+        <p style="margin:0; color:#58a6ff; font-weight:bold;">📝 TEST MY LEVEL</p>
+        <p style="margin:5px 0 0; font-size:11px; color:#8b949e;">Déterminer votre grade technique / تحديد مستواك التقني</p>
+    </div>
+
+    <div class="btn-sos">
+        <span>🆘</span> GROUPE SOS / الدعم الفني
+    </div>
+
 </body>
 </html>
