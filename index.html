@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repair Academy Pro</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f0f0f;
+            color: white;
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+        }
+        .header {
+            padding: 20px 0;
+            border-bottom: 2px solid #0088cc;
+            margin-bottom: 20px;
+        }
+        h1 { font-size: 1.4rem; color: #0088cc; margin: 0; }
+        .ar { direction: rtl; font-size: 0.9rem; color: #888; margin-top: 5px; }
+
+        .section-title {
+            text-align: left;
+            font-size: 0.8rem;
+            color: #555;
+            text-transform: uppercase;
+            margin: 15px 0 5px 5px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .card {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid #333;
+            transition: transform 0.2s;
+        }
+        .card:active { transform: scale(0.95); background: #252525; }
+        .card h3 { font-size: 0.9rem; margin: 5px 0; color: #0088cc; }
+        .card p { font-size: 0.7rem; color: #bbb; margin: 0; }
+
+        .btn-sos {
+            display: block;
+            background: #d9534f;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>MASTER REPAIR ACADEMY</h1>
+        <p class="ar">أكاديمية صيانة المحترفين</p>
+    </div>
+
+    <div class="section-title">Catalogue Technique</div>
+    <div class="grid">
+        <div class="card" onclick="alert('Diodes, Zener, Capacitors...')">
+            <h3>📖 PASSIVE</h3>
+            <p>Composants de base</p>
+        </div>
+        <div class="card" onclick="alert('CPU, PMIC, Baseband...')">
+            <h3>⚡ CHIPS (IC)</h3>
+            <p>Puces principales</p>
+        </div>
+        <div class="card" onclick="alert('I2C, SPI, UART...')">
+            <h3>📟 PROTOCOLS</h3>
+            <p>Communication CPU</p>
+        </div>
+        <div class="card" onclick="alert('Reballing & Jumpers...')">
+            <h3>🔬 ADVANCED</h3>
+            <p>Micro-Soudure</p>
+        </div>
+    </div>
+
+    <div class="section-title">Évaluation</div>
+    <div class="card" style="width: 100%; box-sizing: border-box;" onclick="alert('Lancement du Quiz interactive...')">
+        <h3>📝 TEST MY LEVEL</h3>
+        <p>Déterminer votre grade technique</p>
+    </div>
+
+    <a href="https://t.me/c/3919937885/2" class="btn-sos">🆘 GROUPE SOS / الدعم الفني</a>
+
+    <script>
+        // On initialise la Mini App
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Force l'ouverture en plein écran
+        tg.MainButton.setText("FERMER L'APP");
+        tg.MainButton.show();
+        tg.MainButton.onClick(() => {
+            tg.close();
+        });
+    </script>
+</body>
+</html>
