@@ -7,25 +7,39 @@
     <style>
         :root { --primary: #007bff; --bg: #0d1117; --card-bg: #161b22; --border: #30363d; --text-secondary: #8b949e; }
         body { background-color: var(--bg); color: #fff; font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; text-align: center; overflow-x: hidden; }
-        .header { padding: 40px 10px; background: linear-gradient(to bottom, #161b22, #0d1117); border-bottom: 2px solid var(--primary); margin-bottom: 20px; }
+        
+        /* Header */
+        .header { padding: 40px 10px; background: linear-gradient(to bottom, #161b22, #0d1117); border-bottom: 2px solid var(--primary); margin-bottom: 10px; }
         .header h1 { color: var(--primary); margin: 0; font-size: 26px; text-transform: uppercase; letter-spacing: 2px; }
         .header p { color: var(--text-secondary); margin: 8px 0 0; font-size: 14px; }
-        .section-title { text-align: left; padding: 10px 5%; color: var(--primary); font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 10px;}
+
+        /* Recherche */
+        .search-container { padding: 10px 5%; margin-bottom: 10px; }
+        #mainSearch { 
+            width: 100%; padding: 15px; border-radius: 12px; border: 1px solid var(--border); 
+            background: var(--card-bg); color: white; font-size: 16px; outline: none;
+            transition: 0.3s;
+        }
+        #mainSearch:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(0,123,255,0.2); }
+
+        .section-title { text-align: left; padding: 10px 5%; color: var(--primary); font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px 5%; }
+        
+        /* Cartes */
         .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 25px 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; min-height: 120px; }
         .card:active { transform: scale(0.95); background: #21262d; border-color: var(--primary); }
         .card h3 { margin: 10px 0 5px; font-size: 11px; color: #fff; text-transform: uppercase; }
         .card p { margin: 0; font-size: 10px; color: var(--text-secondary); }
-        .full-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 10px 5%; cursor: pointer; }
-        .btn-sos { background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; padding: 18px; margin: 25px 5%; border-radius: 12px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3); text-decoration: none; }
-        .btn-back { background: #30363d; color: white; padding: 14px; margin: 10px 5%; border-radius: 10px; cursor: pointer; border: none; width: 90%; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; }
         
-        /* Modal Style */
+        .full-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 10px 5%; cursor: pointer; }
+        .btn-sos { background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; padding: 18px; margin: 25px 5%; border-radius: 12px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; }
+        .btn-back { background: #30363d; color: white; padding: 14px; margin: 10px 5%; border-radius: 10px; cursor: pointer; border: none; width: 90%; font-weight: bold; }
+        
+        /* Modal */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(5px); }
         .modal-content { background: var(--card-bg); margin: 10% auto; padding: 25px; border: 1px solid var(--primary); width: 85%; border-radius: 20px; text-align: left; animation: slideUp 0.3s ease; }
-        .modal-content h2 { color: var(--primary); margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
         .lang-box { margin-bottom: 15px; }
-        .lang-label { color: var(--primary); font-size: 12px; font-weight: bold; text-transform: uppercase; display: block; }
+        .lang-label { color: var(--primary); font-size: 12px; font-weight: bold; text-transform: uppercase; }
         .lang-text { font-size: 15px; line-height: 1.4; color: #fff; display: block; margin-top: 4px; }
         .rtl { text-align: right; direction: rtl; }
         .close-modal { background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; width: 100%; margin-top: 10px; font-weight: bold; }
@@ -43,46 +57,53 @@
             <h1>MASTER REPAIR ACADEMY</h1>
             <p>أكاديمية صيانة المحترفين</p>
         </div>
-        <div class="section-title">Catalogue Technique</div>
-        <div class="grid">
-            <div class="card" onclick="nav('niv1')"><h3>🛠 NIV 1</h3><p>REPAIR TOOLS / أدوات الإصلاح</p></div>
-            <div class="card" onclick="nav('niv2')"><h3>⚡ NIV 2</h3><p>ELECTRONIC COMPONENTS / مكونات إلكترونية</p></div>
-            <div class="card" onclick="alert('NIV 3 en développement')"><h3>📟 NIV 3</h3><p>MULTIMETER-PSU / المالتيميتر ومزود الطاقة</p></div>
-            <div class="card" onclick="alert('NIV 4 en développement')"><h3>📋 NIV 4</h3><p>SCHEMATIC / المخططات</p></div>
+
+        <div class="search-container">
+            <input type="text" id="mainSearch" placeholder="Rechercher / Search / بحث..." onkeyup="filterSearch()">
         </div>
-        <div class="section-title">Évaluation</div>
-        <div class="full-card" onclick="alert('Lancement du Quiz...')">
-            <p style="margin:0; color:var(--primary); font-weight:bold;">📝 TEST MY LEVEL</p>
-            <p style="margin:5px 0 0; font-size:11px; color:var(--text-secondary);">Déterminer votre grade technique / تحديد مستواك التقني</p>
+
+        <div id="main-menu-content">
+            <div class="section-title">Catalogue Technique</div>
+            <div class="grid">
+                <div class="card" onclick="nav('niv1')"><h3>🛠 NIV 1</h3><p>REPAIR TOOLS / أدوات الإصلاح</p></div>
+                <div class="card" onclick="nav('niv2')"><h3>⚡ NIV 2</h3><p>ELECTRONIC COMPONENTS / مكونات إلكترونية</p></div>
+                <div class="card" onclick="alert('Bientôt...')"><h3>📟 NIV 3</h3><p>MULTIMETER-PSU / المالتيميتر</p></div>
+                <div class="card" onclick="alert('Bientôt...')"><h3>📋 NIV 4</h3><p>SCHEMATIC / المخططات</p></div>
+            </div>
+            <div class="section-title">Évaluation</div>
+            <div class="full-card" onclick="alert('Quiz bientôt disponible')">
+                <p style="margin:0; color:var(--primary); font-weight:bold;">📝 TEST MY LEVEL</p>
+                <p style="margin:5px 0 0; font-size:11px; color:var(--text-secondary);">Déterminer votre grade technique / تحديد مستواك التقني</p>
+            </div>
         </div>
         <a href="https://t.me/c/3919937885/2" class="btn-sos" target="_blank"><span>🆘</span> GROUPE SOS / الدعم الفني</a>
     </div>
 
     <div id="niv1" class="page">
-        <div class="header"><h1>🛠 REPAIR TOOLS</h1><p>Cliquez pour apprendre / انقر للتعلم</p></div>
+        <div class="header"><h1>🛠 REPAIR TOOLS</h1><p>Cliquez pour apprendre</p></div>
         <button class="btn-back" onclick="nav('home')">⬅ BACK / العودة</button>
-        <div class="grid">
-            <div class="card" onclick="openInfo('SOLDERING STATION', 'Sert à souder les composants sur la carte.', 'Used for soldering components on the board.', 'تستخدم للحام المكونات على اللوحة الأم.')"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
-            <div class="card" onclick="openInfo('HOT AIR STATION', 'Dessoude les puces par air chaud.', 'Desolders chips using hot air.', 'تستخدم لفك الأيسيات بالهواء الساخن.')"><h3>HOT AIR STATION</h3><p>محطة الهواء الساخن</p></div>
-            <div class="card" onclick="openInfo('MICROSCOPE', 'Visualisation des composants miniatures.', 'Viewing miniature components.', 'لرؤية المكونات الدقيقة والمسارات.')"><h3>MICROSCOPE</h3><p>مجهر</p></div>
-            <div class="card" onclick="openInfo('MULTIMETER', 'Mesure tension, courant et continuité.', 'Measures voltage, current and continuity.', 'لقياس الجهد، التيار والممانعة.')"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
-            <div class="card" onclick="openInfo('FLUX', 'Facilite la fusion de l\'étain.', 'Facilitates solder melting.', 'مساعد لحام يسهل انصهار القصدير.')"><h3>FLUX</h3><p>فلاكس</p></div>
-            <div class="card" onclick="openInfo('SOLDER TIN', 'Alliage pour créer les connexions.', 'Alloy for creating connections.', 'القصدير المستخدم لعمل نقاط اللحام.')"><h3>SOLDER TIN</h3><p>قصدير</p></div>
-            <div class="card" onclick="openInfo('DESOLDERING WICK', 'Aspire l\'étain usagé.', 'Absorbs old solder.', 'سلك نحاسي لسحب القصدير الزائد.')"><h3>DESOLDERING WICK</h3><p>فتيل إزالة اللحام</p></div>
-            <div class="card" onclick="openInfo('PCB HOLDER', 'Maintient la carte stable.', 'Holds the board stable.', 'حامل لتثبيت البوردة أثناء العمل.')"><h3>PCB HOLDER</h3><p>حامل البوردة</p></div>
-            <div class="card" onclick="openInfo('LCD GLUE', 'Fixation des écrans.', 'Gluing screens back.', 'غراء خاص لتثبيت الشاشات.')"><h3>LCD GLUE</h3><p>غراء شاشات</p></div>
-            <div class="card" onclick="openInfo('CLEANING LIQUID', 'Nettoyage des résidus.', 'Cleaning residue.', 'سائل لتنظيف البوردة من الفلاكس.')"><h3>CLEANING LIQUID</h3><p>سائل تنظيف</p></div>
-            <div class="card" onclick="openInfo('JUMP WIRES', 'Réparation des pistes coupées.', 'Repairing broken tracks.', 'أسلاك دقيقة لإصلاح المسارات المقطوعة.')"><h3>JUMP WIRES</h3><p>أسلاك التوصيل</p></div>
-            <div class="card" onclick="openInfo('OPENING TOOLS', 'Outils pour ouvrir le châssis.', 'Tools to open the chassis.', 'أدوات لفتح الهاتف دون خدشه.')"><h3>OPENING TOOLS</h3><p>أدوات الفتح</p></div>
-            <div class="card" onclick="openInfo('SCREWDRIVERS', 'Tournevis de précision.', 'Precision screwdrivers.', 'مفكات براغي دقيقة للهواتف.')"><h3>SCREWDRIVERS</h3><p>مفكات</p></div>
-            <div class="card" onclick="openInfo('TWEEZERS', 'Manipulation précise.', 'Precise handling.', 'ملقط للتعامل مع القطع الصغيرة.')"><h3>TWEEZERS</h3><p>ملقط</p></div>
+        <div class="grid" id="grid-niv1">
+            <div class="card" onclick="openInfo('SOLDERING STATION', 'Sert à souder les composants.', 'Used for soldering.', 'تستخدم للحام المكونات.')"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
+            <div class="card" onclick="openInfo('HOT AIR STATION', 'Dessoude par air chaud.', 'Desolders using hot air.', 'تستخدم لفك القطع بالهواء الساخن.')"><h3>HOT AIR STATION</h3><p>محطة الهواء الساخن</p></div>
+            <div class="card" onclick="openInfo('MICROSCOPE', 'Visualisation miniature.', 'Miniature viewing.', 'لرؤية المكونات الدقيقة.')"><h3>MICROSCOPE</h3><p>مجهر</p></div>
+            <div class="card" onclick="openInfo('MULTIMETER', 'Mesure tension et continuité.', 'Measures voltage.', 'لقياس الجهد والممانعة.')"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
+            <div class="card" onclick="openInfo('FLUX', 'Facilite la soudure.', 'Solder helper.', 'مساعد لحام.')"><h3>FLUX</h3><p>فلاكس</p></div>
+            <div class="card" onclick="openInfo('SOLDER TIN', 'Étain de soudure.', 'Solder alloy.', 'قصدير اللحام.')"><h3>SOLDER TIN</h3><p>قصدير</p></div>
+            <div class="card" onclick="openInfo('DESOLDERING WICK', 'Aspire l\'étain.', 'Solder wick.', 'سلك سحب القصدير.')"><h3>DESOLDERING WICK</h3><p>فتيل إزالة اللحام</p></div>
+            <div class="card" onclick="openInfo('PCB HOLDER', 'Fixe la carte.', 'Holds the board.', 'حامل البوردة.')"><h3>PCB HOLDER</h3><p>حامل البوردة</p></div>
+            <div class="card" onclick="openInfo('LCD GLUE', 'Colle écran.', 'Screen glue.', 'غراء شاشات.')"><h3>LCD GLUE</h3><p>غراء شاشات</p></div>
+            <div class="card" onclick="openInfo('CLEANING LIQUID', 'Nettoyant circuit.', 'PCB cleaner.', 'سائل تنظيف.')"><h3>CLEANING LIQUID</h3><p>سائل تنظيف</p></div>
+            <div class="card" onclick="openInfo('JUMP WIRES', 'Fils de réparation.', 'Jumper wires.', 'أسلاك توصيل.')"><h3>JUMP WIRES</h3><p>أسلاك التوصيل</p></div>
+            <div class="card" onclick="openInfo('OPENING TOOLS', 'Leviers d\'ouverture.', 'Opening tools.', 'أدوات الفتح.')"><h3>OPENING TOOLS</h3><p>أدوات الفتح</p></div>
+            <div class="card" onclick="openInfo('SCREWDRIVERS', 'Tournevis.', 'Screwdrivers.', 'مفكات.')"><h3>SCREWDRIVERS</h3><p>مفكات</p></div>
+            <div class="card" onclick="openInfo('TWEEZERS', 'Manipulateur.', 'Tweezers.', 'ملقط.')"><h3>TWEEZERS</h3><p>ملقط</p></div>
         </div>
     </div>
 
     <div id="niv2" class="page">
         <div class="header"><h1>⚡ COMPONENTS</h1><p>المكونات الإلكترونية</p></div>
         <button class="btn-back" onclick="nav('home')">⬅ BACK / العودة</button>
-        <div class="grid">
+        <div class="grid" id="grid-niv2">
             <div class="card"><h3>DIODE</h3><p>ديود</p></div>
             <div class="card"><h3>COIL</h3><p>وشيعة</p></div>
             <div class="card"><h3>RESISTANCE</h3><p>مقاومة</p></div>
@@ -114,6 +135,26 @@
             document.getElementById(id).classList.add('active');
             window.scrollTo(0,0);
         }
+
+        function filterSearch() {
+            let input = document.getElementById('mainSearch').value.toLowerCase();
+            let cards = document.querySelectorAll('.card');
+            let menu = document.getElementById('main-menu-content');
+
+            if (input.length > 0) {
+                menu.style.display = 'none'; // Cache le menu principal pour montrer les résultats
+                nav('niv1'); // Par défaut on cherche dans les outils
+            } else {
+                menu.style.display = 'block';
+                nav('home');
+            }
+
+            cards.forEach(card => {
+                let text = card.innerText.toLowerCase();
+                card.style.display = text.includes(input) ? "flex" : "none";
+            });
+        }
+
         function openInfo(title, fr, en, ar) {
             document.getElementById('mTitle').innerText = title;
             document.getElementById('mFr').innerText = fr;
