@@ -7,104 +7,118 @@
     <style>
         :root { --primary: #007bff; --bg: #0d1117; --card-bg: #161b22; --border: #30363d; }
         body { background-color: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; text-align: center; }
-        .header { padding: 15px 10px; background: #161b22; border-bottom: 2px solid var(--primary); }
-        .header h1 { color: var(--primary); margin: 0; font-size: 22px; font-weight: 800; }
-        .section-title { text-align: left; padding: 10px 5% 5px; color: var(--primary); font-size: 12px; text-transform: uppercase; font-weight: bold; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 5%; }
         
-        .card { background: var(--card-bg); border: 2px solid var(--border); border-radius: 10px; padding: 12px 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; min-height: 80px; position: relative; transition: 0.2s; }
-        .card h3 { margin: 0; font-size: 13px; color: #fff; font-weight: 800; }
-        .card p { margin: 3px 0 0; font-size: 10px; color: var(--primary); font-weight: bold; }
-        
-        /* CADENA */
-        .card.locked::after { content: '🔒'; position: absolute; top: 8px; right: 8px; font-size: 14px; }
-        .card.locked { border-color: #444; opacity: 0.7; }
+        .header { padding: 15px 10px; background: #161b22; border-bottom: 3px solid var(--primary); }
+        .header h1 { color: var(--primary); margin: 0; font-size: 22px; font-weight: 900; }
 
-        .btn-sos { background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; padding: 15px; margin: 15px 5%; border-radius: 10px; font-weight: 900; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 16px; }
-        .btn-back { background: #30363d; color: white; padding: 12px; margin: 10px 5%; border-radius: 8px; border: none; width: 90%; font-weight: bold; cursor: pointer; }
+        .section-title { text-align: left; padding: 10px 5% 2px; color: var(--primary); font-size: 11px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
         
-        /* QUIZ STYLE */
-        .opt-btn { background: #1c2128; border: 2px solid var(--border); color: #fff; width: 90%; padding: 18px 5px; margin: 8px 5%; border-radius: 12px; font-size: 15px; font-weight: bold; cursor: pointer; }
-        .q-box { padding: 25px 20px; text-align: center; }
-        .q-en { font-weight: 900; color: var(--primary); font-size: 18px; margin-bottom: 10px; }
-        .q-ar { font-weight: bold; font-size: 20px; direction: rtl; color: #fff; }
+        /* GRILLE ET CARTES COMPACTES */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px 5%; }
+        
+        .card { 
+            background: var(--card-bg); border: 2px solid var(--border); border-radius: 8px; 
+            padding: 8px 4px; display: flex; flex-direction: column; align-items: center; 
+            justify-content: center; cursor: pointer; min-height: 60px; position: relative;
+        }
+        /* TEXTE PLUS GRAND DANS LES CARTES */
+        .card h3 { margin: 0; font-size: 15px; color: #fff; font-weight: 800; line-height: 1.1; }
+        .card p { margin: 2px 0 0; font-size: 11px; color: var(--primary); font-weight: bold; }
+        
+        /* CADENA DISCRET */
+        .card.locked::after { content: '🔒'; position: absolute; top: 4px; right: 4px; font-size: 11px; }
+        .card.locked { opacity: 0.8; border-color: #444; }
+
+        .btn-sos { 
+            background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; padding: 16px; 
+            margin: 15px 5%; border-radius: 10px; font-weight: 900; display: flex; 
+            align-items: center; justify-content: center; text-decoration: none; font-size: 16px; 
+        }
+        
+        .btn-back { background: #30363d; color: white; padding: 12px; margin: 10px 5%; border-radius: 8px; border: none; width: 90%; font-weight: bold; font-size: 14px; }
+
+        /* QUIZ : TEXTE BIEN VISIBLE */
+        .q-box { padding: 30px 15px; }
+        .q-en { font-weight: 900; color: var(--primary); font-size: 20px; margin-bottom: 15px; }
+        .q-ar { font-weight: bold; font-size: 24px; direction: rtl; color: #fff; }
+        
+        .opt-btn { 
+            background: #1c2128; border: 2px solid var(--border); color: #fff; 
+            width: 92%; padding: 20px 10px; margin: 10px 4%; border-radius: 12px; 
+            font-size: 17px; font-weight: bold; cursor: pointer;
+        }
 
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); }
-        .modal-content { background: var(--card-bg); margin: 15% auto; border: 2px solid var(--primary); width: 85%; border-radius: 15px; padding: 20px; }
-        
+        .modal-content { background: var(--card-bg); margin: 20% auto; border: 2px solid var(--primary); width: 85%; border-radius: 15px; padding: 20px; }
+        .m-desc { font-size: 17px; margin: 10px 0; line-height: 1.4; }
+
         .page { display: none; }
         .active { display: block; }
     </style>
 </head>
 <body>
 
-    <!-- HOME -->
     <div id="home" class="page active">
         <div class="header"><h1>MASTER REPAIR</h1></div>
-        <div class="section-title">Academy Levels</div>
+        <div class="section-title">Niveaux</div>
         <div class="grid">
             <div class="card" onclick="nav('niv1')"><h3>🛠 NIV 1</h3><p>TOOLS / الأدوات</p></div>
             <div class="card" onclick="nav('niv2')"><h3>⚡ NIV 2</h3><p>COMPONENTS / المكونات</p></div>
-            <!-- LE CLIC ICI ENVOIE DIRECT AU QUIZ SI LOCK -->
             <div class="card locked" id="card-niv3" onclick="handleLock('niv3')"><h3>📟 NIV 3</h3><p>MULTIMETER / القياس</p></div>
             <div class="card locked" id="card-niv4" onclick="handleLock('niv4')"><h3>📋 NIV 4</h3><p>SCHEMATICS / المخططات</p></div>
         </div>
         <a href="https://t.me/c/3919937885/2" target="_blank" class="btn-sos">🆘 SOS SUPPORT / الدعم</a>
     </div>
 
-    <!-- NIV 1 -->
     <div id="niv1" class="page">
         <div class="header"><h1>NIV 1 TOOLS</h1></div>
-        <button class="btn-back" onclick="nav('home')">⬅ BACK</button>
+        <button class="btn-back" onclick="nav('home')">⬅ BACK / عودة</button>
         <div class="grid">
-            <div class="card" onclick="openInfo('SOLDERING STATION', 'Thermal station.', 'محطة لحام.')"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
+            <div class="card" onclick="openInfo('SOLDERING STATION', 'Precision heat.', 'محطة لحام.')"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
             <div class="card" onclick="openInfo('HOT AIR STATION', 'IC desoldering.', 'هواء ساخن.')"><h3>HOT AIR STATION</h3><p>هواء ساخن</p></div>
-            <div class="card" onclick="openInfo('MICROSCOPE', 'Inspection.', 'مجهر.')"><h3>MICROSCOPE</h3><p>مجهر</p></div>
+            <div class="card" onclick="openInfo('MICROSCOPE', 'Visual check.', 'مجهر.')"><h3>MICROSCOPE</h3><p>مجهر</p></div>
             <div class="card" onclick="openInfo('MULTIMETER', 'Measuring.', 'المالتيميتر.')"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
             <div class="card" onclick="openInfo('FLUX', 'Cleaning.', 'فلاكس.')"><h3>FLUX</h3><p>فلاكس</p></div>
-            <div class="card" onclick="openInfo('SOLDER TIN', 'Tin wire.', 'قصدير.')"><h3>SOLDER TIN</h3><p>قصدير</p></div>
-            <div class="card" onclick="openInfo('WICK', 'Copper braid.', 'فتيل إزالة.')"><h3>WICK</h3><p>فتيل إزالة</p></div>
+            <div class="card" onclick="openInfo('SOLDER TIN', 'Joining.', 'قصدير.')"><h3>SOLDER TIN</h3><p>قصدير</p></div>
+            <div class="card" onclick="openInfo('WICK', 'Desoldering braid.', 'فتيل إزالة.')"><h3>WICK</h3><p>فتيل إزالة</p></div>
             <div class="card" onclick="openInfo('PCB HOLDER', 'Fixing.', 'حامل بوردة.')"><h3>PCB HOLDER</h3><p>حامل</p></div>
             <div class="card" onclick="openInfo('LCD GLUE', 'Adhesive.', 'غراء.')"><h3>LCD GLUE</h3><p>غراء</p></div>
-            <div class="card" onclick="openInfo('CLEANER', 'Alcohol.', 'منظف.')"><h3>CLEANER</h3><p>منظف</p></div>
-            <div class="card" onclick="openInfo('JUMP WIRES', 'Repair.', 'أسلاك تعويض.')"><h3>JUMP WIRES</h3><p>أسلاك</p></div>
-            <div class="card" onclick="openInfo('OPENING TOOLS', 'Prying.', 'أدوات فتح.')"><h3>OPENING TOOLS</h3><p>أدوات</p></div>
-            <div class="card" onclick="openInfo('SCREWDRIVERS', 'Drivers.', 'مفكات.')"><h3>SCREWDRIVERS</h3><p>مفكات</p></div>
+            <div class="card" onclick="openInfo('CLEANER', 'IPA.', 'منظف.')"><h3>CLEANER</h3><p>منظف</p></div>
+            <div class="card" onclick="openInfo('JUMP WIRES', 'Bypass.', 'أسلاك.')"><h3>JUMP WIRES</h3><p>أسلاك</p></div>
+            <div class="card" onclick="openInfo('OPENING TOOLS', 'Safety pry.', 'أدوات.')"><h3>OPENING TOOLS</h3><p>أدوات</p></div>
+            <div class="card" onclick="openInfo('SCREWDRIVERS', 'Precision.', 'مفكات.')"><h3>SCREWDRIVERS</h3><p>مفكات</p></div>
             <div class="card" onclick="openInfo('TWEEZERS', 'Handling.', 'ملقط.')"><h3>TWEEZERS</h3><p>ملقط</p></div>
         </div>
     </div>
 
-    <!-- NIV 2 -->
     <div id="niv2" class="page">
         <div class="header"><h1>NIV 2 COMPONENTS</h1></div>
-        <button class="btn-back" onclick="nav('home')">⬅ BACK</button>
+        <button class="btn-back" onclick="nav('home')">⬅ BACK / عودة</button>
         <div class="grid">
             <div class="card" onclick="openInfo('DIODE', 'Directional.', 'ديود.')"><h3>DIODE</h3><p>ديود</p></div>
-            <div class="card" onclick="openInfo('COIL', 'Inductor.', 'وشيعة.')"><h3>COIL</h3><p>وشيعة</p></div>
-            <div class="card" onclick="openInfo('RESISTANCE', 'Ohm.', 'مقاومة.')"><h3>RESISTANCE</h3><p>مقاومة</p></div>
-            <div class="card" onclick="openInfo('CAPACITOR', 'Filter.', 'مكثف.')"><h3>CAPACITOR</h3><p>مكثف</p></div>
+            <div class="card" onclick="openInfo('COIL', 'Magnetic energy.', 'وشيعة.')"><h3>COIL</h3><p>وشيعة</p></div>
+            <div class="card" onclick="openInfo('RESISTANCE', 'Opposes flow.', 'مقاومة.')"><h3>RESISTANCE</h3><p>مقاومة</p></div>
+            <div class="card" onclick="openInfo('CAPACITOR', 'Filters noise.', 'مكثف.')"><h3>CAPACITOR</h3><p>مكثف</p></div>
             <div class="card" onclick="openInfo('TRANSISTOR', 'Switch.', 'ترانزستور.')"><h3>TRANSISTOR</h3><p>ترانزستور</p></div>
             <div class="card" onclick="openInfo('IC (CHIP)', 'Integrated.', 'آيسي.')"><h3>IC (CHIP)</h3><p>آيسي</p></div>
             <div class="card" onclick="openInfo('CONNECTOR', 'FPC.', 'موصل.')"><h3>CONNECTOR</h3><p>كونيكتور</p></div>
-            <div class="card" onclick="openInfo('CRYSTAL', 'Frequency.', 'كريستال.')"><h3>CRYSTAL</h3><p>كريستال</p></div>
-            <div class="card" onclick="openInfo('FUSE', 'Safety.', 'فيوز.')"><h3>FUSE</h3><p>فيوز</p></div>
-            <div class="card" onclick="openInfo('THERMISTOR', 'Thermal.', 'ثرمستور.')"><h3>THERMISTOR</h3><p>ثرمستور</p></div>
+            <div class="card" onclick="openInfo('CRYSTAL', 'Clock.', 'كريستال.')"><h3>CRYSTAL</h3><p>كريستال</p></div>
+            <div class="card" onclick="openInfo('FUSE', 'Protection.', 'فيوز.')"><h3>FUSE</h3><p>فيوز</p></div>
+            <div class="card" onclick="openInfo('THERMISTOR', 'Thermal check.', 'ثرمستور.')"><h3>THERMISTOR</h3><p>ثرمستور</p></div>
         </div>
     </div>
 
-    <!-- NIV 3 -->
     <div id="niv3" class="page">
         <div class="header"><h1>📟 NIV 3 MULTIMETER</h1></div>
-        <button class="btn-back" onclick="nav('home')">⬅ BACK</button>
+        <button class="btn-back" onclick="nav('home')">⬅ BACK / عودة</button>
         <div class="grid">
-            <div class="card" onclick="openInfo('DIODE MODE (⯈|)', 'Impedance.', 'وضع الديود.')"><h3>DIODE MODE (⯈|)</h3><p>ديود</p></div>
-            <div class="card" onclick="openInfo('VOLTAGE DC (V⎓)', 'Power check.', 'الجهد المستمر.')"><h3>VOLTAGE DC (V⎓)</h3><p>فولت</p></div>
-            <div class="card" onclick="openInfo('CONTINUITY (🔊)', 'Trace check.', 'الجرس.')"><h3>CONTINUITY (🔊)</h3><p>جرس</p></div>
-            <div class="card" onclick="openInfo('RESISTANCE (Ω)', 'Ohm check.', 'المقاومة.')"><h3>RESISTANCE (Ω)</h3><p>أوم</p></div>
+            <div class="card" onclick="openInfo('DIODE MODE (⯈|)', 'Shorts.', 'وضع الديود.')"><h3>DIODE MODE (⯈|)</h3><p>وضع الديود</p></div>
+            <div class="card" onclick="openInfo('VOLTAGE DC (V⎓)', 'Battery.', 'الجهد المستمر.')"><h3>VOLTAGE DC (V⎓)</h3><p>فولت</p></div>
+            <div class="card" onclick="openInfo('CONTINUITY (🔊)', 'Traces.', 'وضع الجرس.')"><h3>CONTINUITY (🔊)</h3><p>جرس</p></div>
+            <div class="card" onclick="openInfo('RESISTANCE (Ω)', 'Ohm.', 'المقاومة.')"><h3>RESISTANCE (Ω)</h3><p>أوم</p></div>
         </div>
     </div>
 
-    <!-- QUIZ PAGE -->
     <div id="quiz-page" class="page">
         <div class="header"><h1>UNLOCKED TEST</h1></div>
         <div class="q-box">
@@ -114,18 +128,24 @@
         <div id="options"></div>
     </div>
 
-    <!-- MODAL -->
     <div id="infoModal" class="modal">
         <div class="modal-content">
-            <h2 id="mTitle" style="color:var(--primary); margin-top:0;"></h2>
-            <p id="mEn" style="font-weight:bold;"></p>
-            <p id="mAr" style="direction:rtl; text-align:right; color:var(--primary); font-weight:bold;"></p>
+            <h2 id="mTitle" style="color:var(--primary); margin:0; font-size:18px;"></h2>
+            <p id="mEn" class="m-desc"></p>
+            <p id="mAr" class="m-desc" style="direction:rtl; text-align:right; color:var(--primary);"></p>
             <button class="btn-back" style="width:100%; margin:10px 0 0 0;" onclick="closeInfo()">OK</button>
         </div>
     </div>
 
     <script>
         let unlocked = { niv3: false, niv4: false };
+        let curQ = 0; let score = 0; let target = "";
+
+        const quizData = [
+            { en: "Which component filters noise?", ar: "أي مكون يقوم بتصفية الضجيج؟", opts: ["CAPACITOR / مكثف", "DIODE / ديود", "FUSE / فيوز"], r: 0 },
+            { en: "Symbol (Ω) is for?", ar: "الرمز (Ω) يستخدم لقياس؟", opts: ["VOLT / فولت", "RESISTANCE / مقاومة", "AMPERE / أمبير"], r: 1 },
+            { en: "Best tool for BGA ICs?", ar: "أفضل أداة للتعامل مع آيسيهات BGA؟", opts: ["IRON / كاوية", "HOT AIR / هواء ساخن", "GLUE / غراء"], r: 1 }
+        ];
 
         function nav(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -133,12 +153,40 @@
             window.scrollTo(0,0);
         }
 
-        // LOGIQUE : SI LOCK -> GO QUIZ
         function handleLock(id) {
-            if(unlocked[id]) {
-                nav(id);
-            } else {
-                startQuiz(id);
+            if(unlocked[id]) nav(id);
+            else startQuiz(id);
+        }
+
+        function startQuiz(id) {
+            target = id; curQ = 0; score = 0;
+            nav('quiz-page');
+            showQ();
+        }
+
+        function showQ() {
+            let q = quizData[curQ];
+            document.getElementById('q-en').innerText = q.en;
+            document.getElementById('q-ar').innerText = q.ar;
+            let h = "";
+            q.opts.forEach((o, i) => { h += `<button class="opt-btn" onclick="ans(${i})">${o}</button>`; });
+            document.getElementById('options').innerHTML = h;
+        }
+
+        function ans(i) {
+            if(i === quizData[curQ].r) score++;
+            curQ++;
+            if(curQ < quizData.length) showQ();
+            else {
+                if(score === quizData.length) {
+                    alert("SUCCESS! 🔓");
+                    unlocked[target] = true;
+                    document.getElementById('card-' + target).classList.remove('locked');
+                    nav(target);
+                } else {
+                    alert("FAILED. SCORE: " + score + "/3");
+                    nav('home');
+                }
             }
         }
 
@@ -149,51 +197,6 @@
             document.getElementById('infoModal').style.display = 'block';
         }
         function closeInfo() { document.getElementById('infoModal').style.display = 'none'; }
-
-        // QUIZ SYSTEM
-        const quizData = [
-            { en: "Component for filtering?", ar: "مكون يستخدم للتصفية والفلترة؟", opts: ["CAPACITOR / مكثف", "DIODE / ديود", "FUSE / فيوز"], r: 0 },
-            { en: "Symbol (🔊) in Multimeter?", ar: "ماذا يعني رمز (🔊) في المالتيميتر؟", opts: ["VOLT / فولت", "OHM / أوم", "CONTINUITY / جرس"], r: 2 },
-            { en: "Tool for BGA IC?", ar: "أداة لفك وتركيب الآيسيهات؟", opts: ["IRON / كاوية", "HOT AIR / هواء ساخن", "GLUE / غراء"], r: 1 }
-        ];
-
-        let curQ = 0; let score = 0; let targetLevel = "";
-
-        function startQuiz(levelId) {
-            targetLevel = levelId;
-            curQ = 0; score = 0;
-            nav('quiz-page');
-            showQ();
-        }
-
-        function showQ() {
-            let q = quizData[curQ];
-            document.getElementById('q-en').innerText = q.en;
-            document.getElementById('q-ar').innerText = q.ar;
-            let html = "";
-            q.opts.forEach((o, i) => {
-                html += `<button class="opt-btn" onclick="checkAns(${i})">${o}</button>`;
-            });
-            document.getElementById('options').innerHTML = html;
-        }
-
-        function checkAns(i) {
-            if(i === quizData[curQ].r) score++;
-            curQ++;
-            if(curQ < quizData.length) showQ(); else finishQuiz();
-        }
-
-        function finishQuiz() {
-            if(score === quizData.length) {
-                alert("SUCCESS! 🔓 LEVEL UNLOCKED");
-                unlocked[targetLevel] = true;
-                document.getElementById('card-' + targetLevel).classList.remove('locked');
-                nav(targetLevel);
-            } else {
-                alert("FAILED. TRY AGAIN / حاول مرة أخرى");
-                nav('home');
-            }
-        }
     </script>
 </body>
 </html>
