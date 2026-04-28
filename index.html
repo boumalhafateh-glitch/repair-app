@@ -93,10 +93,13 @@
     </div>
 
     <div id="niv3" class="page">
-        <div class="header"><h1>📟 NIV 3 : MULTIMETER</h1><p>Mesures et Diagnostics / القياسات</p></div>
+        <div class="header"><h1>📟 NIV 3 : MULTIMETER</h1><p>How to Measure / كيف نستخدم الأفوميتر</p></div>
         <button class="btn-back" onclick="nav('home')">⬅ BACK / العودة</button>
-        <div style="padding: 20px;">
-            <p>Bienvenue Expert ! Préparez-vous pour les mesures de tension.</p>
+        <div class="grid">
+            <div class="card" onclick="openInfo('DC VOLTAGE (V⎓)', 'Mesure de la tension continue (Batterie).', 'Direct Current Voltage.', 'قياس الجهد المستمر (البطارية).')"><h3>DC VOLTAGE</h3><p>الجهد المستمر</p></div>
+            <div class="card" onclick="openInfo('DIODE MODE (⯈|)', 'Mesure des chutes de tension (Chute).', 'Diode value / Drop voltage.', 'وضع الديود / قياس الممانعة.')"><h3>DIODE MODE</h3><p>وضع الديود</p></div>
+            <div class="card" onclick="openInfo('CONTINUITY (🔊)', 'Vérifier si le courant passe (Bip).', 'Buzz/Bip test.', 'وضع الجرس / فحص المسار.')"><h3>CONTINUITY</h3><p>وضع الجرس</p></div>
+            <div class="card" onclick="openInfo('RESISTANCE (Ω)', 'Mesure de la valeur résistive.', 'Ohms measurement.', 'قياس المقاومة.')"><h3>RESISTANCE</h3><p>المقاومة</p></div>
         </div>
     </div>
 
