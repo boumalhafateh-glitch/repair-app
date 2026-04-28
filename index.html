@@ -22,6 +22,7 @@
             overflow-x: hidden;
         }
 
+        /* Header */
         .header { 
             padding: 40px 10px; 
             background: linear-gradient(to bottom, #161b22, #0d1117);
@@ -33,6 +34,7 @@
         
         .section-title { text-align: left; padding: 10px 5%; color: var(--primary); font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 10px;}
         
+        /* Grille */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px 5%; }
         
         .card { 
@@ -49,6 +51,7 @@
         .card h3 { margin: 10px 0 5px; font-size: 11px; color: #fff; text-transform: uppercase; }
         .card p { margin: 0; font-size: 10px; color: var(--text-secondary); }
 
+        /* Boutons */
         .btn-sos { 
             background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; 
             padding: 18px; margin: 25px 5%; 
@@ -64,13 +67,44 @@
             display: flex; align-items: center; justify-content: center; gap: 8px;
         }
 
+        /* Modal (Interface Définition) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background: var(--card-bg);
+            margin: 15% auto;
+            padding: 30px;
+            border: 1px solid var(--primary);
+            width: 85%;
+            border-radius: 20px;
+            text-align: left;
+            animation: slideUp 0.3s ease;
+        }
+        .modal-content h2 { color: var(--primary); margin-top: 0; text-transform: uppercase; }
+        .modal-content p { color: #fff; line-height: 1.6; font-size: 16px; }
+        .close-modal {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            float: right;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* Navigation */
         .page { display: none; animation: fadeIn 0.3s ease; }
         .active { display: block; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
 <body>
@@ -80,75 +114,61 @@
             <h1>MASTER REPAIR ACADEMY</h1>
             <p>أكاديمية صيانة المحترفين</p>
         </div>
-
         <div class="section-title">Catalogue Technique</div>
         <div class="grid">
-            <div class="card" onclick="nav('niv1')">
-                <h3>🛠 NIV 1</h3>
-                <p>REPAIR TOOLS / أدوات الإصلاح</p>
-            </div>
-            <div class="card" onclick="nav('niv2')">
-                <h3>⚡ NIV 2</h3>
-                <p>ELECTRONIC COMPONENTS / مكونات إلكترونية</p>
-            </div>
-            <div class="card" onclick="alert('NIV 3 en développement')">
-                <h3>📟 NIV 3</h3>
-                <p>MULTIMETER-PSU / المالتيميتر ومزود الطاقة</p>
-            </div>
-            <div class="card" onclick="alert('NIV 4 en développement')">
-                <h3>📋 NIV 4</h3>
-                <p>SCHEMATIC / المخططات</p>
-            </div>
+            <div class="card" onclick="nav('niv1')"><h3>🛠 NIV 1</h3><p>REPAIR TOOLS / أدوات الإصلاح</p></div>
+            <div class="card" onclick="nav('niv2')"><h3>⚡ NIV 2</h3><p>ELECTRONIC COMPONENTS / مكونات إلكترونية</p></div>
+            <div class="card" onclick="alert('NIV 3 en développement')"><h3>📟 NIV 3</h3><p>MULTIMETER-PSU / المالتيميتر ومزود الطاقة</p></div>
+            <div class="card" onclick="alert('NIV 4 en développement')"><h3>📋 NIV 4</h3><p>SCHEMATIC / المخططات</p></div>
         </div>
-
-        <div class="section-title">Évaluation</div>
-        <div class="full-card" style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 10px 5%; cursor: pointer;" onclick="alert('Test my level')">
-            <p style="margin:0; color:var(--primary); font-weight:bold;">📝 TEST MY LEVEL</p>
-            <p style="margin:5px 0 0; font-size:11px; color:var(--text-secondary);">Déterminer votre grade technique / تحديد مستواك التقني</p>
-        </div>
-
-        <a href="https://t.me/c/3919937885/2" class="btn-sos" target="_blank">
-            <span>🆘</span> GROUPE SOS / الدعم الفني
-        </a>
+        <a href="https://t.me/c/3919937885/2" class="btn-sos" target="_blank"><span>🆘</span> GROUPE SOS / الدعم الفني</a>
     </div>
 
     <div id="niv1" class="page">
-        <div class="header"><h1>🛠 REPAIR TOOLS</h1><p>قائمة أدوات الإصلاح</p></div>
+        <div class="header"><h1>🛠 REPAIR TOOLS</h1><p>Cliquez pour la définition</p></div>
         <button class="btn-back" onclick="nav('home')">⬅ BACK / العودة</button>
         <div class="grid">
-            <div class="card"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
-            <div class="card"><h3>HOT AIR STATION</h3><p>محطة الهواء الساخن</p></div>
-            <div class="card"><h3>MICROSCOPE</h3><p>مجهر</p></div>
-            <div class="card"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
-            <div class="card"><h3>FLUX</h3><p>مساعد اللحام (فلاكس)</p></div>
-            <div class="card"><h3>SOLDER TIN/PASTE</h3><p>قصدير لحام</p></div>
-            <div class="card"><h3>DESOLDERING WICK</h3><p>فتيل إزالة اللحام</p></div>
-            <div class="card"><h3>PCB HOLDER</h3><p>حامل البوردة</p></div>
-            <div class="card"><h3>LCD GLUE</h3><p>غراء الشاشات</p></div>
-            <div class="card"><h3>CLEANING LIQUID</h3><p>سائل تنظيف</p></div>
-            <div class="card"><h3>WIRES & JUMP WIRES</h3><p>أسلاك التوصيل</p></div>
-            <div class="card"><h3>OPENING TOOLS</h3><p>أدوات الفتح</p></div>
-            <div class="card"><h3>SCREWDRIVERS</h3><p>مفكات براغي</p></div>
-            <div class="card"><h3>TWEEZERS</h3><p>ملقط</p></div>
+            <div class="card" onclick="openTool('SOLDERING STATION', 'Utilisée pour souder les composants sur la carte mère. Elle permet de contrôler la température de la panne précisément.')"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
+            <div class="card" onclick="openTool('HOT AIR STATION', 'Indispensable pour dessouder les composants CMS et les circuits intégrés (IC) en projetant de l\'air chaud.')"><h3>HOT AIR STATION</h3><p>محطة الهواء الساخن</p></div>
+            <div class="card" onclick="openTool('MICROSCOPE', 'Permet de voir les composants miniatures et les pistes coupées avec précision sous grossissement.')"><h3>MICROSCOPE</h3><p>مجهر</p></div>
+            <div class="card" onclick="openTool('MULTIMETER', 'Outil de diagnostic pour mesurer la tension, le courant, la résistance et tester la continuité.')"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
+            <div class="card" onclick="openTool('FLUX', 'Produit chimique facilitant la fusion de l\'étain et évitant l\'oxydation pendant la soudure.')"><h3>FLUX</h3><p>فلاكس</p></div>
+            <div class="card" onclick="openTool('SOLDER TIN', 'Alliage métallique utilisé pour créer les connexions électriques entre les composants.')"><h3>SOLDER TIN</h3><p>قصدير لحام</p></div>
+            <div class="card" onclick="openTool('DESOLDERING WICK', 'Tresse de cuivre servant à aspirer le surplus d\'étain sur les pastilles de la carte mère.')"><h3>DESOLDERING WICK</h3><p>فتيل إزالة اللحام</p></div>
+            <div class="card" onclick="openTool('PCB HOLDER', 'Support mécanique pour maintenir la carte mère stable pendant le travail sous microscope.')"><h3>PCB HOLDER</h3><p>حامل البوردة</p></div>
+            <div class="card" onclick="openTool('LCD GLUE', 'Colle spéciale (ex: B7000) pour fixer les écrans et les vitres arrière après réparation.')"><h3>LCD GLUE</h3><p>غراء الشاشات</p></div>
+            <div class="card" onclick="openTool('CLEANING LIQUID', 'Alcool isopropylique utilisé pour nettoyer les résidus de flux et l\'oxydation.')"><h3>CLEANING LIQUID</h3><p>سائل تنظيف</p></div>
+            <div class="card" onclick="openTool('JUMP WIRES', 'Fils ultra-fins pour reconstruire les pistes arrachées sur le circuit imprimé.')"><h3>JUMP WIRES</h3><p>أسلاك التوصيل</p></div>
+            <div class="card" onclick="openTool('OPENING TOOLS', 'Ensemble de spatules et médiators pour ouvrir les téléphones sans rayer le châssis.')"><h3>OPENING TOOLS</h3><p>أدوات الفتح</p></div>
+            <div class="card" onclick="openTool('SCREWDRIVERS', 'Tournevis de précision (Pentalobe, Tri-point, Phillips) adaptés aux vis de smartphones.')"><h3>SCREWDRIVERS</h3><p>مفكات براغي</p></div>
+            <div class="card" onclick="openTool('TWEEZERS', 'Brucelles de précision pour manipuler les composants miniatures et les fils de jump.')"><h3>TWEEZERS</h3><p>ملقط</p></div>
         </div>
     </div>
 
     <div id="niv2" class="page">
-        <div class="header"><h1>⚡ COMPONENTS</h1><p>المكونات الإلكترونية الكاملة</p></div>
+        <div class="header"><h1>⚡ COMPONENTS</h1><p>المكونات الإلكترونية</p></div>
         <button class="btn-back" onclick="nav('home')">⬅ BACK / العودة</button>
         <div class="grid">
             <div class="card"><h3>DIODE</h3><p>ديود</p></div>
-            <div class="card"><h3>COIL / INDUCTOR</h3><p>ملف / وشيعة</p></div>
+            <div class="card"><h3>COIL</h3><p>ملف</p></div>
             <div class="card"><h3>RESISTANCE</h3><p>مقاومة</p></div>
             <div class="card"><h3>CAPACITOR</h3><p>مكثف</p></div>
             <div class="card"><h3>TRANSISTOR</h3><p>ترانزستور</p></div>
-            <div class="card"><h3>IC (CHIP)</h3><p>دارة متكاملة / آيسي</p></div>
-            <div class="card"><h3>CONNECTOR</h3><p>موصل / كونيكتور</p></div>
-            <div class="card"><h3>DETECTOR / SENSOR</h3><p>كاشف / مستشعر</p></div>
-            <div class="card"><h3>CRYSTAL</h3><p>كريستال / مذبذب</p></div>
+            <div class="card"><h3>IC (CHIP)</h3><p>آيسي</p></div>
+            <div class="card"><h3>CONNECTOR</h3><p>موصل</p></div>
+            <div class="card"><h3>DETECTOR</h3><p>مستشعر</p></div>
+            <div class="card"><h3>CRYSTAL</h3><p>كريستال</p></div>
             <div class="card"><h3>THERMISTOR</h3><p>مقاومة حرارية</p></div>
-            <div class="card"><h3>FUSE</h3><p>فيوز / قاطع حماية</p></div>
+            <div class="card"><h3>FUSE</h3><p>فيوز</p></div>
             <div class="card"><h3>RF FILTER</h3><p>فلتر الشبكة</p></div>
+        </div>
+    </div>
+
+    <div id="toolModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Titre</h2>
+            <p id="modalDesc">Définition ici...</p>
+            <button class="close-modal" onclick="closeTool()">FERMER</button>
         </div>
     </div>
 
@@ -157,6 +177,22 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0,0);
+        }
+
+        function openTool(title, description) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = description;
+            document.getElementById('toolModal').style.display = 'block';
+        }
+
+        function closeTool() {
+            document.getElementById('toolModal').style.display = 'none';
+        }
+
+        // Fermer si on clique à l'extérieur de la boîte
+        window.onclick = function(event) {
+            let modal = document.getElementById('toolModal');
+            if (event.target == modal) { modal.style.display = "none"; }
         }
     </script>
 </body>
