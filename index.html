@@ -8,73 +8,39 @@
         :root { --primary: #007bff; --bg: #0d1117; --card-bg: #161b22; --border: #30363d; --text-sec: #8b949e; }
         body { background-color: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; text-align: center; }
         
-        /* Header */
         .header { padding: 30px 10px; background: #161b22; border-bottom: 2px solid var(--primary); margin-bottom: 15px; }
         .header h1 { color: var(--primary); margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
         .header p { color: var(--text-sec); margin: 5px 0 0; font-size: 14px; }
 
         .section-title { text-align: left; padding: 5px 5%; color: var(--primary); font-size: 13px; text-transform: uppercase; margin-top: 10px; font-weight: bold; }
         
-        /* Grille */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 5%; }
         
-        /* Cartes d'accueil affinées */
         .card { 
-            background: var(--card-bg); 
-            border: 1px solid var(--border); 
-            border-radius: 8px; 
-            padding: 15px 5px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            cursor: pointer; 
-            min-height: 85px; 
-            transition: 0.2s; 
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; 
+            padding: 15px 5px; display: flex; flex-direction: column; align-items: center; 
+            justify-content: center; cursor: pointer; min-height: 85px; transition: 0.2s; 
         }
         .card h3 { margin: 0; font-size: 13px; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
         .card p { margin: 6px 0 0; font-size: 10.5px; color: var(--text-sec); font-weight: 500; }
         .card.locked { opacity: 0.5; border-style: dashed; }
 
-        /* Boutons spéciaux */
         .btn-sos { background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; padding: 18px; margin: 15px 5%; border-radius: 10px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; font-size: 16px; }
         .full-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin: 10px 5%; cursor: pointer; }
         .btn-back { background: #30363d; color: white; padding: 14px; margin: 15px 5%; border-radius: 8px; border: none; width: 90%; font-weight: bold; cursor: pointer; font-size: 14px; }
 
-        /* Quiz UI */
-        .q-header { background: var(--card-bg); border-left: 4px solid var(--primary); padding: 15px; border-radius: 8px; margin: 20px 5%; text-align: left; }
-        .q-text { font-size: 16px; display: block; margin-bottom: 8px; font-weight: 600; }
-        .opt-btn { background: #21262d; border: 1px solid var(--border); color: #fff; width: 90%; padding: 15px; margin: 7px 5%; border-radius: 8px; font-size: 14px; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-
-        /* MODAL AVEC IMAGE - AMÉLIORÉE */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); overflow-y: auto; }
-        .modal-content { 
-            background: var(--card-bg); 
-            margin: 5% auto; /* Un peu plus haut pour laisser de la place à l'image */
-            padding: 0; /* On gère le padding en interne pour coller l'image */
-            border: 1px solid var(--primary); 
-            width: 85%; 
-            border-radius: 15px; 
-            text-align: left; 
-            overflow: hidden; /* Pour que l'image respecte les bords arrondis */
-        }
-        
-        .modal-image {
-            width: 100%;
-            height: 200px; /* Hauteur fixe pour l'image */
-            object-fit: cover; /* Recadre l'image pour remplir sans déformer */
-            border-bottom: 1px solid var(--primary);
-        }
-        
-        .modal-body {
-            padding: 20px;
-        }
-
-        .lang-label { font-size: 10px; color: var(--primary); text-transform: uppercase; font-weight: bold; margin-bottom: 2px; }
-        .lang-text { font-size: 14px; line-height: 1.4; margin-bottom: 15px; display: block;}
+        .modal-content { background: var(--card-bg); margin: 5% auto; padding: 0; border: 1px solid var(--primary); width: 85%; border-radius: 15px; text-align: left; overflow: hidden;}
+        .modal-img { width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid var(--primary); background: #222;}
+        .modal-body { padding: 20px; }
+        .lang-label { font-size: 10px; color: var(--primary); text-transform: uppercase; font-weight: bold; margin-bottom: 2px; display: block;}
+        .lang-desc { font-size: 14px; margin: 0 0 15px 0; font-weight: 500; line-height: 1.4; display: block;}
 
         .page { display: none; }
         .active { display: block; }
+
+        .q-header { background: var(--card-bg); border-left: 4px solid var(--primary); padding: 15px; border-radius: 8px; margin: 20px 5%; text-align: left; }
+        .opt-btn { background: #21262d; border: 1px solid var(--border); color: #fff; width: 90%; padding: 15px; margin: 7px 5%; border-radius: 8px; font-size: 14px; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
     </style>
 </head>
 <body>
@@ -100,94 +66,10 @@
         <div class="header"><h1>🛠 NIV 1 TOOLS</h1></div>
         <button class="btn-back" onclick="nav('home')">⬅ BACK / العودة</button>
         <div class="grid">
-            <div class="card" onclick="openInfo('SOLDERING STATION', 
-            'https://media.istockphoto.com/id/1148810237/fr/photo/fer-%C3Cet ajout d'images rend l'application immédiatement plus professionnelle. Voici le code **rectifié et complet** qui intègre une image spécifique pour **chacun** des 24 éléments, sans casser aucune de tes fonctionnalités précédentes.
-
-```html
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Master Repair Academy</title>
-    <style>
-        :root { --primary: #007bff; --bg: #0d1117; --card-bg: #161b22; --border: #30363d; --text-sec: #8b949e; }
-        body { background-color: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; text-align: center; }
-        
-        .header { padding: 30px 10px; background: #161b22; border-bottom: 2px solid var(--primary); margin-bottom: 15px; }
-        .header h1 { color: var(--primary); margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
-        .header p { color: var(--text-sec); margin: 5px 0 0; font-size: 14px; }
-
-        .section-title { text-align: left; padding: 5px 5%; color: var(--primary); font-size: 13px; text-transform: uppercase; margin-top: 10px; font-weight: bold; }
-        
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 5%; }
-        
-        .card { 
-            background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; 
-            padding: 15px 5px; display: flex; flex-direction: column; align-items: center; 
-            justify-content: center; cursor: pointer; min-height: 85px; transition: 0.2s; 
-        }
-        .card h3 { margin: 0; font-size: 13px; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
-        .card p { margin: 6px 0 0; font-size: 10.5px; color: var(--text-sec); font-weight: 500; }
-        .card.locked { opacity: 0.5; border-style: dashed; }
-
-        .btn-sos { background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; padding: 18px; margin: 15px 5%; border-radius: 10px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; font-size: 16px; }
-        .full-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin: 10px 5%; cursor: pointer; }
-        .btn-back { background: #30363d; color: white; padding: 14px; margin: 15px 5%; border-radius: 8px; border: none; width: 90%; font-weight: bold; cursor: pointer; font-size: 14px; }
-
-        .q-header { background: var(--card-bg); border-left: 4px solid var(--primary); padding: 15px; border-radius: 8px; margin: 20px 5%; text-align: left; }
-        .opt-btn { background: #21262d; border: 1px solid var(--border); color: #fff; width: 90%; padding: 15px; margin: 7px 5%; border-radius: 8px; font-size: 14px; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-
-        /* Style de la Modal mis à jour pour l'image */
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); overflow-y: auto; }
-        .modal-content { background: var(--card-bg); margin: 8% auto; padding: 0; border: 1px solid var(--primary); width: 85%; border-radius: 15px; text-align: left; overflow: hidden;}
-        
-        .modal-img { width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid var(--primary); }
-        .modal-body { padding: 20px; }
-        .lang-label { font-size: 10px; color: var(--primary); text-transform: uppercase; font-weight: bold; margin-bottom: 2px; display: block;}
-        .lang-desc { font-size: 15px; margin: 0 0 15px 0; font-weight: 500; line-height: 1.4; display: block;}
-
-        .page { display: none; }
-        .active { display: block; }
-    </style>
-</head>
-<body>
-
-    <div id="home" class="page active">
-        <div class="header"><h1>MASTER REPAIR ACADEMY</h1><p>أكاديمية صيانة المحترفين</p></div>
-        <div class="section-title">Catalogue Technique</div>
-        <div class="grid">
-            <div class="card" onclick="nav('niv1')"><h3>🛠 NIV 1</h3><p>TOOLS / الأدوات</p></div>
-            <div class="card" onclick="nav('niv2')"><h3>⚡ NIV 2</h3><p>COMPONENTS / المكونات</p></div>
-            <div class="card locked" id="card-niv3" onclick="startTest()"><h3>📟 NIV 3</h3><p>🔒 MULTIMETER / القياس</p></div>
-            <div class="card locked" id="card-niv4"><h3>📋 NIV 4</h3><p>🔒 SCHEMATIC / المخططات</p></div>
-        </div>
-        <div class="section-title">Évaluation</div>
-        <div class="full-card" onclick="startTest()">
-            <p style="margin:0; color:var(--primary); font-weight:bold; font-size: 16px;">📝 TEST MY LEVEL (5 Qs)</p>
-            <p style="margin:5px 0 0; font-size:11px; color:var(--text-sec);">Besoin de 5/5 pour le NIV 3 / مطلوب 5/5</p>
-        </div>
-        <a href="[https://t.me/c/3919937885/2](https://t.me/c/3919937885/2)" class="btn-sos"><span>🆘</span> GROUPE SOS / الدعم الفني</a>
-    </div>
-
-    <div id="niv1" class="page">
-        <div class="header"><h1>🛠 NIV 1 TOOLS</h1></div>
-        <button class="btn-back" onclick="nav('home')">⬅ BACK / العودة</button>
-        <div class="grid">
-            <div class="card" onclick="openInfo('SOLDERING STATION', 'http://googleusercontent.com/image_collection/image_retrieval/15264350163351025531', 'Station thermique réglable...', 'Adjustable thermal...', 'محطة حرارية قابلة...')"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
-            <div class="card" onclick="openInfo('HOT AIR STATION', 'http://googleusercontent.com/image_collection/image_retrieval/8886369062335123049', 'Générateur d\'air chaud...', 'Hot air generator...', 'مولد هواء ساخن...')"><h3>HOT AIR STATION</h3><p>محطة الهواء الساخن</p></div>
-            <div class="card" onclick="openInfo('MICROSCOPE', 'http://googleusercontent.com/image_collection/image_retrieval/16086749926128212134', 'Outil optique...', 'Optical or digital...', 'أدوات بصرية أو رقمية...')"><h3>MICROSCOPE</h3><p>مجهر</p></div>
-            <div class="card" onclick="openInfo('MULTIMETER', 'http://googleusercontent.com/image_collection/image_retrieval/17496660100233418839', 'Appareil de mesure polyvalent...', 'Versatile measuring...', 'جهاز قياس متعدد الاستخدامات...')"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
-            <div class="card" onclick="openInfo('FLUX', 'http://googleusercontent.com/image_collection/image_retrieval/12250262615413031046', 'Substance chimique...', 'Chemical substance...', 'مادة كيميائية تسهل انصهار القصدير...')"><h3>FLUX</h3><p>فلاكس</p></div>
-            <div class="card" onclick="openInfo('SOLDER TIN', 'http://googleusercontent.com/image_collection/image_retrieval/12025740446132832863', 'Alliage métallique...', 'Metal alloy...', 'سبيكة معدنية...')"><h3>SOLDER TIN</h3><p>قصدير</p></div>
-            <div class="card" onclick="openInfo('DESOLDERING WICK', 'http://googleusercontent.com/image_collection/image_retrieval/17585507111233400570', 'Tresse en cuivre...', 'Copper braid...', 'فتيل نحاسي...')"><h3>DESOLDERING WICK</h3><p>فتيل إزالة</p></div>
-            <div class="card" onclick="openInfo('PCB HOLDER', 'http://googleusercontent.com/image_collection/image_retrieval/8703770422335018698', 'Support lourd...', 'Heavy or adjustable...', 'حامل ثقيل لتثبيت البوردة...')"><h3>PCB HOLDER</h3><p>حامل البوردة</p></div>
-            <div class="card" onclick="openInfo('LCD GLUE', 'http://googleusercontent.com/image_collection/image_retrieval/16016666611311021469', 'Adhésif spécial...', 'Special adhesive...', 'لاصق خاص...')"><h3>LCD GLUE</h3><p>غراء شاشات</p></div>
-            <div class="card" onclick="openInfo('CLEANING LIQUID', 'http://googleusercontent.com/image_collection/image_retrieval/15951662976132830869', 'Alcool isopropylique...', 'Isopropyl alcohol...', 'كحول أيزوبروبيل...')"><h3>CLEANING LIQUID</h3><p>سائل تنظيف</p></div>
-            <div class="card" onclick="openInfo('JUMP WIRES', 'http://googleusercontent.com/image_collection/image_retrieval/11727763622335031062', 'Fils de cuivre...', 'Very thin copper wires...', 'أسلاك نحاسية رفيعة جداً...')"><h3>JUMP WIRES</h3><p>أسلاك التوصيل</p></div>
-            <div class="card" onclick="openInfo('OPENING TOOLS', 'http://googleusercontent.com/image_collection/image_retrieval/12739328211333036686', 'Leviers en plastique...', 'Plastic levers...', 'أدوات بلاستيكية أو شفاطات...')"><h3>OPENING TOOLS</h3><p>أدوات الفتح</p></div>
-            <div class="card" onclick="openInfo('SCREWDRIVERS', 'http://googleusercontent.com/image_collection/image_retrieval/1176216832335028045', 'Ensemble de tournevis...', 'Set of precision...', 'طقم مفكات دقيقة...')"><h3>SCREWDRIVERS</h3><p>مفكات</p></div>
-            <div class="card" onclick="openInfo('TWEEZERS', 'http://googleusercontent.com/image_collection/image_retrieval/17412702736128038686', 'Brucelles de précision...', 'Anti-static precision tweezers...', 'ملقط دقيق مضاد للاستاتيكية...')"><h3>TWEEZERS</h3><p>ملقط</p></div>
+            <div class="card" onclick="openInfo('SOLDERING STATION', 'https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=500', 'Station thermique réglable pour souder avec précision. Indispensable pour refaire les soudures.', 'Adjustable station for soldering with precision.', 'محطة حرارية قابلة للتعديل للحام المكونات بدقة عالية.')"><h3>SOLDERING IRON</h3><p>محطة لحام</p></div>
+            <div class="card" onclick="openInfo('HOT AIR STATION', 'https://images.unsplash.com/photo-1619615391099-3a33957864a3?w=500', 'Générateur d\'air chaud pour le retrait des circuits intégrés (IC).', 'Hot air generator for removing ICs.', 'مولد هواء ساخن لإزالة الدوائر المتكاملة.')"><h3>HOT AIR</h3><p>هواء ساخن</p></div>
+            <div class="card" onclick="openInfo('MICROSCOPE', 'https://images.unsplash.com/photo-1581093191507-280373c24238?w=500', 'Outil optique indispensable pour inspecter les micro-fissures.', 'Optical tool for inspecting micro-cracks.', 'مجهر لرؤية المسارات الدقيقة.')"><h3>MICROSCOPE</h3><p>مجهر</p></div>
+            <div class="card" onclick="openInfo('MULTIMETER', 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500', 'Appareil de mesure pour tester tension et continuité.', 'Device to test voltage and continuity.', 'جهاز قياس الجهد والممانعة.')"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
         </div>
     </div>
 
@@ -195,77 +77,103 @@
         <div class="header"><h1>⚡ NIV 2 COMPONENTS</h1></div>
         <button class="btn-back" onclick="nav('home')">⬅ BACK / العودة</button>
         <div class="grid">
-            <div class="card" onclick="openInfo('DIODE', 'http://googleusercontent.com/image_collection/image_retrieval/13364980641311023168', 'Composant semi-conducteur...', 'Semiconductor component...', 'مكون نصف موصل يمنع انعكاس التيار...')"><h3>DIODE</h3><p>ديود</p></div>
-            <div class="card" onclick="openInfo('COIL', 'http://googleusercontent.com/image_collection/image_retrieval/14988083812335011985', 'Composant qui stocke...', 'Component that stores...', 'مكون يخزن الطاقة في مجال مغناطيسي...')"><h3>COIL</h3><p>وشيعة</p></div>
-            <div class="card" onclick="openInfo('RESISTANCE', 'http://googleusercontent.com/image_collection/image_retrieval/15214041761128328639', 'Composant qui s\'oppose...', 'Component that opposes...', 'مكون يقاوم مرور التيار الكهربائي...')"><h3>RESISTANCE</h3><p>مقاومة</p></div>
-            <div class="card" onclick="openInfo('CAPACITOR', 'http://googleusercontent.com/image_collection/image_retrieval/12059367462335128043', 'Composant capable de stocker...', 'Component capable...', 'مكون قادر على تخزين الشحنات الكهربائية...')"><h3>CAPACITOR</h3><p>مكثف</p></div>
-            <div class="card" onclick="openInfo('TRANSISTOR', 'http://googleusercontent.com/image_collection/image_retrieval/8871928016128212629', 'Composant actif utilisé...', 'Active component...', 'مكون نشط يستخدم كمفتاح أو مكبر...')"><h3>TRANSISTOR</h3><p>ترانزستور</p></div>
-            <div class="card" onclick="openInfo('IC (CHIP)', 'http://googleusercontent.com/image_collection/image_retrieval/14979188046128212134', 'Le cerveau du circuit...', 'The brain of the circuit...', 'عقل الدائرة. يجمع آلاف الترانزستورات...')"><h3>IC (CHIP)</h3><p>آيسي</p></div>
-            <div class="card" onclick="openInfo('CONNECTOR', 'http://googleusercontent.com/image_collection/image_retrieval/17698063246132800539', 'Interface de liaison (FPC)...', 'Link interface (FPC)...', 'واجهة ربط لتوصيل الشاشة أو البطارية...')"><h3>CONNECTOR</h3><p>كونيكتور</p></div>
-            <div class="card" onclick="openInfo('CRYSTAL', 'http://googleusercontent.com/image_collection/image_retrieval/11797042911233428863', 'Composant qui génère...', 'Component that generates...', 'مكون يولد ترددًا دقيقًا لمزامنة المعالج...')"><h3>CRYSTAL</h3><p>كريستال</p></div>
-            <div class="card" onclick="openInfo('FUSE', 'http://googleusercontent.com/image_collection/image_retrieval/17652780621333010469', 'Dispositif de sécurité...', 'Safety device...', 'أداة حماية تقطع الدائرة في حالة التيار الزائد...')"><h3>FUSE</h3><p>فيوز</p></div>
-            <div class="card" onclick="openInfo('THERMISTOR', 'http://googleusercontent.com/image_collection/image_retrieval/11995701461128328639', 'Résistance dont la valeur...', 'Resistor whose value changes...', 'مقاومة تتغير قيمتها مع الحرارة للأمان...')"><h3>THERMISTOR</h3><p>ثرمستور</p></div>
+            <div class="card" onclick="openInfo('DIODE', 'https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=500', 'Laisse passer le courant dans un seul sens.', 'Allows current in one direction only.', 'تسمح بمرور التيار في اتجاه واحد فقط.')"><h3>DIODE</h3><p>ديود</p></div>
+            <div class="card" onclick="openInfo('CAPACITOR', 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=500', 'Stocke et lisse la tension électrique.', 'Stores electrical charge.', 'مكثف لتخزين الجهد.')"><h3>CAPACITOR</h3><p>مكثف</p></div>
         </div>
     </div>
 
     <div id="niv3" class="page">
-        <div class="header"><h1>📟 NIV 3 : MULTIMETER</h1><p>Measurement Modes / أوضاع القياس complete</p></div>
+        <div class="header"><h1>📟 NIV 3 : MEASURES</h1></div>
         <button class="btn-back" onclick="nav('home')">⬅ BACK / العودة</button>
         <div class="grid">
-            <div class="card" onclick="alert('Info simplifiée pour NIV3')"><h3>V⎓ DC VOLT</h3><p>الجهد المستمر</p></div>
-            <div class="card" onclick="alert('Info simplifiée pour NIV3')"><h3>🔊 BUZZER</h3><p>وضع الجرس</p></div>
-            </div>
+            <div class="card" onclick="alert('V⎓ DC VOLT')"><h3>V⎓ DC VOLT</h3><p>الجهد المستمر</p></div>
+            <div class="card" onclick="alert('⯈| DIODE MODE')"><h3>⯈| DIODE</h3><p>وضع الديود</p></div>
+        </div>
     </div>
 
     <div id="quiz-page" class="page">
-        <div class="header"><h1>LEVEL TEST (5/5)</h1></div>
+        <div class="header"><h1>QUIZ (5/5)</h1></div>
         <div class="q-header">
-            <span id="q-fr" style="font-size: 16px; display: block;">...</span>
-            <span id="q-ar" style="text-align:right; direction:rtl; color:var(--primary); font-size: 15px; display: block; margin-top: 5px;">...</span>
+            <p id="q-fr"></p><p id="q-ar" style="direction:rtl; color:var(--primary);"></p>
         </div>
         <div id="options"></div>
-        <button class="btn-back" onclick="nav('home')">ABANDONNER / خروج</button>
+        <button class="btn-back" onclick="nav('home')">QUITTER / خروج</button>
     </div>
 
     <div id="infoModal" class="modal">
         <div class="modal-content">
-            <img src="" id="mImg" class="modal-img">
+            <img id="mImg" src="" class="modal-img">
             <div class="modal-body">
-                <h2 id="mTitle" style="color:var(--primary); margin:0 0 15px 0; font-size:18px;">TITLE</h2>
+                <h2 id="mTitle" style="color:var(--primary); margin:0 0 15px 0;"></h2>
                 <span class="lang-label">Français</span><p id="mFr" class="lang-desc"></p>
                 <span class="lang-label">English</span><p id="mEn" class="lang-desc" style="color:var(--text-sec)"></p>
-                <span class="lang-label" style="text-align:right;">العربية</span><p id="mAr" class="lang-desc" style="text-align:right; direction:rtl; color:var(--primary); font-weight: bold;"></p>
-                <button class="btn-back" style="width:100%; margin:20px 0 0;" onclick="closeInfo()">OK / تم</button>
+                <span class="lang-label" style="text-align:right;">العربية</span><p id="mAr" class="lang-desc" style="text-align:right; direction:rtl; color:var(--primary); font-weight:bold;"></p>
+                <button class="btn-back" style="width:100%; margin:0;" onclick="closeInfo()">OK / تم</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Le script de quiz reste identique, j'ai juste mis à jour openInfo pour l'image
         function nav(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             window.scrollTo(0,0);
         }
 
-        // openInfo accepte maintenant une URL d'image en 2ème paramètre
-        function openInfo(t, imgSrc, fr, en, ar) {
-            document.getElementById('mTitle').innerText = t;
-            document.getElementById('mImg').src = imgSrc; // Change l'image
-            document.getElementById('mFr').innerText = fr; 
-            document.getElementById('mEn').innerText = en; 
+        function openInfo(title, img, fr, en, ar) {
+            document.getElementById('mTitle').innerText = title;
+            document.getElementById('mImg').src = img;
+            document.getElementById('mFr').innerText = fr;
+            document.getElementById('mEn').innerText = en;
             document.getElementById('mAr').innerText = ar;
             document.getElementById('infoModal').style.display = 'block';
         }
+
         function closeInfo() { document.getElementById('infoModal').style.display = 'none'; }
 
-        // Code du Quiz (identique au précédent)
-        const allQuestions = [{ fr: "Quel composant laisse passer le courant dans un seul sens ?", ar: "أي قطعة تسمح بمرور التيار في اتجاه واحد فقط؟", opts: [{fr:"Diode", ar:"ديود"}, {fr:"Coil", ar:"وشيعة"}, {fr:"Fuse", ar:"فيوز"}], r: 0 },{ fr: "Quel outil sert à dessouder avec de l'air chaud ?", ar: "ما هي الأداة المستخدمة للفك بالهواء الساخن؟", opts: [{fr:"Iron", ar:"كاوية"}, {fr:"Hot Air", ar:"هوت آير"}, {fr:"PSU", ar:"باور سبلاي"}], r: 1 }];
-        let quizQuestions = []; let currentQ = 0; let score = 0;
-        function startTest() { quizQuestions = allQuestions.sort(() => 0.5 - Math.random()).slice(0, 5); currentQ = 0; score = 0; nav('quiz-page'); showQ(); }
-        function showQ() { let q = quizQuestions[currentQ]; document.getElementById('q-fr').innerText = q.fr; document.getElementById('q-ar').innerText = q.ar; let html = ""; q.opts.forEach((o, i) => { html += `<button class="opt-btn" onclick="check(${i})"><span>${o.fr}</span><span style="color:var(--primary)">${o.ar}</span></button>`; }); document.getElementById('options').innerHTML = html; }
-        function check(i) { if(i === quizQuestions[currentQ].r) score++; currentQ++; if(currentQ < quizQuestions.length) showQ(); else finish(); }
-        function finish() { if(score === quizQuestions.length) { alert("SUCCÈS ! NIV 3 débloqué"); const card3 = document.getElementById('card-niv3'); card3.classList.remove('locked'); card3.onclick = function() { nav('niv3'); }; nav('home'); } else { alert(`ÉCHEC ! Score : ${score}/5`); nav('home'); } }
+        const allQuestions = [
+            { fr: "Quel composant bloque le courant dans un sens ?", ar: "أي قطعة تمنع التيار في اتجاه واحد؟", opts: ["Diode", "Coil", "Fuse"], r: 0 },
+            { fr: "Quelle unité pour la résistance ?", ar: "وحدة قياس المقاومة؟", opts: ["Volt", "Ohm", "Ampère"], r: 1 },
+            { fr: "Mode pour tester un court-circuit ?", ar: "وضع فحص الشورت؟", opts: ["Buzzer/Diode", "Hz", "Temp"], r: 0 },
+            { fr: "Le rôle du condensateur ?", ar: "دور المكثف؟", opts: ["Chauffer", "Stocker/Filtrer", "Couper"], r: 1 },
+            { fr: "Outil pour souder ?", ar: "أداة اللحام؟", opts: ["Pince", "Fer à souder", "Tournevis"], r: 1 }
+        ];
+
+        let quizQs = []; let cur = 0; let score = 0;
+
+        function startTest() {
+            quizQs = allQuestions.sort(() => 0.5 - Math.random());
+            cur = 0; score = 0;
+            nav('quiz-page');
+            showQ();
+        }
+
+        function showQ() {
+            let q = quizQs[cur];
+            document.getElementById('q-fr').innerText = q.fr;
+            document.getElementById('q-ar').innerText = q.ar;
+            let h = "";
+            q.opts.forEach((o, i) => { h += `<button class="opt-btn" onclick="check(${i})">${o}</button>`; });
+            document.getElementById('options').innerHTML = h;
+        }
+
+        function check(i) {
+            if(i === quizQs[cur].r) score++;
+            cur++;
+            if(cur < 5) showQ(); else finish();
+        }
+
+        function finish() {
+            if(score === 5) {
+                alert("BRAVO ! Niveau 3 débloqué.");
+                document.getElementById('card-niv3').classList.remove('locked');
+                document.getElementById('card-niv3').onclick = function() { nav('niv3'); };
+                nav('home');
+            } else {
+                alert("Score: " + score + "/5. Recommencez !");
+                nav('home');
+            }
+        }
     </script>
 </body>
 </html>
