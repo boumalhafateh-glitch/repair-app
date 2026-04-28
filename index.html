@@ -23,13 +23,6 @@
         .card h3 { margin: 10px 0 5px; font-size: 13px; color: #58a6ff; text-transform: uppercase; }
         .card p { margin: 0; font-size: 10px; color: #8b949e; }
 
-        .tool-img { width: 100%; height: 80px; object-fit: contain; margin-bottom: 10px; opacity: 0.8; }
-
-        .full-card { 
-            grid-column: span 2; background: #161b22; border: 1px solid #30363d; border-radius: 10px; 
-            padding: 15px; margin: 15px 5%; cursor: pointer;
-        }
-        
         .btn-sos { 
             background: #e74c3c; color: white; padding: 15px; margin: 20px 5%; 
             border-radius: 10px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px;
@@ -41,7 +34,8 @@
             border-radius: 8px; cursor: pointer; border: none; width: 90%; font-weight: bold;
         }
 
-        #menu-niv1 { display: none; padding-bottom: 30px; }
+        /* Masquage des sections */
+        #menu-niv1, #menu-niv2 { display: none; padding-bottom: 30px; }
     </style>
 </head>
 <body>
@@ -53,11 +47,11 @@
         </div>
         <div class="section-title">Catalogue Technique</div>
         <div class="grid">
-            <div class="card" onclick="showNiv1()">
+            <div class="card" onclick="showSection('menu-niv1')">
                 <h3>🛠 NIV 1</h3>
                 <p>REPAIR TOOLS / أدوات الإصلاح</p>
             </div>
-            <div class="card" onclick="alert('NIV 2')">
+            <div class="card" onclick="showSection('menu-niv2')">
                 <h3>⚡ NIV 2</h3>
                 <p>ELECTRONIC COMPONENTS / مكونات إلكترونية</p>
             </div>
@@ -71,48 +65,54 @@
             </div>
         </div>
         <div class="section-title">Évaluation</div>
-        <div class="full-card" onclick="alert('Test my level')">
+        <div class="full-card" style="grid-column: span 2; background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 15px; margin: 0 5%;" onclick="alert('Test my level')">
             <p style="margin:0; color:#58a6ff; font-weight:bold;">📝 TEST MY LEVEL</p>
             <p style="margin:5px 0 0; font-size:11px; color:#8b949e;">Déterminer votre grade technique / تحديد مستواك التقني</p>
         </div>
-        <div class="btn-sos">
-            <span>🆘</span> GROUPE SOS / الدعم الفني
-        </div>
+        <div class="btn-sos"><span>🆘</span> GROUPE SOS / الدعم الفني</div>
     </div>
 
     <div id="menu-niv1">
-        <div class="header">
-            <h1>🛠 REPAIR TOOLS</h1>
-            <p>أدوات الإصلاح</p>
-        </div>
+        <div class="header"><h1>🛠 REPAIR TOOLS</h1><p>أدوات الإصلاح</p></div>
         <button class="btn-back" onclick="showHome()">⬅ BACK / العودة</button>
-
         <div class="grid">
             <div class="card"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
             <div class="card"><h3>HOT AIR STATION</h3><p>محطة الهواء الساخن</p></div>
             <div class="card"><h3>MICROSCOPE</h3><p>مجهر</p></div>
             <div class="card"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
-            <div class="card"><h3>FLUX</h3><p>مساعد اللحام (فلاكس)</p></div>
-            <div class="card"><h3>SOLDER TIN/PASTE</h3><p>قصدير لحام</p></div>
-            <div class="card"><h3>DESOLDERING WICK</h3><p>فتيل إزالة اللحام</p></div>
+            <div class="card"><h3>FLUX</h3><p>فلاكس</p></div>
+            <div class="card"><h3>SOLDER TIN/PASTE</h3><p>قصدير</p></div>
             <div class="card"><h3>PCB HOLDER</h3><p>حامل البوردة</p></div>
-            <div class="card"><h3>LCD GLUE</h3><p>غراء الشاشات</p></div>
-            <div class="card"><h3>CLEANING LIQUID</h3><p>سائل تنظيف</p></div>
-            <div class="card"><h3>JUMP WIRES</h3><p>أسلاك التوصيل</p></div>
             <div class="card"><h3>OPENING TOOLS</h3><p>أدوات الفتح</p></div>
-            <div class="card"><h3>SCREWDRIVERS</h3><p>مفكات براغي</p></div>
-            <div class="card"><h3>TWEEZERS</h3><p>ملقط</p></div>
+        </div>
+    </div>
+
+    <div id="menu-niv2">
+        <div class="header"><h1>⚡ ELECTRONIC COMPONENTS</h1><p>المكونات الإلكترونية</p></div>
+        <button class="btn-back" onclick="showHome()">⬅ BACK / العودة</button>
+        <div class="grid">
+            <div class="card"><h3>DIODE</h3><p>ديود</p></div>
+            <div class="card"><h3>COIL / INDUCTOR</h3><p>ملف / وشيعة</p></div>
+            <div class="card"><h3>RESISTANCE</h3><p>مقاومة</p></div>
+            <div class="card"><h3>CAPACITOR</h3><p>مكثف</p></div>
+            <div class="card"><h3>TRANSISTOR</h3><p>ترانزستور</p></div>
+            <div class="card"><h3>IC (CHIP)</h3><p>دارة متكاملة / آيسي</p></div>
+            <div class="card"><h3>CONNECTOR</h3><p>موصل / كونيكتور</p></div>
+            <div class="card"><h3>DETECTOR / SENSOR</h3><p>كاشف / مستشعر</p></div>
         </div>
     </div>
 
     <script>
-        function showNiv1() {
+        function showSection(id) {
             document.getElementById('home-screen').style.display = 'none';
-            document.getElementById('menu-niv1').style.display = 'block';
+            document.getElementById('menu-niv1').style.display = 'none';
+            document.getElementById('menu-niv2').style.display = 'none';
+            document.getElementById(id).style.display = 'block';
             window.scrollTo(0,0);
         }
         function showHome() {
             document.getElementById('menu-niv1').style.display = 'none';
+            document.getElementById('menu-niv2').style.display = 'none';
             document.getElementById('home-screen').style.display = 'block';
             window.scrollTo(0,0);
         }
