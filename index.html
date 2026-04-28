@@ -24,27 +24,10 @@
         .card p { margin: 3px 0 0; font-size: 11px; color: var(--primary); font-weight: bold; }
         .card.locked { opacity: 0.4; border-style: dashed; }
 
-        /* SOS BUTTON STYLE */
-        .btn-sos { 
-            background: linear-gradient(45deg, #e74c3c, #c0392b); 
-            color: white; 
-            padding: 15px; 
-            margin: 15px 5%; 
-            border-radius: 10px; 
-            font-weight: 900; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 8px; 
-            text-decoration: none; 
-            font-size: 16px; 
-            border: none; 
-            text-transform: uppercase;
-            cursor: pointer;
-            width: 90%;
-        }
+        .btn-sos { background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; padding: 15px; margin: 15px 5%; border-radius: 10px; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; font-size: 16px; border: none; text-transform: uppercase; cursor: pointer; }
         
         .full-card { background: var(--card-bg); border: 2px solid var(--primary); border-radius: 10px; padding: 15px; margin: 10px 5%; cursor: pointer; }
+        
         .btn-back { background: #30363d; color: white; padding: 12px; margin: 10px 5%; border-radius: 8px; border: none; width: 90%; font-weight: bold; cursor: pointer; font-size: 14px; }
 
         .opt-btn { 
@@ -54,10 +37,12 @@
             display: block; text-align: center;
             transition: 0.2s;
         }
+        .opt-btn:active { border-color: var(--primary); background: #21262d; }
 
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); overflow-y: auto; }
         .modal-content { background: var(--card-bg); margin: 10% auto; border: 2px solid var(--primary); width: 85%; border-radius: 15px; }
         .modal-body { padding: 20px; text-align: left; }
+
         .lang-desc { font-size: 15px; margin: 0 0 15px 0; font-weight: 600; line-height: 1.5; }
 
         .page { display: none; }
@@ -78,22 +63,45 @@
         <div class="full-card" onclick="startTest()">
             <p style="margin:0; color:var(--primary); font-weight:900; font-size: 18px;">📝 LEVEL TEST / اختبار المستوى</p>
         </div>
-        
-        <!-- SOS BUTTON FIXED WITH JAVASCRIPT -->
-        <button onclick="openSOS()" class="btn-sos">🆘 SOS GROUP / الدعم الفني</button>
+        <a href="https://t.me/c/3919937885/2" target="_blank" class="btn-sos">🆘 SOS GROUP / الدعم الفني</a>
     </div>
 
-    <!-- PAGES NIV 1 & NIV 2 (Definitions in script for space) -->
     <div id="niv1" class="page">
         <div class="header"><h1>NIV 1 TOOLS</h1></div>
         <button class="btn-back" onclick="nav('home')">⬅ BACK / عودة</button>
-        <div class="grid" id="grid-niv1"></div>
+        <div class="grid">
+            <div class="card" onclick="openInfo('SOLDERING STATION', 'High-precision thermal station (200-450°C). Uses PID control for stable temperature. Vital for micro-soldering ICs and replacing SMD resistors.', 'محطة حرارية دقيقة (200-450 درجة). تستخدم نظام التحكم PID لاستقرار الحرارة. حيوية للحام الآيسيهات الدقيق.')"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
+            <div class="card" onclick="openInfo('HOT AIR STATION', 'Powerful airflow system (100-500°C) for non-contact desoldering of BGA chips and connectors without physical damage.', 'منفاخ حراري قوي يستخدم لفك الآيسيهات والكونيكتورات بدون تلامس لتجنب التلف الميكانيكي.')"><h3>HOT AIR STATION</h3><p>هواء ساخن</p></div>
+            <div class="card" onclick="openInfo('MICROSCOPE', '7X-45X magnification system used to inspect micro-cracks, damaged CPU pads, and microscopic solder bridge shorts.', 'نظام تكبير يستخدم لفحص الشقوق الدقيقة، تلف أرجل المعالج، وتماس اللحام المجهري.')"><h3>MICROSCOPE</h3><p>مجهر</p></div>
+            <div class="card" onclick="openInfo('MULTIMETER', 'Primary diagnostic instrument for DC Voltage, Resistance, and Diode Mode to compare line values and find short circuits.', 'أداة التشخيص الأساسية لقياس الجهد، المقاومة، ووضع الديود لمقارنة قيم المسارات وإيجاد الشورت.')"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
+            <div class="card" onclick="openInfo('FLUX', 'Chemical agent that facilitates solder flow, removes oxidation during heating, and ensures high-quality joints on PCB pads.', 'مادة كيميائية تسهل تدفق القصدير، تزيل الأكسدة أثناء التسخين، وتضمن جودة اللحام على النقاط.')"><h3>FLUX</h3><p>فلاكس</p></div>
+            <div class="card" onclick="openInfo('SOLDER TIN', 'Conductive Lead/Tin alloy with specific melting point (183°C or 138°C) used to create electrical and mechanical joints.', 'سبيكة موصلة من القصدير لها درجة انصهار محددة تستخدم لإنشاء وصلات كهربائية وميكانيكية.')"><h3>SOLDER TIN</h3><p>قصدير</p></div>
+            <div class="card" onclick="openInfo('WICK', 'Finely braided copper wire used for cleaning old solder from pads via capillary action, leaving a flat surface for new chips.', 'سلك نحاسي مضفر يستخدم لتنظيف القصدير القديم من النقاط عبر خاصية الامتصاص.')"><h3>WICK</h3><p>فتيل إزالة</p></div>
+            <div class="card" onclick="openInfo('PCB HOLDER', 'Heavy-duty adjustable mechanical fixture designed to secure the motherboard firmly during micro-soldering operations.', 'مثبت ميكانيكي ثقيل مصمم لتأمين اللوحة الأم بإحكام أثناء عمليات اللحام الدقيقة.')"><h3>PCB HOLDER</h3><p>حامل</p></div>
+            <div class="card" onclick="openInfo('LCD GLUE', 'Professional industrial adhesive (B-7000/T-7000) for bonding touch screens and frames while remaining flexible.', 'لاصق صناعي احترافي يستخدم لتركيب الشاشات والإطارات ويتميز بمرونة عالية.')"><h3>LCD GLUE</h3><p>غراء</p></div>
+            <div class="card" onclick="openInfo('CLEANER', '99.9% Pure Isopropyl Alcohol (IPA) used to remove flux residue and oxidation from circuits without leaving any film.', 'كحول أيزوبروبيلي نقي يستخدم لإزالة بقايا الفلاكس والأكسدة من الدوائر دون ترك أثر.')"><h3>CLEANER</h3><p>منظف</p></div>
+            <div class="card" onclick="openInfo('JUMP WIRES', 'Insulated ultra-thin copper wires used to bypass broken traces or reconstruct missing pads on the motherboard.', 'أسلاك نحاسية معزولة رفيعة جداً تستخدم لتجاوز المسارات المقطوعة أو تعويض النقاط المفقودة.')"><h3>JUMP WIRES</h3><p>أسلاك</p></div>
+            <div class="card" onclick="openInfo('OPENING TOOLS', 'Nylon and metal spudgers designed to safely pry open device housings and disconnect delicate ribbon cables.', 'أدوات بلاستيكية ومعدنية مصممة لفتح الأغطية وفصل الكابلات الحساسة بأمان.')"><h3>OPENING TOOLS</h3><p>أدوات</p></div>
+            <div class="card" onclick="openInfo('SCREWDRIVERS', 'Precision magnetized drivers required for specialized smartphone screws like Pentalobe, Tri-wing, and Standoff.', 'مفكات دقيقة مغناطيسية مطلوبة لفك براغي الهواتف الخاصة مثل بنتالوب وتراي وينج.')"><h3>SCREWDRIVERS</h3><p>مفكات</p></div>
+            <div class="card" onclick="openInfo('TWEEZERS', 'Non-magnetic, anti-static tweezers for picking and placing microscopic SMD components under the microscope.', 'ملقط مضاد للاستاتيكية وغير مغناطيسي لوضع المكونات المجهرية تحت المجهر.')"><h3>TWEEZERS</h3><p>ملقط</p></div>
+        </div>
     </div>
 
     <div id="niv2" class="page">
         <div class="header"><h1>NIV 2 COMPONENTS</h1></div>
         <button class="btn-back" onclick="nav('home')">⬅ BACK / عودة</button>
-        <div class="grid" id="grid-niv2"></div>
+        <div class="grid">
+            <div class="card" onclick="openInfo('DIODE', 'Semi-conductor device that allows current to flow in one direction only. Essential for protection and voltage rectification.', 'جهاز نصف موصل يسمح للتيار بالتدفق في اتجاه واحد فقط. ضروري للحماية وتقويم الجهد.')"><h3>DIODE</h3><p>ديود</p></div>
+            <div class="card" onclick="openInfo('COIL', 'Inductive component storing energy in a magnetic field. Crucial for Buck/Boost converters in Power and Backlight circuits.', 'مكون حثي يخزن الطاقة في مجال مغناطيسي. ضروري لدوائر الباور والإضاءة.')"><h3>COIL</h3><p>وشيعة</p></div>
+            <div class="card" onclick="openInfo('RESISTANCE', 'Passive component creating opposition to current. Used to drop voltage levels and protect sensitive ICs from overcurrent.', 'مكون يعمل على مقاومة تدفق التيار. يستخدم لخفض مستويات الجهد وحماية الآيسيهات.')"><h3>RESISTANCE</h3><p>مقاومة</p></div>
+            <div class="card" onclick="openInfo('CAPACITOR', 'Energy storage component used for filtering electrical noise. A shorted capacitor is the leading cause of power failure in mobiles.', 'مكون لتخزين الطاقة يستخدم لتصفية الضجيج. المكثف المسبب للشورت هو السبب الأول لأعطال الباور.')"><h3>CAPACITOR</h3><p>مكثف</p></div>
+            <div class="card" onclick="openInfo('TRANSISTOR', 'Solid-state switch or amplifier. It controls high current with a small signal, acting as a gate for circuit functions.', 'مفتاح أو مضخم صلب. يتحكم في تيار كبير بإشارة صغيرة، ويعمل كبوابة لوظائف الدائرة.')"><h3>TRANSISTOR</h3><p>ترانزستور</p></div>
+            <div class="card" onclick="openInfo('IC (CHIP)', 'Complex circuit with thousands of transistors. PMIC manages power, while the CPU executes system logic and instructions.', 'دائرة معقدة بها آلاف الترانزستورات. آيسي الباور يدير الطاقة والمعالج ينفذ الأوامر.')"><h3>IC (CHIP)</h3><p>آيسي</p></div>
+            <div class="card" onclick="openInfo('CONNECTOR', 'High-density FPC interface used to bridge peripheral modules like LCD, Battery, and Cameras to the main logic board.', 'واجهة FPC عالية الكثافة تستخدم لربط الشاشة والبطارية والكاميرات باللوحة الأم.')"><h3>CONNECTOR</h3><p>كونيكتور</p></div>
+            <div class="card" onclick="openInfo('CRYSTAL', 'Piezoelectric resonator generating a precise clock frequency for CPU synchronization and RF communication timing.', 'مرنان يولد تردد ساعة دقيق مطلوب لمزامنة المعالج وتوقيت اتصالات الراديو.')"><h3>CRYSTAL</h3><p>كريستال</p></div>
+            <div class="card" onclick="openInfo('FUSE', 'Safety component that breaks the circuit if current exceeds safe limits, protecting the board from catastrophic fire.', 'مكون أمان يقطع الدائرة إذا تجاوز التيار الحدود الآمنة، مما يحمي البوردة من الاحتراق.')"><h3>FUSE</h3><p>فيوز</p></div>
+            <div class="card" onclick="openInfo('THERMISTOR', 'Temperature-sensitive resistor. It signals the PMIC to stop charging or power down if excessive heat is detected.', 'مقاومة حساسة للحرارة. تعطي إشارة لآيسي الباور لإيقاف الشحن في حالة السخونة الزائدة.')"><h3>THERMISTOR</h3><p>ثرمستور</p></div>
+        </div>
     </div>
 
     <div id="quiz-page" class="page">
@@ -117,57 +125,25 @@
     </div>
 
     <script>
-        // SOS FUNCTION
-        function openSOS() {
-            window.location.href = "https://t.me/c/3919937885/2";
-        }
-
         function nav(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             window.scrollTo(0,0);
         }
-
         function openInfo(t, en, ar) {
             document.getElementById('mTitle').innerText = t;
             document.getElementById('mEn').innerText = en;
             document.getElementById('mAr').innerText = ar;
             document.getElementById('infoModal').style.display = 'block';
         }
-
         function closeInfo() { document.getElementById('infoModal').style.display = 'none'; }
 
-        // ULTRA DETAILED CONTENT
-        const tools = [
-            {t:'SOLDERING STATION', en:'High-precision thermal station (200-450°C). Uses PID control for stable temperature. Vital for micro-soldering ICs and replacing SMD resistors without damaging the PCB fiber.', ar:'محطة حرارية دقيقة (200-450 درجة). تستخدم نظام التحكم PID لاستقرار الحرارة. حيوية للحام الآيسيهات الدقيق واستبدال المكونات دون إتلاف البوردة.'},
-            {t:'HOT AIR STATION', en:'Airflow heating system (100-500°C) for non-contact rework. Used for desoldering BGA chips, charging ports, and melting underfill glue safely.', ar:'نظام تسخين بتدفق الهواء (100-500 درجة). يستخدم لفك آيسيهات BGA، وكونيكتورات الشحن، وإذابة الحماية الصمغية بأمان.'},
-            {t:'MULTIMETER', en:'Digital measurement tool for Voltage, Resistance, and Continuity. In mobile repair, used mostly for "Diode Mode" to compare line values and find short circuits.', ar:'أداة قياس رقمية للجهد والمقاومة والاستمرارية. في صيانة الهاتف، تستخدم غالباً في "وضع الديود" لمقارنة القيم وإيجاد الشورت.'},
-            {t:'MICROSCOPE', en:'7X-45X magnification. Allows viewing of micro-corrosion, damaged CPU pads, and microscopic solder bridges (shorts) hidden under components.', ar:'تكبير 7-45 مرة. يسمح برؤية التآكل الدقيق، تلف أرجل المعالج، وتماس اللحام المجهري المخفي تحت المكونات.'}
-        ];
-
-        const comps = [
-            {t:'COIL (Inductor)', en:'Wire-wound component that stores energy in a magnetic field. Acts as a filter in Power lines and is crucial for "Buck/Boost" converters to change voltage levels.', ar:'مكون سلكي ملفوف يخزن الطاقة في مجال مغناطيسي. يعمل كمرشح في خطوط الطاقة وهو ضروري لرفع أو خفض الجهد.'},
-            {t:'CAPACITOR', en:'Two-plate component that stores charge. Parallel capacitors act as filters to remove AC ripple from DC lines. A shorted capacitor is the #1 cause of dead phones.', ar:'مكون يخزن الشحنة. تعمل المكثفات المتوازية كمرشحات لإزالة الضجيج الكهربائي. المكثف المسبب للشورت هو السبب الأول لموت الهواتف.'},
-            {t:'DIODE', en:'One-way valve for electricity. Protects the motherboard from reverse polarity (battery plugged wrong) and prevents high-voltage spikes (TVS Diode).', ar:'صمام أحادي للكهرباء. يحمي اللوحة الأم من عكس القطبية ويمنع طفرات الجهد العالي.'},
-            {t:'IC (CHIP)', en:'The brain of the circuit. A PMIC (Power IC) manages all voltages, while the CPU executes instructions. ICs are BGA based (Ball Grid Array).', ar:'عقل الدائرة. آيسي الباور يدير جميع الجهود، بينما المعالج ينفذ الأوامر. الآيسيهات تعتمد على نظام الكرات (BGA).'}
-        ];
-
-        // Populate Grids
-        function loadGrid(data, gridId) {
-            let h = "";
-            data.forEach(item => {
-                h += `<div class="card" onclick="openInfo('${item.t}', '${item.en}', '${item.ar}')"><h3>${item.t}</h3><p>DETAILS / تفاصيل</p></div>`;
-            });
-            document.getElementById(gridId).innerHTML = h;
-        }
-        loadGrid(tools, 'grid-niv1');
-        loadGrid(comps, 'grid-niv2');
-
-        // Quiz Logic
         const allQs = [
             { en: "Which component stores energy in a magnetic field?", ar: "أي مكون يخزن الطاقة في مجال مغناطيسي؟", opts: ["DIODE", "COIL", "FUSE"], r: 1 },
             { en: "What is the unit of electrical resistance?", ar: "ما هي وحدة قياس المقاومة الكهربائية؟", opts: ["VOLT", "OHM", "FARAD"], r: 1 },
-            { en: "Tool used for non-contact IC desoldering?", ar: "أداة تستخدم لفك الآيسيهات بدون تلامس؟", opts: ["SOLDERING IRON", "HOT AIR STATION", "TWEEZERS"], r: 1 }
+            { en: "Tool used for non-contact IC desoldering?", ar: "أداة تستخدم لفك الآيسيهات بدون تلامس؟", opts: ["SOLDERING IRON", "HOT AIR STATION", "TWEEZERS"], r: 1 },
+            { en: "Main role of a capacitor?", ar: "الدور الرئيسي للمكثف؟", opts: ["FILTER/STORE", "HEAT", "BREAKER"], r: 0 },
+            { en: "Mode to test a broken trace?", ar: "وضع فحص المسار المقطوع؟", opts: ["BUZZER", "HZ", "TEMP"], r: 0 }
         ];
 
         let cur = 0; let score = 0;
@@ -183,14 +159,14 @@
         function check(i) {
             if(i === allQs[cur].r) score++;
             cur++;
-            if(cur < 3) showQ(); else finish();
+            if(cur < 5) showQ(); else finish();
         }
         function finish() {
-            if(score === 3) {
-                alert("PERFECT! NIV 3 UNLOCKED");
+            if(score === 5) {
+                alert("PERFECT 5/5! NIV 3 UNLOCKED");
                 document.getElementById('card-niv3').classList.remove('locked');
                 nav('home');
-            } else { alert("SCORE: "+score+"/3. TRY AGAIN."); nav('home'); }
+            } else { alert("SCORE: "+score+"/5. TRY AGAIN."); nav('home'); }
         }
     </script>
 </body>
