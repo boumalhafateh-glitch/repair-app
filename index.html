@@ -7,23 +7,30 @@
     <style>
         :root { --primary: #007bff; --bg: #0d1117; --card-bg: #161b22; --border: #30363d; --text-sec: #8b949e; }
         body { background-color: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; text-align: center; }
+        
         .header { padding: 30px 10px; background: #161b22; border-bottom: 2px solid var(--primary); margin-bottom: 15px; }
         .header h1 { color: var(--primary); margin: 0; font-size: 22px; text-transform: uppercase; letter-spacing: 1px; }
         .header p { color: var(--text-sec); margin: 5px 0 0; font-size: 13px; }
+
         .section-title { text-align: left; padding: 5px 5%; color: var(--primary); font-size: 11px; text-transform: uppercase; margin-top: 10px; }
+        
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px 5%; }
-        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; min-height: 100px; }
+        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px 5px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; min-height: 100px; transition: 0.2s; }
         .card h3 { margin: 0; font-size: 11px; color: #fff; text-transform: uppercase; }
         .card p { margin: 5px 0 0; font-size: 9px; color: var(--text-sec); }
         .card.locked { opacity: 0.5; border-style: dashed; }
+
         .btn-sos { background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; padding: 18px; margin: 20px 5%; border-radius: 12px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; font-size: 14px; }
         .full-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 15px; margin: 10px 5%; cursor: pointer; }
         .btn-back { background: #30363d; color: white; padding: 12px; margin: 15px 5%; border-radius: 8px; border: none; width: 90%; font-weight: bold; cursor: pointer; }
+
         .q-header { background: var(--card-bg); border-left: 4px solid var(--primary); padding: 15px; border-radius: 8px; margin: 20px 5%; text-align: left; }
         .q-text { font-size: 14px; display: block; margin-bottom: 5px; }
         .opt-btn { background: #21262d; border: 1px solid var(--border); color: #fff; width: 90%; padding: 14px; margin: 5px 5%; border-radius: 8px; font-size: 13px; text-align: left; cursor: pointer; display: flex; justify-content: space-between; }
+
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); }
-        .modal-content { background: var(--card-bg); margin: 15% auto; padding: 25px; border: 1px solid var(--primary); width: 80%; border-radius: 15px; text-align: left; }
+        .modal-content { background: var(--card-bg); margin: 20% auto; padding: 25px; border: 1px solid var(--primary); width: 80%; border-radius: 15px; text-align: left; }
+        
         .page { display: none; }
         .active { display: block; }
     </style>
@@ -53,9 +60,19 @@
         <div class="grid">
             <div class="card" onclick="openInfo('SOLDERING STATION', 'Sert à souder les composants.', 'Used for soldering.', 'تستخدم للحام المكونات.')"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
             <div class="card" onclick="openInfo('HOT AIR STATION', 'Dessoude par air chaud.', 'Desolders using hot air.', 'تستخدم لفك القطع بالهواء الساخن.')"><h3>HOT AIR STATION</h3><p>محطة الهواء الساخن</p></div>
-            <div class="card" onclick="openInfo('MULTIMETER', 'Mesure tension et continuité.', 'Measures voltage.', 'لقياس الجهد والممانعة.')"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
             <div class="card" onclick="openInfo('MICROSCOPE', 'Visualisation miniature.', 'Miniature viewing.', 'لرؤية المكونات الدقيقة.')"><h3>MICROSCOPE</h3><p>مجهر</p></div>
-            </div>
+            <div class="card" onclick="openInfo('MULTIMETER', 'Mesure tension et continuité.', 'Measures voltage.', 'لقياس الجهد والممانعة.')"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
+            <div class="card" onclick="openInfo('FLUX', 'Facilite la soudure.', 'Solder helper.', 'مساعد لحام.')"><h3>FLUX</h3><p>فلاكس</p></div>
+            <div class="card" onclick="openInfo('SOLDER TIN', 'Étain de soudure.', 'Solder alloy.', 'قصدير اللحام.')"><h3>SOLDER TIN</h3><p>قصدير</p></div>
+            <div class="card" onclick="openInfo('DESOLDERING WICK', 'Aspire l\'étain.', 'Solder wick.', 'سلك سحب القصدير.')"><h3>DESOLDERING WICK</h3><p>فتيل إزالة اللحام</p></div>
+            <div class="card" onclick="openInfo('PCB HOLDER', 'Fixe la carte.', 'Holds the board.', 'حامل البوردة.')"><h3>PCB HOLDER</h3><p>حامل البوردة</p></div>
+            <div class="card" onclick="openInfo('LCD GLUE', 'Colle écran.', 'Screen glue.', 'غراء شاشات.')"><h3>LCD GLUE</h3><p>غراء شاشات</p></div>
+            <div class="card" onclick="openInfo('CLEANING LIQUID', 'Nettoyant circuit.', 'PCB cleaner.', 'سائل تنظيف.')"><h3>CLEANING LIQUID</h3><p>سائل تنظيف</p></div>
+            <div class="card" onclick="openInfo('JUMP WIRES', 'Fils de réparation.', 'Jumper wires.', 'أسلاك توصيل.')"><h3>JUMP WIRES</h3><p>أسلاك التوصيل</p></div>
+            <div class="card" onclick="openInfo('OPENING TOOLS', 'Leviers d\'ouverture.', 'Opening tools.', 'أدوات الفتح.')"><h3>OPENING TOOLS</h3><p>أدوات الفتح</p></div>
+            <div class="card" onclick="openInfo('SCREWDRIVERS', 'Tournevis.', 'Screwdrivers.', 'مفكات.')"><h3>SCREWDRIVERS</h3><p>مفكات</p></div>
+            <div class="card" onclick="openInfo('TWEEZERS', 'Manipulateur.', 'Tweezers.', 'ملقط.')"><h3>TWEEZERS</h3><p>ملقط</p></div>
+        </div>
     </div>
 
     <div id="niv2" class="page">
@@ -64,15 +81,22 @@
         <div class="grid">
             <div class="card" onclick="openInfo('DIODE', 'Laisse passer le courant dans un seul sens.', 'One-way current flow.', 'تسمح بمرور التيار في اتجاه واحد.')"><h3>DIODE</h3><p>ديود</p></div>
             <div class="card" onclick="openInfo('COIL', 'Filtre et stabilise le courant.', 'Filters and stabilizes.', 'فلترة وتثبيت التيار.')"><h3>COIL</h3><p>وشيعة</p></div>
+            <div class="card" onclick="openInfo('RESISTANCE', 'Limite le courant.', 'Limits current.', 'مقاومة التيار.')"><h3>RESISTANCE</h3><p>مقاومة</p></div>
             <div class="card" onclick="openInfo('CAPACITOR', 'Stocke et lisse la tension.', 'Stores voltage.', 'مكثف لتخزين الجهد.')"><h3>CAPACITOR</h3><p>مكثف</p></div>
+            <div class="card" onclick="openInfo('TRANSISTOR', 'Interrupteur électronique.', 'Electronic switch.', 'ترانزستور.')"><h3>TRANSISTOR</h3><p>ترانزستور</p></div>
+            <div class="card" onclick="openInfo('IC (CHIP)', 'Circuit intégré (Cerveau).', 'Integrated circuit.', 'آيسي.')"><h3>IC (CHIP)</h3><p>آيسي</p></div>
+            <div class="card" onclick="openInfo('CONNECTOR', 'Port de connexion.', 'Connection port.', 'كونيكتور.')"><h3>CONNECTOR</h3><p>كونيكتور</p></div>
+            <div class="card" onclick="openInfo('CRYSTAL', 'Générateur d\'horloge.', 'Clock generator.', 'كريستال.')"><h3>CRYSTAL</h3><p>كريستال</p></div>
+            <div class="card" onclick="openInfo('FUSE', 'Protection surcharge.', 'Overload protection.', 'فيوز حماية.')"><h3>FUSE</h3><p>فيوز</p></div>
+            <div class="card" onclick="openInfo('THERMISTOR', 'Résistance thermique.', 'Heat resistor.', 'مقاومة حرارية.')"><h3>THERMISTOR</h3><p>ثرمستور</p></div>
         </div>
     </div>
 
     <div id="niv3" class="page">
-        <div class="header"><h1>📟 NIV 3 : MULTIMETER</h1><p>Mesures avancées</p></div>
+        <div class="header"><h1>📟 NIV 3 : MULTIMETER</h1><p>Mesures et Diagnostics / القياسات</p></div>
         <button class="btn-back" onclick="nav('home')">⬅ BACK / العودة</button>
         <div style="padding: 20px;">
-            <p>Bienvenue au Niveau 3 ! Ici nous allons apprendre à utiliser le multimètre en mode Diode et Continuité.</p>
+            <p>Bienvenue Expert ! Préparez-vous pour les mesures de tension.</p>
         </div>
     </div>
 
@@ -84,7 +108,7 @@
             <span id="q-ar" class="q-text" style="text-align:right; direction:rtl; color:var(--primary)">...</span>
         </div>
         <div id="options"></div>
-        <button class="btn-back" onclick="nav('home')">QUITTER / خروج</button>
+        <button class="btn-back" onclick="nav('home')">ABANDONNER / خروج</button>
     </div>
 
     <div id="infoModal" class="modal">
@@ -149,9 +173,7 @@
 
         function openInfo(t, fr, en, ar) {
             document.getElementById('mTitle').innerText = t;
-            document.getElementById('mFr').innerText = fr; 
-            document.getElementById('mEn').innerText = en; 
-            document.getElementById('mAr').innerText = ar;
+            document.getElementById('mFr').innerText = fr; document.getElementById('mEn').innerText = en; document.getElementById('mAr').innerText = ar;
             document.getElementById('infoModal').style.display = 'block';
         }
         function closeInfo() { document.getElementById('infoModal').style.display = 'none'; }
