@@ -15,7 +15,6 @@
         
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 5%; }
         
-        /* Boutons ajustés et texte agrandi */
         .card { 
             background: var(--card-bg); border: 2px solid var(--border); border-radius: 10px; 
             padding: 10px 5px; display: flex; flex-direction: column; align-items: center; 
@@ -31,12 +30,13 @@
         
         .btn-back { background: #30363d; color: white; padding: 12px; margin: 10px 5%; border-radius: 8px; border: none; width: 90%; font-weight: bold; cursor: pointer; font-size: 14px; }
 
-        /* Style Quiz Encadré */
+        /* Style Quiz avec Réponses Centrées dans le Cadre */
         .opt-btn { 
             background: #1c2128; border: 2px solid var(--border); color: #fff; 
-            width: 90%; padding: 18px; margin: 12px 5%; border-radius: 12px; 
-            font-size: 16px; font-weight: bold; text-align: left; cursor: pointer;
-            display: flex; justify-content: space-between; align-items: center;
+            width: 90%; padding: 18px 0; margin: 12px 5%; border-radius: 12px; 
+            font-size: 16px; font-weight: bold; cursor: pointer;
+            display: block; text-align: center; /* Centrage horizontal parfait */
+            transition: 0.2s;
         }
         .opt-btn:active { border-color: var(--primary); background: #21262d; }
 
@@ -71,20 +71,20 @@
         <div class="header"><h1>OUTILS NIV 1</h1></div>
         <button class="btn-back" onclick="nav('home')">⬅ RETOUR</button>
         <div class="grid">
-            <div class="card" onclick="openInfo('SOLDERING STATION', 'Station thermique réglable pour soudure précise.', 'Soldering Station.', 'محطة لحام.')"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
-            <div class="card" onclick="openInfo('HOT AIR STATION', 'Générateur d\'air chaud pour les IC.', 'Hot air station.', 'هواء ساخن.')"><h3>HOT AIR STATION</h3><p>هواء ساخن</p></div>
-            <div class="card" onclick="openInfo('MICROSCOPE', 'Inspection des micro-fissures.', 'Microscope.', 'مجهر.')"><h3>MICROSCOPE</h3><p>مجهر</p></div>
-            <div class="card" onclick="openInfo('MULTIMETER', 'Mesure tension et continuité.', 'Multimeter.', 'المالتيميتر.')"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
-            <div class="card" onclick="openInfo('FLUX', 'Facilite la fusion de l\'étain.', 'Flux.', 'فلاكس.')"><h3>FLUX</h3><p>فلاكس</p></div>
-            <div class="card" onclick="openInfo('SOLDER TIN', 'Alliage pour connexions.', 'Tin.', 'قصدير.')"><h3>SOLDER TIN</h3><p>قصدير</p></div>
-            <div class="card" onclick="openInfo('WICK', 'Aspiration du surplus d\'étain.', 'Wick.', 'فتيل.')"><h3>WICK</h3><p>فتيل إزالة</p></div>
-            <div class="card" onclick="openInfo('PCB HOLDER', 'Fixation de la carte mère.', 'PCB Holder.', 'حامل.')"><h3>PCB HOLDER</h3><p>حامل</p></div>
-            <div class="card" onclick="openInfo('LCD GLUE', 'Adhésif pour écrans.', 'Glue.', 'غراء.')"><h3>LCD GLUE</h3><p>غراء</p></div>
-            <div class="card" onclick="openInfo('CLEANER', 'Alcool pour nettoyage.', 'Cleaner.', 'منظف.')"><h3>CLEANER</h3><p>منظف</p></div>
-            <div class="card" onclick="openInfo('JUMP WIRES', 'Fils pour pontage.', 'Jumpers.', 'أسلاك.')"><h3>JUMP WIRES</h3><p>أسلاك</p></div>
-            <div class="card" onclick="openInfo('OPENING TOOLS', 'Outils d\'ouverture.', 'Opening tools.', 'أدوات.')"><h3>OPENING TOOLS</h3><p>أدوات</p></div>
-            <div class="card" onclick="openInfo('SCREWDRIVERS', 'Tournevis de précision.', 'Screwdrivers.', 'مفكات.')"><h3>SCREWDRIVERS</h3><p>مفكات</p></div>
-            <div class="card" onclick="openInfo('TWEEZERS', 'Brucelles de précision.', 'Tweezers.', 'ملقط.')"><h3>TWEEZERS</h3><p>ملقط</p></div>
+            <div class="card" onclick="openInfo('SOLDERING STATION', 'Station thermique réglable pour soudure précise.', 'محطة لحام.')"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
+            <div class="card" onclick="openInfo('HOT AIR STATION', 'Générateur d\'air chaud pour les IC.', 'هواء ساخن.')"><h3>HOT AIR STATION</h3><p>هواء ساخن</p></div>
+            <div class="card" onclick="openInfo('MICROSCOPE', 'Inspection des micro-fissures.', 'مجهر.')"><h3>MICROSCOPE</h3><p>مجهر</p></div>
+            <div class="card" onclick="openInfo('MULTIMETER', 'Mesure tension et continuité.', 'المالتيميتر.')"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
+            <div class="card" onclick="openInfo('FLUX', 'Facilite la fusion de l\'étain.', 'فلاكس.')"><h3>FLUX</h3><p>فلاكس</p></div>
+            <div class="card" onclick="openInfo('SOLDER TIN', 'Alliage pour connexions.', 'قصدير.')"><h3>SOLDER TIN</h3><p>قصدير</p></div>
+            <div class="card" onclick="openInfo('WICK', 'Aspiration du surplus d\'étain.', 'فتيل إزالة.')"><h3>WICK</h3><p>فتيل إزالة</p></div>
+            <div class="card" onclick="openInfo('PCB HOLDER', 'Fixation de la carte mère.', 'حامل.')"><h3>PCB HOLDER</h3><p>حامل</p></div>
+            <div class="card" onclick="openInfo('LCD GLUE', 'Adhésif pour écrans.', 'غراء.')"><h3>LCD GLUE</h3><p>غراء</p></div>
+            <div class="card" onclick="openInfo('CLEANER', 'Alcool pour nettoyage.', 'منظف.')"><h3>CLEANER</h3><p>منظف</p></div>
+            <div class="card" onclick="openInfo('JUMP WIRES', 'Fils pour pontage.', 'أسلاك.')"><h3>JUMP WIRES</h3><p>أسلاك</p></div>
+            <div class="card" onclick="openInfo('OPENING TOOLS', 'Outils d\'ouverture.', 'أدوات.')"><h3>OPENING TOOLS</h3><p>أدوات</p></div>
+            <div class="card" onclick="openInfo('SCREWDRIVERS', 'Tournevis de précision.', 'مفكات.')"><h3>SCREWDRIVERS</h3><p>مفكات</p></div>
+            <div class="card" onclick="openInfo('TWEEZERS', 'Brucelles de précision.', 'ملقط.')"><h3>TWEEZERS</h3><p>ملقط</p></div>
         </div>
     </div>
 
@@ -92,16 +92,16 @@
         <div class="header"><h1>COMPOSANTS NIV 2</h1></div>
         <button class="btn-back" onclick="nav('home')">⬅ RETOUR</button>
         <div class="grid">
-            <div class="card" onclick="openInfo('DIODE', 'Laisse passer le courant dans un sens.', 'Diode.', 'ديود.')"><h3>DIODE</h3><p>ديود</p></div>
-            <div class="card" onclick="openInfo('COIL', 'Stockage magnétique.', 'Coil.', 'وشيعة.')"><h3>COIL</h3><p>وشيعة</p></div>
-            <div class="card" onclick="openInfo('RESISTANCE', 'Limite le courant.', 'Resistor.', 'مقاومة.')"><h3>RESISTANCE</h3><p>مقاومة</p></div>
-            <div class="card" onclick="openInfo('CAPACITOR', 'Stockage électrique.', 'Capacitor.', 'مكثف.')"><h3>CAPACITOR</h3><p>مكثف</p></div>
-            <div class="card" onclick="openInfo('TRANSISTOR', 'Interrupteur actif.', 'Transistor.', 'ترانزستور.')"><h3>TRANSISTOR</h3><p>ترانزستور</p></div>
-            <div class="card" onclick="openInfo('IC (CHIP)', 'Cerveau du circuit.', 'IC.', 'آيسي.')"><h3>IC (CHIP)</h3><p>آيسي</p></div>
-            <div class="card" onclick="openInfo('CONNECTOR', 'Liaison écran/batterie.', 'Connector.', 'كونيكتور.')"><h3>CONNECTOR</h3><p>كونيكتور</p></div>
-            <div class="card" onclick="openInfo('CRYSTAL', 'Horloge fréquence.', 'Crystal.', 'كريستال.')"><h3>CRYSTAL</h3><p>كريستال</p></div>
-            <div class="card" onclick="openInfo('FUSE', 'Sécurité surcharge.', 'Fuse.', 'فيوز.')"><h3>FUSE</h3><p>فيوز</p></div>
-            <div class="card" onclick="openInfo('THERMISTOR', 'Sonde thermique.', 'Thermistor.', 'ثرمستور.')"><h3>THERMISTOR</h3><p>ثرمستور</p></div>
+            <div class="card" onclick="openInfo('DIODE', 'Laisse passer le courant dans un sens.', 'ديود.')"><h3>DIODE</h3><p>ديود</p></div>
+            <div class="card" onclick="openInfo('COIL', 'Stockage magnétique.', 'وشيعة.')"><h3>COIL</h3><p>وشيعة</p></div>
+            <div class="card" onclick="openInfo('RESISTANCE', 'Limite le courant.', 'مقاومة.')"><h3>RESISTANCE</h3><p>مقاومة</p></div>
+            <div class="card" onclick="openInfo('CAPACITOR', 'Stockage électrique.', 'مكثف.')"><h3>CAPACITOR</h3><p>مكثف</p></div>
+            <div class="card" onclick="openInfo('TRANSISTOR', 'Interrupteur actif.', 'ترانزستور.')"><h3>TRANSISTOR</h3><p>ترانزستور</p></div>
+            <div class="card" onclick="openInfo('IC (CHIP)', 'Cerveau du circuit.', 'آيسي.')"><h3>IC (CHIP)</h3><p>آيسي</p></div>
+            <div class="card" onclick="openInfo('CONNECTOR', 'Liaison écran/batterie.', 'كونيكتور.')"><h3>CONNECTOR</h3><p>كونيكتور</p></div>
+            <div class="card" onclick="openInfo('CRYSTAL', 'Horloge fréquence.', 'كريستال.')"><h3>CRYSTAL</h3><p>كريستال</p></div>
+            <div class="card" onclick="openInfo('FUSE', 'Sécurité surcharge.', 'فيوز.')"><h3>FUSE</h3><p>فيوز</p></div>
+            <div class="card" onclick="openInfo('THERMISTOR', 'Sonde thermique.', 'ثرمستور.')"><h3>THERMISTOR</h3><p>ثرمستور</p></div>
         </div>
     </div>
 
@@ -130,7 +130,7 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(id).classList.add('active');
         }
-        function openInfo(t, fr, en, ar) {
+        function openInfo(t, fr, ar) {
             document.getElementById('mTitle').innerText = t;
             document.getElementById('mFr').innerText = fr;
             document.getElementById('mAr').innerText = ar;
@@ -153,7 +153,7 @@
             document.getElementById('q-fr').innerText = q.fr;
             document.getElementById('q-ar').innerText = q.ar;
             let h = "";
-            q.opts.forEach((o, i) => { h += `<button class="opt-btn" onclick="check(${i})"><span>${o}</span> ➜</button>`; });
+            q.opts.forEach((o, i) => { h += `<button class="opt-btn" onclick="check(${i})">${o}</button>`; });
             document.getElementById('options').innerHTML = h;
         }
         function check(i) {
@@ -163,7 +163,7 @@
         }
         function finish() {
             if(score === 5) {
-                alert("PARFAIT 5/5 !");
+                alert("PARFAIT 5/5 ! NIV 3 DÉBLOQUÉ");
                 document.getElementById('card-niv3').classList.remove('locked');
                 nav('home');
             } else { alert("SCORE: "+score+"/5. REESSAYEZ."); nav('home'); }
