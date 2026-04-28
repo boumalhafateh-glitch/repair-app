@@ -43,16 +43,12 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             cursor: pointer; 
             transition: all 0.2s ease;
+            min-height: 120px;
         }
         .card:active { transform: scale(0.95); background: #21262d; border-color: var(--primary); }
         .card h3 { margin: 10px 0 5px; font-size: 11px; color: #fff; text-transform: uppercase; }
         .card p { margin: 0; font-size: 10px; color: var(--text-secondary); }
 
-        .full-card { 
-            background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; 
-            padding: 20px; margin: 10px 5%; cursor: pointer;
-        }
-        
         .btn-sos { 
             background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; 
             padding: 18px; margin: 25px 5%; 
@@ -68,7 +64,6 @@
             display: flex; align-items: center; justify-content: center; gap: 8px;
         }
 
-        /* Pages */
         .page { display: none; animation: fadeIn 0.3s ease; }
         .active { display: block; }
 
@@ -107,7 +102,7 @@
         </div>
 
         <div class="section-title">Évaluation</div>
-        <div class="full-card" onclick="alert('Test my level')">
+        <div class="full-card" style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin: 10px 5%; cursor: pointer;" onclick="alert('Test my level')">
             <p style="margin:0; color:var(--primary); font-weight:bold;">📝 TEST MY LEVEL</p>
             <p style="margin:5px 0 0; font-size:11px; color:var(--text-secondary);">Déterminer votre grade technique / تحديد مستواك التقني</p>
         </div>
@@ -139,7 +134,7 @@
     </div>
 
     <div id="niv2" class="page">
-        <div class="header"><h1>⚡ COMPONENTS</h1><p>المكونات الإلكترونية</p></div>
+        <div class="header"><h1>⚡ COMPONENTS</h1><p>المكونات الإلكترونية الكاملة</p></div>
         <button class="btn-back" onclick="nav('home')">⬅ BACK / العودة</button>
         <div class="grid">
             <div class="card"><h3>DIODE</h3><p>ديود</p></div>
@@ -150,6 +145,10 @@
             <div class="card"><h3>IC (CHIP)</h3><p>دارة متكاملة / آيسي</p></div>
             <div class="card"><h3>CONNECTOR</h3><p>موصل / كونيكتور</p></div>
             <div class="card"><h3>DETECTOR / SENSOR</h3><p>كاشف / مستشعر</p></div>
+            <div class="card"><h3>CRYSTAL</h3><p>كريستال / مذبذب</p></div>
+            <div class="card"><h3>THERMISTOR</h3><p>مقاومة حرارية</p></div>
+            <div class="card"><h3>FUSE</h3><p>فيوز / قاطع حماية</p></div>
+            <div class="card"><h3>RF FILTER</h3><p>فلتر الشبكة</p></div>
         </div>
     </div>
 
