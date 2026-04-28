@@ -20,11 +20,10 @@
             cursor: pointer; transition: 0.3s;
         }
         .card:active { background: #21262d; transform: scale(0.98); }
-        .card h3 { margin: 10px 0 5px; font-size: 14px; color: #58a6ff; text-transform: uppercase; }
-        .card p { margin: 0; font-size: 11px; color: #8b949e; }
+        .card h3 { margin: 10px 0 5px; font-size: 13px; color: #58a6ff; text-transform: uppercase; }
+        .card p { margin: 0; font-size: 10px; color: #8b949e; }
 
-        /* Style pour les outils dans NIV 1 */
-        .tool-img { width: 100%; height: 100px; object-fit: contain; margin-bottom: 10px; border-radius: 5px; }
+        .tool-img { width: 100%; height: 80px; object-fit: contain; margin-bottom: 10px; opacity: 0.8; }
 
         .full-card { 
             grid-column: span 2; background: #161b22; border: 1px solid #30363d; border-radius: 10px; 
@@ -38,12 +37,11 @@
         }
 
         .btn-back {
-            background: #30363d; color: white; padding: 10px; margin: 10px 5%;
-            border-radius: 5px; cursor: pointer; border: none; width: 90%;
+            background: #30363d; color: white; padding: 12px; margin: 15px 5%;
+            border-radius: 8px; cursor: pointer; border: none; width: 90%; font-weight: bold;
         }
 
-        /* Masquage des sections par défaut */
-        #menu-niv1 { display: none; }
+        #menu-niv1 { display: none; padding-bottom: 30px; }
     </style>
 </head>
 <body>
@@ -53,9 +51,7 @@
             <h1>MASTER REPAIR ACADEMY</h1>
             <p>أكاديمية صيانة المحترفين</p>
         </div>
-
         <div class="section-title">Catalogue Technique</div>
-
         <div class="grid">
             <div class="card" onclick="showNiv1()">
                 <h3>🛠 NIV 1</h3>
@@ -74,13 +70,11 @@
                 <p>SCHEMATIC / المخططات</p>
             </div>
         </div>
-
         <div class="section-title">Évaluation</div>
         <div class="full-card" onclick="alert('Test my level')">
             <p style="margin:0; color:#58a6ff; font-weight:bold;">📝 TEST MY LEVEL</p>
             <p style="margin:5px 0 0; font-size:11px; color:#8b949e;">Déterminer votre grade technique / تحديد مستواك التقني</p>
         </div>
-
         <div class="btn-sos">
             <span>🆘</span> GROUPE SOS / الدعم الفني
         </div>
@@ -91,35 +85,23 @@
             <h1>🛠 REPAIR TOOLS</h1>
             <p>أدوات الإصلاح</p>
         </div>
-        
         <button class="btn-back" onclick="showHome()">⬅ BACK / العودة</button>
 
-        <div class="section-title">Liste des outils / قائمة الأدوات</div>
-
         <div class="grid">
-            <div class="card">
-                <img src="https://via.placeholder.com/150?text=Soldering+Station" class="tool-img">
-                <h3>SOLDERING STATION</h3>
-                <p>محطة لحام</p>
-            </div>
-            
-            <div class="card">
-                <img src="https://via.placeholder.com/150?text=Microscope" class="tool-img">
-                <h3>MICROSCOPE</h3>
-                <p>مجهر</p>
-            </div>
-
-            <div class="card">
-                <img src="https://via.placeholder.com/150?text=Screwdrivers" class="tool-img">
-                <h3>SCREWDRIVERS</h3>
-                <p>مفكات براغي</p>
-            </div>
-
-            <div class="card">
-                <img src="https://via.placeholder.com/150?text=Tweezers" class="tool-img">
-                <h3>TWEEZERS</h3>
-                <p>ملقط</p>
-            </div>
+            <div class="card"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
+            <div class="card"><h3>HOT AIR STATION</h3><p>محطة الهواء الساخن</p></div>
+            <div class="card"><h3>MICROSCOPE</h3><p>مجهر</p></div>
+            <div class="card"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
+            <div class="card"><h3>FLUX</h3><p>مساعد اللحام (فلاكس)</p></div>
+            <div class="card"><h3>SOLDER TIN/PASTE</h3><p>قصدير لحام</p></div>
+            <div class="card"><h3>DESOLDERING WICK</h3><p>فتيل إزالة اللحام</p></div>
+            <div class="card"><h3>PCB HOLDER</h3><p>حامل البوردة</p></div>
+            <div class="card"><h3>LCD GLUE</h3><p>غراء الشاشات</p></div>
+            <div class="card"><h3>CLEANING LIQUID</h3><p>سائل تنظيف</p></div>
+            <div class="card"><h3>JUMP WIRES</h3><p>أسلاك التوصيل</p></div>
+            <div class="card"><h3>OPENING TOOLS</h3><p>أدوات الفتح</p></div>
+            <div class="card"><h3>SCREWDRIVERS</h3><p>مفكات براغي</p></div>
+            <div class="card"><h3>TWEEZERS</h3><p>ملقط</p></div>
         </div>
     </div>
 
@@ -129,13 +111,11 @@
             document.getElementById('menu-niv1').style.display = 'block';
             window.scrollTo(0,0);
         }
-
         function showHome() {
             document.getElementById('menu-niv1').style.display = 'none';
             document.getElementById('home-screen').style.display = 'block';
             window.scrollTo(0,0);
         }
     </script>
-
 </body>
 </html>
