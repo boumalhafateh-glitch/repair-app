@@ -1,59 +1,74 @@
-from aiogram import Bot, Dispatcher, types
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
-from aiogram.utils import executor
-import json
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repair Academy</title>
 
-TOKEN = "8682639487:AAGWWFxx5sRsG3espGAkyIqn9X2c5PxZ8uM"
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-bot = Bot(token=TOKEN)
-dp = Dispatcher(bot)
+<style>
+body {
+    font-family: Arial;
+    background:#0f0f0f;
+    color:white;
+    text-align:center;
+    margin:0;
+    padding:20px;
+}
 
-# Menu principal
-menu = ReplyKeyboardMarkup(resize_keyboard=True)
-menu.add(KeyboardButton("📚 Chapitres"))
-menu.add(KeyboardButton("📊 Mon niveau"))
+.card {
+    background:#1e1e1e;
+    padding:20px;
+    margin:10px;
+    border-radius:12px;
+}
 
-# Charger utilisateurs
-def load_users():
-    try:
-        with open("data/users.json", "r") as f:
-            return json.load(f)
-    except:
-        return {}
+button {
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#0088cc;
+    color:white;
+    width:100%;
+    margin-top:10px;
+}
+</style>
+</head>
 
-def save_users(data):
-    with open("data/users.json", "w") as f:
-        json.dump(data, f)
+<body>
 
-@dp.message_handler(commands=['start'])
-async def start(msg: types.Message):
-    users = load_users()
-    user_id = str(msg.from_user.id)
+<h2>MASTER REPAIR ACADEMY</h2>
 
-    if user_id not in users:
-        users[user_id] = {"level": 1}
-        save_users(users)
+<div class="card">
+    <h3>📊 Ton niveau</h3>
+    <p id="level">Chargement...</p>
+</div>
 
-    await msg.answer("Bienvenue dans la formation 📱🔧", reply_markup=menu)
+<div class="card">
+    <h3>📚 Chapitres</h3>
+    <button onclick="openChapter(1)">Multimètre</button>
+    <button onclick="openChapter(2)">Composants</button>
+</div>
 
-@dp.message_handler(lambda message: message.text == "📊 Mon niveau")
-async def level(msg: types.Message):
-    users = load_users()
-    user_id = str(msg.from_user.id)
+<script>
+const tg = window.Telegram.WebApp;
+tg.expand();
 
-    lvl = users[user_id]["level"]
-    await msg.answer(f"Ton niveau actuel : {lvl}")
+// récupérer user Telegram
+let user = tg.initDataUnsafe?.user?.id;
 
-@dp.message_handler(lambda message: message.text == "📚 Chapitres")
-async def chapters(msg: types.Message):
-    text = """
-📚 Chapitre 1 : Multimètre
-Niveau 1 débloqué
+// simulation niveau (sera remplacé par backend)
+document.getElementById("level").innerText = "Niveau 1";
 
-📚 Chapitre 2 : Composants
-🔒 Bloqué
-"""
-    await msg.answer(text)
+function openChapter(id){
+    tg.sendData(JSON.stringify({
+        action:"open_chapter",
+        chapter:id
+    }));
+    tg.close();
+}
+</script>
 
-if __name__ == "__main__":
-    executor.start_polling(dp)
+</body>
+</html>
