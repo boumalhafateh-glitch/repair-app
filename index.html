@@ -1,74 +1,56 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Repair Academy</title>
+from aiogram import Bot, Dispatcher, types
+from aiogram.utils import executor
+import json
+import os
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+TOKEN = "8682639487:AAGWWFxx5sRsG3espGAkyIqn9X2c5PxZ8uM"
 
-<style>
-body {
-    font-family: Arial;
-    background:#0f0f0f;
-    color:white;
-    text-align:center;
-    margin:0;
-    padding:20px;
-}
+bot = Bot(token=TOKEN)
+dp = Dispatcher(bot)
 
-.card {
-    background:#1e1e1e;
-    padding:20px;
-    margin:10px;
-    border-radius:12px;
-}
+# ---------- INIT DATA ----------
+if not os.path.exists("data"):
+    os.makedirs("data")
 
-button {
-    padding:12px;
-    border:none;
-    border-radius:8px;
-    background:#0088cc;
-    color:white;
-    width:100%;
-    margin-top:10px;
-}
-</style>
-</head>
+if not os.path.exists("data/users.json"):
+    with open("data/users.json", "w") as f:
+        json.dump({}, f)
 
-<body>
+# ---------- LOAD / SAVE ----------
+def load_users():
+    with open("data/users.json", "r") as f:
+        return json.load(f)
 
-<h2>MASTER REPAIR ACADEMY</h2>
+def save_users(data):
+    with open("data/users.json", "w") as f:
+        json.dump(data, f)
 
-<div class="card">
-    <h3>📊 Ton niveau</h3>
-    <p id="level">Chargement...</p>
-</div>
+# ---------- START ----------
+@dp.message_handler(commands=['start'])
+async def start(msg: types.Message):
+    users = load_users()
+    user_id = str(msg.from_user.id)
 
-<div class="card">
-    <h3>📚 Chapitres</h3>
-    <button onclick="openChapter(1)">Multimètre</button>
-    <button onclick="openChapter(2)">Composants</button>
-</div>
+    if user_id not in users:
+        users[user_id] = {"level": 1}
+        save_users(users)
 
-<script>
-const tg = window.Telegram.WebApp;
-tg.expand();
+    await msg.answer("Bienvenue dans la formation 📱🔧")
 
-// récupérer user Telegram
-let user = tg.initDataUnsafe?.user?.id;
+# ---------- MINI APP DATA ----------
+@dp.message_handler(content_types=['web_app_data'])
+async def webapp_data(msg: types.Message):
+    data = msg.web_app_data.data
 
-// simulation niveau (sera remplacé par backend)
-document.getElementById("level").innerText = "Niveau 1";
+    await msg.answer(f"📩 Action reçue : {data}")
 
-function openChapter(id){
-    tg.sendData(JSON.stringify({
-        action:"open_chapter",
-        chapter:id
-    }));
-    tg.close();
-}
-</script>
+    # logique simple niveau
+    if "chapter_1" in data:
+        await msg.answer("📘 Chapitre 1 ouvert : Multimètre")
 
-</body>
-</html>
+    elif "chapter_2" in data:
+        await msg.answer("📘 Chapitre 2 ouvert : Composants")
+
+# ---------- RUN ----------
+if __name__ == "__main__":
+    executor.start_polling(dp, skip_updates=True)
