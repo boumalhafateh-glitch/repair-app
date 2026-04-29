@@ -3,257 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Master Repair Kombat</title>
+    <title>Repair Kombat Academy</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        :root { 
-            --primary: #f3ba2f; --bg: #000000; --card: #1c1f24; 
-            --text: #ffffff; --success: #27ad75; --border: #32363c;
+        :root { --primary: #f3ba2f; --bg: #000; --card: #1c1f24; --border: #32363c; --success: #27ad75; }
+        body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; margin: 0; overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
+        
+        /* HEADER */
+        .header-stats { display: flex; justify-content: space-around; background: #15181c; padding: 12px; border-bottom: 2px solid var(--border); }
+        .stat { text-align: center; }
+        .stat-label { font-size: 9px; color: #848b94; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-val { font-size: 14px; font-weight: 800; color: var(--primary); }
+
+        /* SCORE */
+        .balance-area { text-align: center; padding: 15px 0; background: linear-gradient(180deg, #15181c 0%, #000 100%); }
+        .balance { font-size: 48px; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .coin-icon { width: 35px; height: 35px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 15px var(--primary); }
+
+        /* TAP ZONE */
+        .tap-area { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+        .tap-target { 
+            width: 240px; height: 240px; background: radial-gradient(circle, #32363c 0%, #1c1f24 100%);
+            border-radius: 50%; border: 10px solid #282c34; position: relative;
+            box-shadow: 0 0 40px rgba(243, 186, 47, 0.1); transition: transform 0.05s;
         }
-        body { 
-            background-color: var(--bg); color: var(--text); 
-            font-family: 'Arial', sans-serif; margin: 0; overflow: hidden; height: 100vh;
-            display: flex; flex-direction: column; user-select: none;
-        }
+        .tap-target:active { transform: scale(0.92); }
+        .tap-img { font-size: 100px; line-height: 240px; text-align: center; }
 
-        /* HEADER TYPE HAMSTER */
-        .top-bar { padding: 15px; display: flex; justify-content: space-between; background: #15181c; border-bottom: 2px solid var(--border); }
-        .stat-box { text-align: center; flex: 1; }
-        .stat-label { font-size: 10px; color: #848b94; text-transform: uppercase; }
-        .stat-value { font-size: 14px; font-weight: bold; color: var(--primary); }
-
-        /* SCORE PRINCIPAL */
-        .main-score { text-align: center; padding: 20px 0; }
-        .balance { font-size: 42px; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .coin { width: 40px; height: 40px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 15px var(--primary); }
-
-        /* ZONE DE CLIC */
-        .click-area { flex: 1; display: flex; align-items: center; justify-content: center; position: relative; }
-        .circle-outer { 
-            width: 250px; height: 250px; background: radial-gradient(circle, #2d333b 0%, #1c1f24 100%);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            border: 8px solid #32363c; box-shadow: 0 0 50px rgba(0,0,0,0.5);
-            transition: transform 0.05s;
-        }
-        .circle-outer:active { transform: scale(0.95); }
-        .main-icon { font-size: 80px; }
-
-        /* BARRE D'ÉNERGIE */
-        .energy-container { padding: 20px; }
-        .energy-text { margin-bottom: 5px; font-size: 14px; font-weight: bold; display: flex; align-items: center; gap: 5px; }
-        .energy-bar { width: 100%; height: 12px; background: #32363c; border-radius: 10px; overflow: hidden; }
-        .energy-fill { width: 100%; height: 100%; background: linear-gradient(90deg, #f3ba2f, #ffea00); transition: width 0.2s; }
-
-        /* NAVIGATION BASSE */
-        .nav-tabs { 
-            display: flex; background: #1c1f24; padding: 10px 0; 
-            border-top: 2px solid var(--border); justify-content: space-around;
-        }
-        .tab { text-align: center; color: #848b94; font-size: 11px; flex: 1; cursor: pointer; }
-        .tab.active { color: var(--primary); }
-        .tab-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+        /* NAV */
+        .nav { display: flex; background: #1c1f24; border-top: 1px solid var(--border); padding: 10px 0; }
+        .nav-btn { flex: 1; text-align: center; color: #848b94; font-size: 10px; cursor: pointer; }
+        .nav-btn.active { color: var(--primary); }
+        .nav-icon { display: block; font-size: 20px; margin-bottom: 3px; }
 
         /* PAGES */
-        .page { display: none; flex: 1; overflow-y: auto; padding: 20px; padding-bottom: 80px; }
+        .page { display: none; flex: 1; overflow-y: auto; padding: 15px; }
         .page.active { display: block; }
 
-        /* CARDS */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .card { 
-            background: var(--card); border: 1px solid var(--border); border-radius: 15px;
-            padding: 15px; position: relative; opacity: 1;
+        /* SHOP CARDS */
+        .shop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .shop-card { 
+            background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 12px;
+            display: flex; flex-direction: column; align-items: flex-start;
         }
-        .card.locked { opacity: 0.5; filter: grayscale(1); }
-        .card h3 { margin: 0; font-size: 12px; }
-        .card .price { color: var(--primary); font-weight: bold; font-size: 13px; margin-top: 10px; }
-        
-        /* FLOATING TEXT */
-        .float-text {
-            position: absolute; color: white; font-weight: 900; font-size: 24px;
-            pointer-events: none; animation: floatUp 0.8s ease-out forwards;
-        }
-        @keyframes floatUp {
-            0% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-100px); }
-        }
+        .shop-card h4 { margin: 5px 0; font-size: 13px; }
+        .shop-card .profit { font-size: 10px; color: var(--success); font-weight: bold; }
+        .shop-card .price { margin-top: 8px; font-size: 12px; font-weight: 800; color: var(--primary); }
+
+        /* MODAL LEARNING */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; padding: 20px; box-sizing: border-box; }
+        .modal-content { background: var(--card); border-radius: 24px; padding: 20px; border: 1px solid var(--primary); max-width: 400px; margin: auto; }
+        .quiz-option { width: 100%; padding: 12px; margin-top: 10px; background: #282c34; border: 1px solid var(--border); color: #fff; border-radius: 12px; text-align: left; }
+
+        .float-text { position: absolute; color: white; font-weight: 900; animation: up 0.7s forwards; pointer-events: none; }
+        @keyframes up { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-100px); } }
     </style>
 </head>
 <body>
 
-    <!-- TOP INFO -->
-    <div class="top-bar">
-        <div class="stat-box">
-            <div class="stat-label">Grade</div>
-            <div class="stat-value" id="rank">Apprenti</div>
-        </div>
-        <div class="stat-box" style="border-left: 1px solid #32363c; border-right: 1px solid #32363c;">
-            <div class="stat-label">Profit / Hour</div>
-            <div class="stat-value" id="pph">+0</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-label">Lvl</div>
-            <div class="stat-value" id="current-lvl">1</div>
-        </div>
+    <div class="header-stats">
+        <div class="stat"><div class="stat-label">Grade</div><div class="stat-val" id="rank">Apprenti</div></div>
+        <div class="stat"><div class="stat-label">Profit / H</div><div class="stat-val" id="pph">+0</div></div>
+        <div class="stat"><div class="stat-label">Energie</div><div class="stat-val" id="nrj">1000</div></div>
     </div>
 
-    <!-- BALANCE -->
-    <div class="main-score">
-        <div class="balance">
-            <div class="coin"></div>
-            <span id="balance">0</span>
-        </div>
+    <div class="balance-area">
+        <div class="balance"><div class="coin-icon"></div><span id="balance">0</span></div>
     </div>
 
-    <!-- MAIN GAME PAGE -->
-    <div id="game-page" class="page active">
-        <div class="click-area" id="tap-zone">
-            <div class="circle-outer">
-                <div class="main-icon">🛠️</div>
-            </div>
-        </div>
-
-        <div class="energy-container">
-            <div class="energy-text">⚡ <span id="energy-val">1000</span> / 1000</div>
-            <div class="energy-bar">
-                <div class="energy-fill" id="energy-fill"></div>
+    <!-- MAIN GAME -->
+    <div id="game" class="page active">
+        <div class="tap-area">
+            <div class="tap-target" id="clicker">
+                <div class="tap-img">🛠️</div>
             </div>
         </div>
     </div>
 
-    <!-- ACADEMY (MINING) PAGE -->
-    <div id="academy-page" class="page">
-        <h2 style="color:var(--primary)">Shop & Tools</h2>
-        <div class="grid" id="tools-grid">
-            <!-- Injecté par JS -->
+    <!-- ACADEMY (SHOP) -->
+    <div id="academy" class="page">
+        <h3 style="margin-top:0">Academy & Upgrades</h3>
+        <div class="shop-grid" id="shop-items"></div>
+    </div>
+
+    <!-- MODAL QUIZ -->
+    <div id="quiz-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="q-title" style="color:var(--primary); margin-top:0;"></h3>
+            <p id="q-lesson" style="font-size: 14px; line-height: 1.4; color: #ccc;"></p>
+            <hr border="0" style="border-top:1px solid #333; margin:15px 0;">
+            <p id="q-question" style="font-weight: bold;"></p>
+            <div id="q-options"></div>
         </div>
     </div>
 
-    <!-- NAV -->
-    <div class="nav-tabs">
-        <div class="tab active" onclick="showPage('game-page', this)">
-            <span class="tab-icon">🏠</span>Main
-        </div>
-        <div class="tab" onclick="showPage('academy-page', this)">
-            <span class="tab-icon">⚒️</span>Academy
-        </div>
+    <div class="nav">
+        <div class="nav-btn active" onclick="showPage('game', this)"><span class="nav-icon">🏠</span>Exchange</div>
+        <div class="nav-btn" onclick="showPage('academy', this)"><span class="nav-icon">🎓</span>Academy</div>
     </div>
 
     <script>
         const tg = window.Telegram.WebApp;
         tg.expand();
 
-        // DONNÉES
-        let state = JSON.parse(localStorage.getItem('rk_state')) || {
-            balance: 0,
-            pph: 0,
-            energy: 1000,
-            maxEnergy: 1000,
-            lvl: 1,
-            unlocked: []
+        let state = JSON.parse(localStorage.getItem('rk_pro_save')) || {
+            balance: 0, pph: 0, energy: 1000, maxEnergy: 1000, items: []
         };
 
-        const tools = [
-            { id: 1, t: "Soldering Iron", p: 500, pph: 50, icon: "🔌" },
-            { id: 2, t: "Multimeter", p: 2000, pph: 150, icon: "📟" },
-            { id: 3, t: "Microscope", p: 10000, pph: 800, icon: "🔬" },
-            { id: 4, t: "Thermal Cam", p: 50000, pph: 4500, icon: "🌡️" }
+        const academyDB = [
+            { id: 1, name: "Condensateur", icon: "🔋", pph: 150, price: 500, 
+              lesson: "Le condensateur stocke l'énergie et filtre les parasites dans un circuit.", 
+              q: "Quelle est l'unité du condensateur ?", opts: ["Ohm", "Farad", "Volt"], r: 1 },
+            { id: 2, name: "Multimètre", icon: "📟", pph: 600, price: 2500, 
+              lesson: "Le multimètre est l'outil de base pour mesurer la tension et la continuité.", 
+              q: "Quel mode utilise-t-on pour tester un court-circuit ?", opts: ["Ampère", "Diode / Bip", "Celsius"], r: 1 },
+            { id: 3, name: "Circuit de Charge", icon: "⚡", pph: 2500, price: 15000, 
+              lesson: "Le circuit de charge gère l'entrée USB vers la batterie via l'IC de charge.", 
+              q: "Quel IC gère l'USB sur iPhone ?", opts: ["CPU", "Tristar / Hydra", "Audio IC"], r: 1 }
         ];
 
-        // INITIALISATION
         function updateUI() {
             document.getElementById('balance').innerText = Math.floor(state.balance).toLocaleString();
             document.getElementById('pph').innerText = "+" + state.pph.toLocaleString();
-            document.getElementById('energy-val').innerText = Math.floor(state.energy);
-            document.getElementById('energy-fill').style.width = (state.energy / state.maxEnergy * 100) + "%";
+            document.getElementById('nrj').innerText = Math.floor(state.energy);
             
             // Grades
-            if(state.balance > 100000) document.getElementById('rank').innerText = "Legend";
-            else if(state.balance > 10000) document.getElementById('rank').innerText = "Master";
-            else document.getElementById('rank').innerText = "Technicien";
+            let r = "Apprenti";
+            if(state.balance > 1000000) r = "Expert Legend";
+            else if(state.balance > 100000) r = "Master Tech";
+            else if(state.balance > 10000) r = "Technicien";
+            document.getElementById('rank').innerText = r;
 
             renderShop();
         }
 
         function renderShop() {
-            let html = "";
-            tools.forEach(tool => {
-                const isOwned = state.unlocked.includes(tool.id);
-                html += `
-                    <div class="card ${isOwned ? '' : ''}" onclick="buyTool(${tool.id}, ${tool.p}, ${tool.pph})">
-                        <div style="font-size:30px">${tool.icon}</div>
-                        <h3>${tool.t}</h3>
-                        <div class="price">${isOwned ? 'OWNED' : tool.p + ' RP'}</div>
-                        <div style="font-size:10px; color:#27ad75">+${tool.pph}/h</div>
-                    </div>
-                `;
+            let h = "";
+            academyDB.forEach(item => {
+                const count = state.items.filter(x => x === item.id).length;
+                h += `<div class="shop-card" onclick="openQuiz(${item.id})">
+                    <span>${item.icon} Lvl ${count}</span>
+                    <h4>${item.name}</h4>
+                    <span class="profit">+$${item.pph}/h</span>
+                    <span class="price">💰 ${Math.floor(item.price * (1 + count * 0.5))}</span>
+                </div>`;
             });
-            document.getElementById('tools-grid').innerHTML = html;
+            document.getElementById('shop-items').innerHTML = h;
         }
 
-        // LOGIQUE CLIC
-        document.getElementById('tap-zone').addEventListener('touchstart', (e) => {
-            e.preventDefault();
+        document.getElementById('clicker').onclick = (e) => {
             if(state.energy >= 1) {
                 state.balance += 1;
                 state.energy -= 1;
-                tg.HapticFeedback.impactOccurred('light');
-                createFloatText(e.touches[0].clientX, e.touches[0].clientY);
+                tg.HapticFeedback.impactOccurred('medium');
+                const ft = document.createElement('div');
+                ft.className = 'float-text'; ft.innerText = '+1';
+                ft.style.left = e.pageX + 'px'; ft.style.top = e.pageY + 'px';
+                document.body.appendChild(ft);
+                setTimeout(() => ft.remove(), 700);
                 updateUI();
                 save();
             }
-        });
+        };
 
-        function createFloatText(x, y) {
-            const div = document.createElement('div');
-            div.className = 'float-text';
-            div.innerText = '+1';
-            div.style.left = x + 'px';
-            div.style.top = y + 'px';
-            document.body.appendChild(div);
-            setTimeout(() => div.remove(), 800);
-        }
+        let currentActiveItem = null;
+        window.openQuiz = (id) => {
+            currentActiveItem = academyDB.find(x => x.id === id);
+            const count = state.items.filter(x => x === id).length;
+            const price = Math.floor(currentActiveItem.price * (1 + count * 0.5));
+            
+            if(state.balance < price) { tg.showAlert("Pas assez de points !"); return; }
 
-        // ACHATS
-        window.buyTool = (id, price, pphAdd) => {
-            if(state.unlocked.includes(id)) {
-                tg.showAlert("Tu possèdes déjà cet outil !");
-                return;
-            }
-            if(state.balance >= price) {
+            document.getElementById('q-title').innerText = currentActiveItem.name;
+            document.getElementById('q-lesson').innerText = currentActiveItem.lesson;
+            document.getElementById('q-question').innerText = currentActiveItem.q;
+            
+            let h = "";
+            currentActiveItem.opts.forEach((o, i) => {
+                h += `<button class="quiz-option" onclick="checkQuiz(${i})">${o}</button>`;
+            });
+            document.getElementById('q-options').innerHTML = h;
+            document.getElementById('quiz-modal').style.display = 'block';
+        };
+
+        window.checkQuiz = (i) => {
+            if(i === currentActiveItem.r) {
+                const count = state.items.filter(x => x === currentActiveItem.id).length;
+                const price = Math.floor(currentActiveItem.price * (1 + count * 0.5));
                 state.balance -= price;
-                state.pph += pphAdd;
-                state.unlocked.push(id);
+                state.pph += currentActiveItem.pph;
+                state.items.push(currentActiveItem.id);
                 tg.HapticFeedback.notificationOccurred('success');
+                document.getElementById('quiz-modal').style.display = 'none';
                 updateUI();
                 save();
             } else {
-                tg.showAlert("Pas assez de Repair Points !");
+                tg.HapticFeedback.notificationOccurred('error');
+                tg.showAlert("Faux ! Relis bien la leçon.");
             }
         };
 
-        // PROFIT PASSIF ET ÉNERGIE
         setInterval(() => {
-            // Profit par seconde
-            if(state.pph > 0) {
-                state.balance += (state.pph / 3600);
-            }
-            // Recharge énergie
-            if(state.energy < state.maxEnergy) {
-                state.energy = Math.min(state.maxEnergy, state.energy + 1);
-            }
+            state.balance += (state.pph / 3600);
+            if(state.energy < state.maxEnergy) state.energy = Math.min(state.maxEnergy, state.energy + 1.5);
             updateUI();
         }, 1000);
 
-        // NAVIGATION
-        window.showPage = (id, el) => {
+        window.showPage = (id, btn) => {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            el.classList.add('active');
+            btn.classList.add('active');
         };
 
-        function save() { localStorage.setItem('rk_state', JSON.stringify(state)); }
-        
+        function save() { localStorage.setItem('rk_pro_save', JSON.stringify(state)); }
         updateUI();
     </script>
 </body>
