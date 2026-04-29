@@ -16,7 +16,6 @@ if not os.path.exists("data/users.json"):
     with open("data/users.json", "w") as f:
         json.dump({}, f)
 
-# ---------- LOAD / SAVE ----------
 def load_users():
     with open("data/users.json", "r") as f:
         return json.load(f)
@@ -35,21 +34,20 @@ async def start(msg: types.Message):
         users[user_id] = {"level": 1}
         save_users(users)
 
-    await msg.answer("Bienvenue dans la formation 📱🔧")
+    await msg.answer("Bienvenue 📱🔧")
 
-# ---------- MINI APP DATA ----------
-@dp.message_handler(content_types=['web_app_data'])
+# ---------- IMPORTANT FIX ----------
+@dp.message_handler(content_types=types.ContentType.WEB_APP_DATA)
 async def webapp_data(msg: types.Message):
     data = msg.web_app_data.data
 
-    await msg.answer(f"📩 Action reçue : {data}")
+    await msg.answer(f"📩 Reçu : {data}")
 
-    # logique simple niveau (CORRECTEMENT DANS LA FONCTION)
-    if "chapter_1" in data:
-        await msg.answer("📘 Chapitre 1 ouvert : Multimètre")
+    if data == "chapter_1":
+        await msg.answer("📘 Chapitre 1 : Multimètre")
 
-    elif "chapter_2" in data:
-        await msg.answer("📘 Chapitre 2 ouvert : Composants")
+    elif data == "chapter_2":
+        await msg.answer("📘 Chapitre 2 : Composants")
 
 # ---------- RUN ----------
 if __name__ == "__main__":
