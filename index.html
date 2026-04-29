@@ -3,115 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ENCYCLOPÉDIE RÉPARATION PRO</title>
+    <title>Master Repair Academy</title>
     <style>
-        :root { --main: #00d4ff; --bg: #0a0c10; --card: #161b22; --text: #e6edf3; --border: #30363d; }
-        body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 50px; }
+        :root { --primary: #007bff; --bg: #0d1117; --card-bg: #161b22; --border: #30363d; --text-sec: #8b949e; }
+        body { background-color: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; text-align: center; }
         
-        .header { background: var(--card); padding: 25px; text-align: center; border-bottom: 3px solid var(--main); }
-        .header h1 { margin: 0; font-size: 24px; letter-spacing: 2px; color: var(--main); }
+        .header { padding: 15px 10px; background: #161b22; border-bottom: 2px solid var(--primary); }
+        .header h1 { color: var(--primary); margin: 0; font-size: 22px; font-weight: 800; }
 
-        .category-title { padding: 20px 5% 10px; font-size: 14px; font-weight: bold; color: #8b949e; text-transform: uppercase; border-bottom: 1px solid var(--border); margin: 0 5%; }
-
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px 5%; }
+        .section-title { text-align: left; padding: 10px 5% 5px; color: var(--primary); font-size: 12px; text-transform: uppercase; font-weight: bold; }
         
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 5%; }
+        
+        /* Boutons ajustés et texte agrandi */
         .card { 
-            background: var(--card); border: 1px solid var(--border); border-radius: 12px; 
-            padding: 20px 10px; text-align: center; transition: 0.2s; cursor: pointer;
+            background: var(--card-bg); border: 2px solid var(--border); border-radius: 10px; 
+            padding: 10px 5px; display: flex; flex-direction: column; align-items: center; 
+            justify-content: center; cursor: pointer; min-height: 60px; transition: 0.2s; 
         }
-        .card:active { transform: scale(0.95); border-color: var(--main); }
-        .card h3 { margin: 0; font-size: 14px; color: #fff; }
-        .card p { margin: 8px 0 0; font-size: 11px; color: var(--main); font-weight: bold; }
+        .card h3 { margin: 0; font-size: 14px; color: #fff; font-weight: 800; width: 95%; line-height: 1.1; }
+        .card p { margin: 3px 0 0; font-size: 11px; color: var(--primary); font-weight: bold; }
+        .card.locked { opacity: 0.4; border-style: dashed; }
 
-        /* MODAL FULLSCREEN */
-        #content-modal { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: var(--bg); z-index: 1000; overflow-y: auto;
-        }
-        .modal-header { padding: 20px; background: var(--card); border-bottom: 1px solid var(--main); display: flex; align-items: center; }
-        .back-btn { background: var(--main); color: #000; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; margin-right: 15px; }
+        .btn-sos { background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; padding: 15px; margin: 15px 5%; border-radius: 10px; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; font-size: 16px; border: none; text-transform: uppercase; }
         
-        .content-body { padding: 25px 5%; line-height: 1.6; }
-        .content-body h2 { color: var(--main); border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-        .tech-box { background: #1c2128; border-left: 4px solid var(--main); padding: 15px; margin: 20px 0; font-size: 14px; }
-        .arabic { direction: rtl; color: var(--main); font-size: 18px; margin-top: 10px; }
+        .full-card { background: var(--card-bg); border: 2px solid var(--primary); border-radius: 10px; padding: 15px; margin: 10px 5%; cursor: pointer; }
+        
+        .btn-back { background: #30363d; color: white; padding: 12px; margin: 10px 5%; border-radius: 8px; border: none; width: 90%; font-weight: bold; cursor: pointer; font-size: 14px; }
+
+        /* Style Quiz Encadré */
+        .opt-btn { 
+            background: #1c2128; border: 2px solid var(--border); color: #fff; 
+            width: 90%; padding: 18px; margin: 12px 5%; border-radius: 12px; 
+            font-size: 16px; font-weight: bold; text-align: left; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .opt-btn:active { border-color: var(--primary); background: #21262d; }
+
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); }
+        .modal-content { background: var(--card-bg); margin: 20% auto; border: 2px solid var(--primary); width: 85%; border-radius: 15px; }
+        .modal-body { padding: 20px; text-align: left; }
+
+        .lang-desc { font-size: 16px; margin: 0 0 15px 0; font-weight: 600; }
+
+        .page { display: none; }
+        .active { display: block; }
     </style>
 </head>
 <body>
 
-    <div class="header"><h1>TECH REPAIR BIBLE v1.0</h1></div>
-
-    <div class="category-title">1. ÉQUIPEMENTS DE L'ATELIER</div>
-    <div class="grid" id="grid-tools"></div>
-
-    <div class="category-title">2. COMPOSANTS ÉLECTRONIQUES</div>
-    <div class="grid" id="grid-comp"></div>
-
-    <div class="category-title">3. PROTOCOLES DE MESURE</div>
-    <div class="grid" id="grid-measure"></div>
-
-    <!-- MODAL POUR APPRENDRE -->
-    <div id="content-modal">
-        <div class="modal-header">
-            <button class="back-btn" onclick="closeContent()">⬅ RETOUR</button>
-            <h1 id="modal-title" style="font-size:18px; margin:0;">DÉTAILS</h1>
+    <div id="home" class="page active">
+        <div class="header"><h1>MASTER REPAIR</h1></div>
+        <div class="section-title">Catalogue</div>
+        <div class="grid">
+            <div class="card" onclick="nav('niv1')"><h3>🛠 NIV 1</h3><p>OUTILS</p></div>
+            <div class="card" onclick="nav('niv2')"><h3>⚡ NIV 2</h3><p>COMPOSANTS</p></div>
+            <div class="card locked" id="card-niv3" onclick="startTest()"><h3>📟 NIV 3</h3><p>MULTIMÈTRE</p></div>
+            <div class="card locked" id="card-niv4"><h3>📋 NIV 4</h3><p>SCHÉMAS</p></div>
         </div>
-        <div class="content-body" id="modal-body"></div>
+        <div class="full-card" onclick="startTest()">
+            <p style="margin:0; color:var(--primary); font-weight:900; font-size: 18px;">📝 TEST DE NIVEAU</p>
+        </div>
+        <a href="#" class="btn-sos">🆘 GROUPE SOS / الدعم</a>
+    </div>
+
+    <div id="niv1" class="page">
+        <div class="header"><h1>OUTILS NIV 1</h1></div>
+        <button class="btn-back" onclick="nav('home')">⬅ RETOUR</button>
+        <div class="grid">
+            <div class="card" onclick="openInfo('SOLDERING STATION', 'Station thermique réglable pour soudure précise.', 'Soldering Station.', 'محطة لحام.')"><h3>SOLDERING STATION</h3><p>محطة لحام</p></div>
+            <div class="card" onclick="openInfo('HOT AIR STATION', 'Générateur d\'air chaud pour les IC.', 'Hot air station.', 'هواء ساخن.')"><h3>HOT AIR STATION</h3><p>هواء ساخن</p></div>
+            <div class="card" onclick="openInfo('MICROSCOPE', 'Inspection des micro-fissures.', 'Microscope.', 'مجهر.')"><h3>MICROSCOPE</h3><p>مجهر</p></div>
+            <div class="card" onclick="openInfo('MULTIMETER', 'Mesure tension et continuité.', 'Multimeter.', 'المالتيميتر.')"><h3>MULTIMETER</h3><p>المالتيميتر</p></div>
+            <div class="card" onclick="openInfo('FLUX', 'Facilite la fusion de l\'étain.', 'Flux.', 'فلاكس.')"><h3>FLUX</h3><p>فلاكس</p></div>
+            <div class="card" onclick="openInfo('SOLDER TIN', 'Alliage pour connexions.', 'Tin.', 'قصدير.')"><h3>SOLDER TIN</h3><p>قصدير</p></div>
+            <div class="card" onclick="openInfo('WICK', 'Aspiration du surplus d\'étain.', 'Wick.', 'فتيل.')"><h3>WICK</h3><p>فتيل إزالة</p></div>
+            <div class="card" onclick="openInfo('PCB HOLDER', 'Fixation de la carte mère.', 'PCB Holder.', 'حامل.')"><h3>PCB HOLDER</h3><p>حامل</p></div>
+            <div class="card" onclick="openInfo('LCD GLUE', 'Adhésif pour écrans.', 'Glue.', 'غراء.')"><h3>LCD GLUE</h3><p>غراء</p></div>
+            <div class="card" onclick="openInfo('CLEANER', 'Alcool pour nettoyage.', 'Cleaner.', 'منظف.')"><h3>CLEANER</h3><p>منظف</p></div>
+            <div class="card" onclick="openInfo('JUMP WIRES', 'Fils pour pontage.', 'Jumpers.', 'أسلاك.')"><h3>JUMP WIRES</h3><p>أسلاك</p></div>
+            <div class="card" onclick="openInfo('OPENING TOOLS', 'Outils d\'ouverture.', 'Opening tools.', 'أدوات.')"><h3>OPENING TOOLS</h3><p>أدوات</p></div>
+            <div class="card" onclick="openInfo('SCREWDRIVERS', 'Tournevis de précision.', 'Screwdrivers.', 'مفكات.')"><h3>SCREWDRIVERS</h3><p>مفكات</p></div>
+            <div class="card" onclick="openInfo('TWEEZERS', 'Brucelles de précision.', 'Tweezers.', 'ملقط.')"><h3>TWEEZERS</h3><p>ملقط</p></div>
+        </div>
+    </div>
+
+    <div id="niv2" class="page">
+        <div class="header"><h1>COMPOSANTS NIV 2</h1></div>
+        <button class="btn-back" onclick="nav('home')">⬅ RETOUR</button>
+        <div class="grid">
+            <div class="card" onclick="openInfo('DIODE', 'Laisse passer le courant dans un sens.', 'Diode.', 'ديود.')"><h3>DIODE</h3><p>ديود</p></div>
+            <div class="card" onclick="openInfo('COIL', 'Stockage magnétique.', 'Coil.', 'وشيعة.')"><h3>COIL</h3><p>وشيعة</p></div>
+            <div class="card" onclick="openInfo('RESISTANCE', 'Limite le courant.', 'Resistor.', 'مقاومة.')"><h3>RESISTANCE</h3><p>مقاومة</p></div>
+            <div class="card" onclick="openInfo('CAPACITOR', 'Stockage électrique.', 'Capacitor.', 'مكثف.')"><h3>CAPACITOR</h3><p>مكثف</p></div>
+            <div class="card" onclick="openInfo('TRANSISTOR', 'Interrupteur actif.', 'Transistor.', 'ترانزستور.')"><h3>TRANSISTOR</h3><p>ترانزستور</p></div>
+            <div class="card" onclick="openInfo('IC (CHIP)', 'Cerveau du circuit.', 'IC.', 'آيسي.')"><h3>IC (CHIP)</h3><p>آيسي</p></div>
+            <div class="card" onclick="openInfo('CONNECTOR', 'Liaison écran/batterie.', 'Connector.', 'كونيكتور.')"><h3>CONNECTOR</h3><p>كونيكتور</p></div>
+            <div class="card" onclick="openInfo('CRYSTAL', 'Horloge fréquence.', 'Crystal.', 'كريستال.')"><h3>CRYSTAL</h3><p>كريستال</p></div>
+            <div class="card" onclick="openInfo('FUSE', 'Sécurité surcharge.', 'Fuse.', 'فيوز.')"><h3>FUSE</h3><p>فيوز</p></div>
+            <div class="card" onclick="openInfo('THERMISTOR', 'Sonde thermique.', 'Thermistor.', 'ثرمستور.')"><h3>THERMISTOR</h3><p>ثرمستور</p></div>
+        </div>
+    </div>
+
+    <div id="quiz-page" class="page">
+        <div class="header"><h1>QUIZ</h1></div>
+        <div style="padding: 20px;">
+            <p id="q-fr" style="font-weight:900; font-size:18px; color:var(--primary);"></p>
+            <p id="q-ar" style="font-weight:bold; font-size:20px; text-align:right; direction:rtl; margin-top:5px;"></p>
+        </div>
+        <div id="options"></div>
+    </div>
+
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h2 id="mTitle" style="color:var(--primary); margin-bottom:15px; font-size:18px;"></h2>
+                <p id="mFr" class="lang-desc"></p>
+                <p id="mAr" class="lang-desc" style="text-align:right; direction:rtl; color:var(--primary);"></p>
+                <button class="btn-back" style="width:100%; margin:0;" onclick="closeInfo()">OK / تم</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        const database = {
-            tools: [
-                { t: "STATION AIR CHAUD", p: "HOT AIR STATION", ar: "هواء ساخن", d: "Utilisée pour dessouder les circuits intégrés (IC). Température moyenne : 350-380°C. Débit d'air : 40-60%." },
-                { t: "FER À SOUDER", p: "SOLDERING IRON", ar: "كاوية لحam", d: "Pour les soudures de précision. Utilisez une panne fine pour les composants CMS et une panne large pour les connecteurs de batterie." },
-                { t: "POWER SUPPLY", p: "DC POWER SUPPLY", ar: "باور سبلاي", d: "Permet d'injecter du courant pour détecter les courts-circuits. Si l'ampérage monte direct à 2A ou plus : COURT-CIRCUIT." }
-            ],
-            comp: [
-                { t: "CONDENSATEUR", p: "CAPACITOR (C)", ar: "مكثف", d: "Rôle : Filtrage et stockage. Un condensateur en court-circuit (relié à la masse) empêche le téléphone de s'allumer." },
-                { t: "BOBINE", p: "COIL / INDUCTOR (L)", ar: "ملف / وشيعة", d: "Rôle : Filtrage et Boost (élévation de tension pour le rétroéclairage). Si elle est grillée, le circuit est coupé." },
-                { t: "DIODE", p: "DIODE (D)", ar: "ديود", d: "Laisse passer le courant dans un seul sens. Protège les circuits contre les inversions de polarité." },
-                { t: "IC POWER (PMIC)", p: "POWER MANAGEMENT", ar: "آيسي الباور", d: "Le cerveau de l'énergie. Il reçoit la tension batterie et la redistribue à tous les autres composants." }
-            ],
-            measure: [
-                { t: "MODE DIODE", p: "DIODE MODE", ar: "وضع الديود", d: "La mesure la plus importante. Fil rouge à la masse (GND), fil noir sur le point à tester. On cherche une 'valeur de chute de tension'." },
-                { t: "CONTINUITÉ", p: "CONTINUITY", ar: "الجرس", d: "Pour vérifier si un fil est coupé ou si une ligne positive est touchée par la masse (bip au sol)." }
-            ]
-        };
-
-        function renderGrids() {
-            render('grid-tools', database.tools);
-            render('grid-comp', database.comp);
-            render('grid-measure', database.measure);
+        function nav(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
         }
-
-        function render(id, items) {
-            let html = "";
-            items.forEach(item => {
-                html += `<div class="card" onclick="openContent('${item.t}', '${item.p}', '${item.ar}', '${item.d}')">
-                            <h3>${item.t}</h3>
-                            <p>${item.p}</p>
-                         </div>`;
-            });
-            document.getElementById(id).innerHTML = html;
+        function openInfo(t, fr, en, ar) {
+            document.getElementById('mTitle').innerText = t;
+            document.getElementById('mFr').innerText = fr;
+            document.getElementById('mAr').innerText = ar;
+            document.getElementById('infoModal').style.display = 'block';
         }
+        function closeInfo() { document.getElementById('infoModal').style.display = 'none'; }
 
-        function openContent(t, p, ar, d) {
-            document.getElementById('modal-title').innerText = t;
-            document.getElementById('modal-body').innerHTML = `
-                <h2>${t} / ${p}</h2>
-                <div class="arabic">${ar}</div>
-                <div class="tech-box">
-                    <strong>FICHE TECHNIQUE :</strong><br><br>
-                    ${d}
-                </div>
-                <p style="color:#8b949e; font-size:13px;">Consultez les schémas (ZXW / DZKJ) pour localiser ce composant sur la carte mère.</p>
-            `;
-            document.getElementById('content-modal').style.display = 'block';
+        const allQs = [
+            { fr: "Composant à sens unique ?", ar: "يمرر التيار في اتجاه واحد؟", opts: ["DIODE", "COIL", "FUSE"], r: 0 },
+            { fr: "Unité de la résistance ?", ar: "وحدة قياس المقاومة؟", opts: ["VOLT", "OHM", "FARAD"], r: 1 },
+            { fr: "Outil pour retirer les IC ?", ar: "أداة إزالة الآيسيهات؟", opts: ["FER", "STATION AIR CHAUD", "PINCE"], r: 1 },
+            { fr: "Rôle du condensateur ?", ar: "ما هو دور المكثف؟", opts: ["STOCKER", "CHAUFFER", "COUPER"], r: 0 },
+            { fr: "Mode pour continuité ?", ar: "وضع فحص المسارات؟", opts: ["BUZZER", "HZ", "TEMP"], r: 0 }
+        ];
+
+        let cur = 0; let score = 0;
+        function startTest() { cur=0; score=0; nav('quiz-page'); showQ(); }
+        function showQ() {
+            let q = allQs[cur];
+            document.getElementById('q-fr').innerText = q.fr;
+            document.getElementById('q-ar').innerText = q.ar;
+            let h = "";
+            q.opts.forEach((o, i) => { h += `<button class="opt-btn" onclick="check(${i})"><span>${o}</span> ➜</button>`; });
+            document.getElementById('options').innerHTML = h;
         }
-
-        function closeContent() { document.getElementById('content-modal').style.display = 'none'; }
-
-        renderGrids();
+        function check(i) {
+            if(i === allQs[cur].r) score++;
+            cur++;
+            if(cur < 5) showQ(); else finish();
+        }
+        function finish() {
+            if(score === 5) {
+                alert("PARFAIT 5/5 !");
+                document.getElementById('card-niv3').classList.remove('locked');
+                nav('home');
+            } else { alert("SCORE: "+score+"/5. REESSAYEZ."); nav('home'); }
+        }
     </script>
 </body>
 </html>
